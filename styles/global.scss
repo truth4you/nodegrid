@@ -19,3 +19,30 @@ body {
 * {
   letter-spacing: inherit;
 }
+
+.tier.basic {
+  &::before {
+    background-image: url(/basic.png);
+  }
+  &.selected::before {
+    background-image: url(/basic-selected.png);
+  }
+}
+
+.tier.light {
+  &::before {
+    background-image: url(/light.png);
+  }
+  &.selected::before {
+    background-image: url(/light-selected.png);
+  }
+}
+
+.tier.pro {
+  &::before {
+    background-image: url(/pro.png);
+  }
+  &.selected::before {
+    background-image: url(/pro-selected.png);
+  }
+}

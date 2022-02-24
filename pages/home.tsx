@@ -30,7 +30,7 @@ export default function Home() {
         <p>Choose all warriors to unlock the full power of the Bifrost</p>
         <div className={classNames(styles.nodes, "flex flex-wrap justify-around gap-10 md:mt-10")}>
           {[{ name: 'basic' }, { name: 'light' }, { name: 'pro' }].map(tier =>
-            <a className={tier.name == activedTier ? styles.selected : ''} onClick={() => activeTier(tier.name)}>
+            <a className={classNames("tier", tier.name, tier.name == activedTier ? styles.selected : "", tier.name == activedTier ? "selected" : "")} onClick={() => activeTier(tier.name)}>
               <h2>{tier.name}</h2>
               <p>1.250 NodeGrid per Node</p>
               <p>Earn 0.02 NodeGrid per Day</p>

@@ -50,7 +50,8 @@
     }
     &::before {
       content: "";
-      background: url(/tier.png) no-repeat center;
+      background-repeat: no-repeat;
+      background-position: center;
       height: 143px;
       display: block;
       margin-bottom: 2em;
@@ -64,9 +65,6 @@
       font-size: 0.8em;
     }    
     &.selected {
-      &::before {
-        background-image: url(/tier-selected.png);
-      }
       h2 {
         color: white;
       }
