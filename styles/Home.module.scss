@@ -1,0 +1,156 @@
+.welcome {
+  color: white;
+  h1 {
+    color: var(--color-primary);
+    font-size: xx-large;
+    padding-bottom: 1em;
+  }
+}
+
+.status {
+  ul {
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    border-radius: 1em;
+    padding: 1em;
+    padding-left: 2em;
+    list-style-type: "\203B";
+    line-height: 2em;
+    li {
+      em {
+        font-style: normal;
+        font-size: 0.8em;
+      }
+    }
+  }
+}
+
+.create {
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  border-radius: 1em;
+  padding: 3em 2em;
+  h1 {
+    font-size: xx-large;
+    padding-bottom: 1em;
+  }
+  p {
+    color: white;
+    line-height: 2em;
+  }
+  a {
+    text-align: center;
+    border: 1px solid var(--color-primary);
+    border-radius: 1em;
+    padding: 1.5em 0.5em;
+    line-height: 2em;
+    cursor: pointer;
+    &:not(.selected):hover {
+      opacity: 0.65;
+    }
+    &::before {
+      content: "";
+      background: url(/tier.png) no-repeat center;
+      height: 143px;
+      display: block;
+      margin-bottom: 2em;
+    }    
+    h2 {
+      font-size: x-large;
+      text-transform: uppercase;
+    }
+    p {
+      letter-spacing: 0;
+      font-size: 0.8em;
+    }    
+    &.selected {
+      &::before {
+        background-image: url(/tier-selected.png);
+      }
+      h2 {
+        color: white;
+      }
+      p {
+        color: var(--color-primary);
+      }
+    }
+  }
+  .active {
+    padding-left: 1em;
+    margin-top: 4em;
+    label {
+      text-transform: uppercase;
+      color: white;
+    }
+  }
+  .edit {
+    padding-top: 1em;
+    input {
+      border-radius: 2em;
+      padding: 0 1.2em;
+      border: 1px solid var(--color-primary);
+      background-color: transparent;
+      color: white;
+      -moz-appearance:textfield;
+      &::placeholder {
+        color: var(--color-primary);
+        opacity: 0.5;
+        font-size: 0.8em;
+      }
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+    span {
+      color: white;
+      font-size: 0.8em;
+    }
+  }
+  button {
+    font-weight: bold;
+    font-family: 'Manrope';
+    background: #44F1A680;
+    padding: 0.8em 2em;
+    color: white;
+    border-radius: 2em;
+    &:hover {
+      background: #44F1A6;
+      color: black;
+    }
+  }
+  hr {
+    border-color: #44F1A680;
+  }
+  .buy {
+    align-items: center;
+    button {
+      white-space: nowrap;
+    }
+    h2 {
+      color: white;
+      font-size: large;
+      margin-bottom: 1em;
+    }
+    p {
+      color: var(--color-primary);
+      font-size: 0.8em;
+    }
+  }
+}
+
+.rules {
+  border: 1px solid var(--color-primary);
+  border-radius: 1em;
+  padding: 3em 2em;
+  color: white;
+  h1 {
+    color: var(--color-primary);
+    font-size: xx-large;
+    padding-bottom: 1em;
+  }
+  p {
+    line-height: 1.5em;
+  }
+}

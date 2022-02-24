@@ -1,0 +1,21 @@
+@import "~tailwindcss/base";
+@import "~tailwindcss/components";
+@import "~tailwindcss/utilities";
+@import url('https://fonts.googleapis.com/css?family=PT%20Mono&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Manrope&display=swap');
+
+body {
+  background-color: #161616;
+  font-family: PT Mono;
+  font-size: 16px;
+  font-weight: 200;
+  line-height: 19px;
+  letter-spacing: 1px;
+
+  --color-primary: #44F1A6;
+  padding-bottom: 5em;
+}
+
+* {
+  letter-spacing: inherit;
+}
