@@ -5,9 +5,11 @@ import { useEffect, useState } from "react" // State management
 import cn from "classnames"
 import styles from "styles/Header.module.scss" // Component styles
 import Router from "next/router"
+import { token } from "state/token"
 
 export default function Header() {
   const { address, unlock, lock } = eth.useContainer()
+  const { info } = token.useContainer()
   const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(false)
   const [pathname, setPathname] = useState('')
   useEffect(() => {
@@ -34,7 +36,8 @@ export default function Header() {
           {[
             { title: "App", route: "/" },
             { title: "Dashboard", route: "/dashboard" },
-          ].map(({ route, title }) => (
+            { title: "Monitor", route: "/monitor", owner: true },
+          ].filter(route => info.isOwner || !route.owner).map(({ route, title }) => (
             <li className="mt-3 md:mt-0 md:mr-6" key={title}>
               <Link href={route} passHref>
                 <a className={cn("text-white hover:text-red-600", pathname == route && styles.active)}>{title}</a>

@@ -17,15 +17,14 @@ export default function MyApp({
       <Layout>
         <Component {...pageProps} />
         <ToastContainer
-          position="bottom-center"
+          position="top-right"
           autoClose={5000}
-          hideProgressBar={false}
+          hideProgressBar={true}
           newestOnTop={false}
           closeOnClick
           rtl={false}
           pauseOnFocusLoss
-          draggable
-          pauseOnHover
+          theme="dark"
         />
       </Layout>
     </StateProvider>

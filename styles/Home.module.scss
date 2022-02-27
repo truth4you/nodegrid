@@ -20,6 +20,25 @@
       em {
         font-style: normal;
         font-size: 0.8em;
+        text-transform: capitalize;
+      }
+    }
+    ins {
+      margin-left: -1em;
+      text-align: center;
+      color: white;
+      text-decoration: none;
+      button {
+        font-weight: bold;
+        font-family: 'Manrope';
+        background: #44F1A680;
+        padding: 0.5em 2em;
+        color: white;
+        border-radius: 0.5em;
+        &:not([disabled]):hover {
+          background: #44F1A6;
+          color: black;
+        }
       }
     }
   }
@@ -81,8 +100,78 @@
       color: white;
     }
   }
+  input {
+    border-radius: 2em;
+    padding: 0.7em 1.2em;
+    border: 1px solid var(--color-primary);
+    background-color: transparent;
+    color: white;
+    -moz-appearance:textfield;
+    &::placeholder {
+      color: var(--color-primary);
+      opacity: 0.5;
+      font-size: 0.8em;
+    }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
   .edit {
     padding-top: 1em;
+    align-items: center; 
+    span {
+      color: white;
+      font-size: 0.8em;
+      line-height: 2em;
+    }
+  }
+  button {
+    font-weight: bold;
+    font-family: 'Manrope';
+    background: #44F1A680;
+    padding: 0.8em 2em;
+    color: white;
+    border-radius: 2em;
+    &:not([disabled]):hover {
+      background: #44F1A6;
+      color: black;
+    }
+    &:not(.approved)[disabled] {
+      opacity: 0.3;
+    }
+    &.approved {
+      background-color: rgb(199, 113, 0);
+    }
+  }
+  .group * {
+    &:not(:first-child) {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    &:not(:last-child) {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+  hr {
+    border-color: #44F1A680;
+  }
+  .upgrade {
+    align-items: center;
+    button {
+      white-space: nowrap;      
+    }
+    h2 {
+      color: white;
+      font-size: large;
+      margin-bottom: 1em;
+    }
+    p {
+      color: var(--color-primary);
+      font-size: 0.8em;
+    }
     input {
       border-radius: 2em;
       padding: 0 1.2em;
@@ -101,25 +190,6 @@
         margin: 0;
       }
     }
-    span {
-      color: white;
-      font-size: 0.8em;
-    }
-  }
-  button {
-    font-weight: bold;
-    font-family: 'Manrope';
-    background: #44F1A680;
-    padding: 0.8em 2em;
-    color: white;
-    border-radius: 2em;
-    &:hover {
-      background: #44F1A6;
-      color: black;
-    }
-  }
-  hr {
-    border-color: #44F1A680;
   }
   .buy {
     align-items: center;
@@ -138,6 +208,63 @@
   }
 }
 
+.nodes {
+  border: 1px solid var(--color-primary);
+  border-radius: 1em;
+  padding: 3em 2em;
+  color: white;
+  h1 {
+    color: var(--color-primary);
+    font-size: xx-large;
+  }
+  table {
+    line-height: 1.5em;
+    width: 100%;
+    border:1px solid var(--color-secondary);    
+    thead {
+      color: var(--color-primary);
+      th {
+        line-height: 2.5em;
+        font-weight: normal;
+        border-bottom:1px solid var(--color-secondary);
+      }
+    }
+    tbody {
+      td {
+        line-height: 2em;
+        border-bottom:1px dotted var(--color-secondary);
+        text-align: center;
+      }
+    }
+  }
+  button {
+    font-weight: bold;
+    font-family: 'Manrope';
+    background: #44F1A680;
+    padding: 0.4em 2em;
+    color: white;
+    border-radius: 2em;
+    text-transform: capitalize;
+    &:not(.selected):hover {
+      background: #44F1A6;
+      color: black;
+    }
+    &.selected {
+      background-color: rgb(199, 113, 0);
+    }
+  }
+  .group * {
+    &:not(:first-child) {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    &:not(:last-child) {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+}
+
 .rules {
   border: 1px solid var(--color-primary);
   border-radius: 1em;
@@ -150,5 +277,29 @@
   }
   p {
     line-height: 1.5em;
+  }
+  hr {
+    border-color: #44F1A680;
+  }
+  .pay {
+    align-items: center;
+    button {
+      font-weight: bold;
+      font-family: 'Manrope';
+      background: #44F1A680;
+      padding: 0.8em 2em;
+      color: white;
+      border-radius: 2em;
+      &:not([disabled]):hover {
+        background: #44F1A6;
+        color: black;
+      }
+      &:not(.approved)[disabled] {
+        opacity: 0.3;
+      }
+      &.approved {
+        background-color: rgb(199, 113, 0);
+      }
+    }
   }
 }
