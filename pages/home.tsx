@@ -40,7 +40,9 @@ export default function Home() {
 
   const calcRewards = (node: any) => {
     const tier = findTier(node.tierIndex)
-    return tier?.rewardsPerTime.mul(new Date().getTime() - node.claimedTime * 1000).div(tier.claimInterval).div(1000) ?? 0
+    const diff = new Date().getTime() - node.claimedTime * 1000
+    if (diff <= 0) return 0
+    return tier?.rewardsPerTime.mul(diff).div(tier.claimInterval).div(1000) ?? 0
   }
 
   const handleApprove = () => {
@@ -231,7 +233,7 @@ export default function Home() {
     }
   }, [address])
   useEffect(() => {
-    if (tiers.length) activeTier(tiers[0].name)
+    if (activedTier == '') activeTier(tiers[0].name)
   }, [tiers])
   useEffect(() => {
     const interval = setInterval(() => {
