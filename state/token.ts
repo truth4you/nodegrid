@@ -7,9 +7,9 @@ import { BigNumber } from "ethers"
 
 const TokenABI = require("abi/NodeManager.json")
 const ERC20ABI = require("abi/ERC20.json")
-const MulticallABI = require("abi/Multicall.json")
+// const MulticallABI = require("abi/Multicall.json")
 const UINT256_MAX = '1000000000000000000000000000000000000000000000000000000000000000'
-const MULTICALL_ADDRESS = '0x5FC8d32690cc91D4c39d9d3abcBD16989F875707'
+// const MULTICALL_ADDRESS = '0x5FC8d32690cc91D4c39d9d3abcBD16989F875707'
 
 let contractNodeGrid: ethers.Contract
 let contractToken: ethers.Contract
@@ -109,7 +109,7 @@ function useToken() {
 
   const multicall = async () => {
     await getToken()
-    await setMulticallAddress(31337,MULTICALL_ADDRESS)
+    // await setMulticallAddress(31337,MULTICALL_ADDRESS)
     const multicall = new Provider(provider??defaultProvider)
     await multicall.init()
     const NodeGrid = new Contract(
@@ -119,10 +119,6 @@ function useToken() {
     const Token = new Contract(
       tokenAddress,
       ERC20ABI
-    )
-    const Multicall = new Contract(
-      MULTICALL_ADDRESS,
-      MulticallABI
     )
     const _tiers = await getTiers()
     setTiers(_tiers)
@@ -135,8 +131,6 @@ function useToken() {
     calls.push(NodeGrid.rewardsPoolFee())
     calls.push(NodeGrid.operatorFee())
     calls.push(NodeGrid.maxCountOfUser())
-    calls.push(NodeGrid.memberFee())
-    calls.push(Multicall.getCurrentBlockTimestamp())
     if(address) {
       calls.push(multicall.getEthBalance(address))
       calls.push(Token.balanceOf(address))
@@ -157,8 +151,6 @@ function useToken() {
     info.rewardsPoolFee = ret[index++]
     info.operatorFee = ret[index++]
     info.maxCountOfUser = ret[index++]
-    info.memberFee = ret[index++]
-    info.timestamp = ret[index++]
     if(address) {
       info.balanceETH = ret[index++]
       info.balanceToken = ret[index++]

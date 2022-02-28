@@ -8,7 +8,7 @@ export default function Layout({
   children: ReactElement | ReactElement[];
 }) {
   return (
-    <div className="container md:mx-auto">
+    <div className="container mx-auto md:p-0 px-4">
       <Header />
       <div>{children}</div>
       <Footer />

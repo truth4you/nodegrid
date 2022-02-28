@@ -17,6 +17,7 @@ export default function Monitor() {
   const [filter, setFilter] = useState<any>({})
   const [loading, setLoading] = useState(false)
 
+  const isMobile = ( window.innerWidth <= 600 );
   const parseError = (ex: any) => {
     if (typeof ex == 'object')
       return (ex.data?.message ?? null) ? ex.data.message.replace('execution reverted: ', '') : ex.message
@@ -144,85 +145,90 @@ export default function Monitor() {
             <button className={listMode == 'account' ? styles.active : ''} onClick={() => showList('account')}>Account</button>
             <button className={listMode == 'node' ? styles.active : ''} onClick={() => showList('node')}>Node</button>
           </div>
-          <div className={classNames(styles.group, "flex gap-1")}>
+          <div className={classNames(styles.group, "flex gap-1 hidden md:block")}>
             <input name="days" placeholder="Past before (days)" type="number" value={filter.days ?? ''} onChange={handleChangeFilter} />
             <button className={styles.danger} disabled={checked.length == 0} onClick={handleBurn}>Burn Selected {checked.length ? `(${checked.length})` : ''}</button>
           </div>
+          <div className="md:hidden" >
+            <input name="days" placeholder="Past before (days)" type="number" value={filter.days ?? ''} onChange={handleChangeFilter} className="py-1 my-3 w-full"/>
+            <button className={classNames(styles.danger,"w-full")} disabled={checked.length == 0} onClick={handleBurn}>Burn Selected {checked.length ? `(${checked.length})` : ''}</button>
+          </div>
         </div>
-        <table className="table-auto border-collapse">
-          <thead>
-            {listMode == 'node' ?
-              <tr>
-                {/* <th>Title</th> */}
-                <th>#</th>
-                <th>Owner</th>
-                <th>Tier</th>
-                <th>Creation Time</th>
-                <th>Past</th>
-                <th>
-                  <input type="checkbox" onChange={handleCheckAll} checked={checked.length == nodes.length} />
-                </th>
-              </tr> :
-              <tr>
-                <th>#</th>
-                <th>Owner</th>
-                <th>Number of Nodes</th>
-                <th>Max Past</th>
-                <th>Min Past</th>
-                <th>Avg Past</th>
-                <th>
-                  <input type="checkbox" onChange={handleCheckAll} checked={checked.length == nodes.length} />
-                </th>
-              </tr>
-            }
-          </thead>
-          <tbody>
-            {listMode == 'node' ?
-              nodes.filter(node => {
-                if (filter.days) {
-                  return Math.floor((node.limitedTime - new Date().getTime() / 1000) / 86400) <= -filter.days
-                }
-                return true
-              }).sort((a: any, b: any) => {
-                if (a.limitedTime < b.limitedTime) return -1
-                return 1
-              }).map((node, index) =>
-                <tr key={index}>
-                  {/* <td>{node.title}</td> */}
-                  <td>{index + 1}</td>
-                  <td>{node.owner.substring(0, 10)}...{node.owner.slice(-8)}</td>
-                  <td>{findTier(node.tierIndex)?.name?.toUpperCase()}</td>
-                  <td>{formatTime(node.createdTime)}</td>
-                  <td>{formatDays(node.limitedTime)}</td>
-                  <td>
-                    <input type="checkbox" checked={checked.indexOf(String(node.id)) > -1} onChange={handleCheck} value={node.id ?? ''} />
-                  </td>
+        <div className="overflow-x-auto">
+          <table className="table-auto border-collapse">
+            <thead>
+              {listMode == 'node' ?
+                <tr>
+                  {/* <th>Title</th> */}
+                  <th>#</th>
+                  <th>Owner</th>
+                  <th>Tier</th>
+                  <th>Creation Time</th>
+                  <th>Past</th>
+                  <th>
+                    <input type="checkbox" onChange={handleCheckAll} checked={checked.length == nodes.length} />
+                  </th>
+                </tr> :
+                <tr>
+                  <th>#</th>
+                  <th>Owner</th>
+                  <th>Number of Nodes</th>
+                  <th>Max Past</th>
+                  <th>Min Past</th>
+                  <th>Avg Past</th>
+                  <th>
+                    <input type="checkbox" onChange={handleCheckAll} checked={checked.length == nodes.length} />
+                  </th>
                 </tr>
-              ) :
-              Object.values(accounts).filter((account: any) => {
-                if (filter.days) {
-                  return account.maxLimitedDays >= filter.days
-                }
-                return true
-              }).sort((a: any, b: any) => {
-                if (a.maxLimitedTime < b.maxLimitedTime) return -1
-                return 1
-              }).map((account: any, index) =>
-                <tr key={account.owner}>
-                  {/* <td>{node.title}</td> */}
-                  <td>{index + 1}</td>
-                  <td>{account.owner.substring(0, 10)}...{account.owner.slice(-8)}</td>
-                  <td>{account.count}</td>
-                  <td><span className="text-red-500">{account.maxLimitedDay} days</span></td>
-                  <td><span className="text-red-500">{account.minLimitedDay} days</span></td>
-                  <td><span className="text-red-500">{account.limitedDays.reduce((a: number, b: number) => a + b) / account.count} days</span></td>
-                  <td>
-                    <input type="checkbox" checked={checked.indexOf(account.owner) > -1} onChange={handleCheck} value={account.owner ?? ''} />
-                  </td>
-                </tr>
-              )}
-          </tbody>
-        </table>
+              }
+            </thead>
+            <tbody>
+              {listMode == 'node' ?
+                nodes.filter(node => {                if (filter.days) {
+                    return Math.floor((node.limitedTime - new Date().getTime() / 1000) / 86400) <= -filter.days
+                  }
+                  return true
+                }).sort((a: any, b: any) => {
+                  if (a.limitedTime < b.limitedTime) return -1
+                  return 1
+                }).map((node, index) =>
+                  <tr key={index}>
+                    {/* <td>{node.title}</td> */}
+                    <td>{index + 1}</td>
+                    <td>{isMobile?`${node.owner.substring(0, 4)}`:`${node.owner.substring(0, 10)}...${node.owner.slice(-8)}`}</td>
+                    <td>{findTier(node.tierIndex)?.name?.toUpperCase()}</td>
+                    <td>{formatTime(node.createdTime)}</td>
+                    <td>{formatDays(node.limitedTime)}</td>
+                    <td>
+                      <input type="checkbox" checked={checked.indexOf(String(node.id)) > -1} onChange={handleCheck} value={node.id ?? ''} />
+                    </td>
+                  </tr>
+                ) :
+                Object.values(accounts).filter((account: any) => {
+                  if (filter.days) {
+                    return account.maxLimitedDays >= filter.days
+                  }
+                  return true
+                }).sort((a: any, b: any) => {
+                  if (a.maxLimitedTime < b.maxLimitedTime) return -1
+                  return 1
+                }).map((account: any, index) =>
+                  <tr key={account.owner}>
+                    {/* <td>{node.title}</td> */}
+                    <td>{index + 1}</td>
+                    <td>{isMobile?`${account.owner.substring(0, 4)}`:`${account.owner.substring(0, 10)}...${account.owner.slice(-8)}`}</td>
+                    <td>{account.count}</td>
+                    <td><span className="text-red-500">{account.maxLimitedDay} days</span></td>
+                    <td><span className="text-red-500">{account.minLimitedDay} days</span></td>
+                    <td><span className="text-red-500">{account.limitedDays.reduce((a: number, b: number) => a + b) / account.count} days</span></td>
+                    <td>
+                      <input type="checkbox" checked={checked.indexOf(account.owner) > -1} onChange={handleCheck} value={account.owner ?? ''} />
+                    </td>
+                  </tr>
+                )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div >
   )

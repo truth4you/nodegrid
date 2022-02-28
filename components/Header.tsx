@@ -34,13 +34,13 @@ export default function Header() {
         </button>
         <ul className="md:flex flex-col md:flex-row md:items-center md:justify-center w-full md:w-auto hidden md:block">
           {[
+            { title: "Home", route: "/dashboard" },
             { title: "App", route: "/" },
-            { title: "Dashboard", route: "/dashboard" },
             { title: "Monitor", route: "/monitor", owner: true },
           ].filter(route => info.isOwner || !route.owner).map(({ route, title }) => (
             <li className="mt-3 md:mt-0 md:mr-6" key={title}>
               <Link href={route} passHref>
-                <a className={cn("text-white hover:text-red-600", pathname == route && styles.active)}>{title}</a>
+                <a className={cn("text-white hover:text-green-600", pathname == route && styles.active)}>{title}</a>
               </Link>
             </li>
           ))}
@@ -50,16 +50,17 @@ export default function Header() {
             <button className={styles.button} onClick={lock}>Disconnect</button>}
         </ul>
       </div>
-      <div className={cn("z-20 bg-black block md:hidden absolute top-0 left-0 w-full h-auto", mobileMenuIsOpen ? `translate-x-0` : `translate-x-full`)}
+      <div className={cn("z-10 bg-black block md:hidden top-0 left-0 w-full h-auto fixed", mobileMenuIsOpen ? `translate-x-0` : `translate-x-full`)}
         style={{ transition: "transform 200ms linear" }}>
         <div className="container p-8">
-          <span className="close_menu mt-10" onClick={() => setMobileMenuIsOpen(!mobileMenuIsOpen)}></span>
+          <span className="close_menu mt-10 text-white" onClick={() => setMobileMenuIsOpen(!mobileMenuIsOpen)}>close</span>
           <ul
             className="items-center justify-center text-sm w-full h-screen flex flex-col -mt-12"
           >
             {[
-              { title: "App", route: "/createnode" },
-              { title: "Dashboard", route: "/dashboard" },
+              { title: "Home", route: "/dashboard" },
+              { title: "App", route: "/" },
+              { title: "Monitor", route: "/monitor", owner: true },
             ].map(({ route, title }) => (
               <li className="mt-5" key={title}>
                 <Link href={route} passHref>
@@ -68,7 +69,10 @@ export default function Header() {
               </li>
             ))}
             <div className={styles.header__actions}>
-              <button>Connect</button>
+            {!address ?
+            <button className={styles.button} onClick={unlock}>Connect</button>
+            :
+            <button className={styles.button} onClick={lock}>Disconnect</button>}
             </div>
           </ul>
         </div>

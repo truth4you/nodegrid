@@ -6,6 +6,7 @@ import { formatEther } from "ethers/lib/utils"
 import { formatFixed } from "@ethersproject/bignumber"
 import styles from "styles/Home.module.scss"
 import { toast } from "react-toastify"
+import Link from "next/link"
 
 export default function Home() {
   const { address } = eth.useContainer()
@@ -233,7 +234,7 @@ export default function Home() {
     }
   }, [address])
   useEffect(() => {
-    if (activedTier == '') activeTier(tiers[0].name)
+    if (activedTier == '' && tiers[0]) activeTier(tiers[0].name)
   }, [tiers])
   useEffect(() => {
     const interval = setInterval(() => {
@@ -243,11 +244,11 @@ export default function Home() {
   }, [timer])
   return (
     <div className={classNames(loading ? "loading" : "", "flex flex-col")}>
-      <div className={classNames(styles.welcome, "md:pt-20")}>
+      <div className={classNames(styles.welcome, "pt-10 md:pt-20")}>
         <h1>Welcome Node Grid</h1>
         <p>You can use this app to create Thor Nodes, view, claim and compound rewards.</p>
       </div>
-      <div className={classNames(styles.status, "flex flex-wrap justify-between gap-10 md:pt-20")}>
+      <div className={classNames(styles.status, "flex flex-wrap justify-between md:gap-10 gap-5 md:pt-20 pt-10")}>
         <ul className="flex-1">
           <li><em>My Nodes :</em> {info.countOfUser ?? 0} / {info.maxCountOfUser ?? 'Infinite'}</li>
           {tiers.map((tier, index) =>
@@ -270,13 +271,13 @@ export default function Home() {
           <ins><button className="w-full" onClick={handleClaim}>Claim Rewards</button></ins>
         </ul>
       </div>
-      <div className={classNames(styles.create, "md:mt-10")}>
+      <div className={classNames(styles.create, "md:mt-10 mt-5")}>
         <h1>Create a Node</h1>
         <p>Choose a warrior to fight for your rewards</p>
         <p>Choose all warriors to unlock the full power of the Bifrost</p>
-        <div className={classNames(styles.tiers, "flex flex-wrap justify-around gap-10 md:mt-10")}>
+        <div className={classNames(styles.tiers, "flex flex-wrap justify-around md:gap-10 gap-5 md:mt-10")}>
           {tiers.map(tier =>
-            <a className={classNames("tier", tier.name, tier.name == activedTier ? styles.selected : "", tier.name == activedTier ? "selected" : "")} key={tier.name} onClick={() => activeTier(tier.name)}>
+            <a className={classNames("tier w-full md:w-auto", tier.name, tier.name == activedTier ? styles.selected : "", tier.name == activedTier ? "selected" : "")} key={tier.name} onClick={() => activeTier(tier.name)}>
               <h2>{tier.name}</h2>
               <p>{formatEther(tier.price)} NodeGrid per Node</p>
               <p>Earn {formatEther(tier.rewardsPerTime)} NodeGrid per Day</p>
@@ -289,18 +290,26 @@ export default function Home() {
           <span>Please approve the contract before creating a node if this is your first interaction with NodeGrid.</span>
         </div>
         {showingTransfer ?
-          <div className={classNames(styles.group, "flex gap-1 mt-4 md:mt-10")}>
-            <input placeholder="Address of Recipient" type="text" className="flex-1" value={addressTransfer} onInput={handleInputAddress} />
+          <>
+          <div className={classNames(styles.group, "md:flex gap-1 mt-4 mt-10 hidden md:block")}>
+            <input placeholder="Address of Recipient" type="text" className="flex-1 w-full mb-2" value={addressTransfer} onInput={handleInputAddress} />
             <button disabled={nodes.length == 0} onClick={handleTransfer}>Confirm</button>
             <button disabled={nodes.length == 0} onClick={() => showTransfer(false)}>Cancel</button>
-          </div> :
+          </div>
+          <div className={"md:flex gap-1 mt-4 mt-10 md:hidden"}>
+            <input placeholder="Address of Recipient" type="text" className="flex-1 w-full mb-2" value={addressTransfer} onInput={handleInputAddress} />
+            <button disabled={nodes.length == 0} onClick={handleTransfer} className={"mr-4"}>Confirm</button>
+            <button disabled={nodes.length == 0} onClick={() => showTransfer(false)}>Cancel</button>
+          </div>
+          </>
+           :
           <div className="flex flex-wrap justify-between mt-4 md:mt-10">
             {approved ?
-              <button disabled className={styles.approved}>Approved</button> :
-              <button onClick={handleApprove}>Approve Contract</button>}
-            <button disabled={!approved} onClick={handleCreate}>Create Nodes</button>
-            <button disabled={!approved} onClick={handleCompound}>Compound Nodes</button>
-            <button disabled={nodes.length == 0} onClick={handleShowTransfer}>Transfer Nodes</button>
+              <button disabled className={classNames(styles.approved,"w-full md:w-auto")}>Approved</button> :
+              <button onClick={handleApprove} className="w-full md:w-auto">Approve Contract</button>}
+            <button disabled={!approved} onClick={handleCreate} className="w-full md:w-auto">Create Nodes</button>
+            <button disabled={!approved} onClick={handleCompound} className="w-full md:w-auto">Compound Nodes</button>
+            <button disabled={nodes.length == 0} onClick={handleShowTransfer} className="w-full md:w-auto">Transfer Nodes</button>
           </div>}
         <hr className="my-10" />
         <div className={styles.upgrade}>
@@ -308,9 +317,9 @@ export default function Home() {
           <p>Upgrading nodes to higher tier needs tokens that equals with difference of tiers' prices.</p>
           <div className="flex flex-wrap justify-between mt-4 md:mt-10">
             <input placeholder="Number of Nodes" type="number" defaultValue={countUpgrade ? countUpgrade : ''} onChange={handleCountUpgrade} />
-            <div className={classNames(styles.group, "flex gap-1")}>
+            <div className={classNames(styles.group, "flex gap-1 mt-3 md:m-0")}>
               {tiers.map((tier1) =>
-                tiers.filter((tier2) => tier1.price < tier2.price).map((tier2) =>
+                tiers.filter((tier2) => tier1.price.lt(tier2.price)).map((tier2) =>
                   <button disabled={!approved || nodes.length == 0 || countUpgrade == 0} onClick={() => handleUpgrade(tier1.name, tier2.name)} key={`upgrade-${tier1.id}-${tier2.id}`}>
                     {tier1.name.toUpperCase()} &rArr; {tier2.name.toUpperCase()}
                   </button>
@@ -320,18 +329,22 @@ export default function Home() {
           </div>
         </div>
         <hr className="my-10" />
-        <div className={classNames(styles.buy, "flex align-center")}>
+        <div className={classNames(styles.buy, "md:flex align-center")}>
           <div>
             <h2>Create a  Node with NodeGrid tokens to earn NodeGrid token rewards.</h2>
             <p>Rewards calculations are based on many factors, including the number of nodes, node revenue, token price, and protocol revenue, and they are variable.</p>
           </div>
-          <button className="flex-1 nowrap">Buy NodeGrid</button>
+          <Link  href="https://testnet.godex.exchange/swap?outputCurrency=0x25A6dC9DB7E0e862Db0B6b3e3612705bbCAd6E03" >
+            <a target="_blank">
+              <button className="flex-1 nowrap">Buy NodeGrid</button>
+            </a>
+          </Link>
         </div>
       </div>
-      {nodes.length && <div className={classNames(styles.nodes, "md:mt-10")}>
-        <div className="flex justify-between items-end mb-4">
+      {nodes.length>0 && <div className={classNames(styles.nodes, "md:mt-10 mt-5")}>
+        <div className="md:flex justify-between items-end mb-4">
           <h1>Nodes</h1>
-          <div className={classNames(styles.group, "flex gap-1")}>
+          <div className={classNames(styles.group, "flex gap-1 mt-2")}>
             <button onClick={() => setFilterTier(-1)} className={filterTier == -1 ? styles.selected : ""}>All</button>
             {tiers.map((tier, index) =>
               <button onClick={() => setFilterTier(index)} className={filterTier == index ? styles.selected : ""}>{tier.name}</button>
@@ -344,7 +357,7 @@ export default function Home() {
               {/* <th>Title</th> */}
               <th>#</th>
               <th>Tier</th>
-              <th>Creation Time</th>
+              <th className="hidden md:block">Creation Time</th>
               <th>Limited</th>
               <th>Rewards</th>
             </tr>
@@ -362,8 +375,8 @@ export default function Home() {
               <tr key={index}>
                 {/* <td>{node.title}</td> */}
                 <td>{index + 1}</td>
-                <td><span className="uppercase">{findTier(node.tierIndex).name}</span></td>
-                <td>{formatTime(node.createdTime)}</td>
+                <td><span className="uppercase">{findTier(node.tierIndex)?.name}</span></td>
+                <td className="hidden md:block" >{formatTime(node.createdTime)}</td>
                 <td>{formatDays(node.limitedTime)}</td>
                 <td>{parseFloat(formatEther(calcRewards(node))).toFixed(5)}</td>
               </tr>
@@ -371,7 +384,7 @@ export default function Home() {
           </tbody>
         </table>
       </div>}
-      <div className={classNames(styles.rules, "md:mt-10")}>
+      <div className={classNames(styles.rules, "md:mt-10 mt-5")}>
         <h1>Compounding Rules</h1>
         <p>You can only compound in the same tier.</p>
         <p>You can only compound across tiers in god mode.</p>
@@ -381,7 +394,7 @@ export default function Home() {
         <div className={classNames(styles.pay)}>
           <div>
             <h1>Pay maintenance fee every month</h1>
-            <p>Rewards calculations are based on many factors, including the number of nodes, node revenue, token price, and protocol revenue, and they are variable.</p>
+            <p>You need to pay maintaince fees end of the month And You have time to pay upto 1 more month but if not paid for 2 months nodes will be burnt</p>
           </div>
           <div className="flex flex-wrap gap-4 mt-4 justify-end">
             <button onClick={() => handlePay(1)}>Pay 1 Month</button>
