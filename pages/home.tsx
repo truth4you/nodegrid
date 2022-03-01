@@ -7,6 +7,7 @@ import { formatFixed } from "@ethersproject/bignumber"
 import styles from "styles/Home.module.scss"
 import { toast } from "react-toastify"
 import Link from "next/link"
+import BigNumber from "bignumber.js"
 
 export default function Home() {
   const { address } = eth.useContainer()
@@ -195,7 +196,12 @@ export default function Home() {
   const handlePay = (months: number) => {
     setLoading(true)
     try {
-      pay(months).then(async () => {
+      let fee = new BigNumber(0)
+      nodes.map(node=>{
+        const tier = findTier(node.tierIndex)
+        fee = fee.plus(tier.maintenanceFee.toString())
+      })
+      pay(months,fee.multipliedBy(months)).then(async () => {
         toast.success(`Successfully paid!`)
         if (address) getNodes(address).then(nodes => setNodes(nodes))
         await multicall()
@@ -335,7 +341,7 @@ export default function Home() {
             <p>Rewards calculations are based on many factors, including the number of nodes, node revenue, token price, and protocol revenue, and they are variable.</p>
           </div>
           <Link href="https://testnet.godex.exchange/swap?outputCurrency=0x25A6dC9DB7E0e862Db0B6b3e3612705bbCAd6E03" >
-            <a target="_blank">
+            <a target="_blank" className={styles.link}>
               <button className="flex-1 nowrap">Buy NodeGrid</button>
             </a>
           </Link>

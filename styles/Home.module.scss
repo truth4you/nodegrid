@@ -58,23 +58,23 @@
     line-height: 2em;
   }
   a {
-    // text-align: center;
-    // border: 1px solid var(--color-primary);
-    // border-radius: 1em;
-    // padding: 1.5em 0.5em;
-    // line-height: 2em;
-    // cursor: pointer;
+    text-align: center;
+    border: 1px solid var(--color-primary);
+    border-radius: 1em;
+    padding: 1.5em 0.5em;
+    line-height: 2em;
+    cursor: pointer;
     &:not(.selected):hover {
       opacity: 0.65;
     }
-    // &::before {
-    //   content: "";
-    //   background-repeat: no-repeat;
-    //   background-position: center;
-    //   // max-height: 143px;
-    //   display: block;
-    //   margin-bottom: 2em;
-    // }    
+    &::before {
+      content: "";
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 143px;
+      display: block;
+      margin-bottom: 2em;
+    }    
     h2 {
       font-size: x-large;
       text-transform: uppercase;
@@ -208,6 +208,12 @@
     p {
       color: var(--color-primary);
       font-size: 0.8em;
+    }
+    a {
+      border: none;
+      &::before {
+        display: none;
+      }
     }
   }
 }

@@ -480,7 +480,7 @@
     ],
     "name": "pay",
     "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -979,5 +979,13 @@
     ],
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawAllETH",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
+
 ]

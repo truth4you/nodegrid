@@ -3,7 +3,7 @@ import { ethers } from "ethers" // Ethers
 import { Contract, Provider, setMulticallAddress } from "ethers-multicall"
 import { useEffect, useState } from "react" // React
 import { createContainer } from "unstated-next" // State management
-import { BigNumber } from "ethers"
+import { BigNumber } from "bignumber.js"
 
 const TokenABI = require("abi/NodeManager.json")
 const ERC20ABI = require("abi/ERC20.json")
@@ -86,9 +86,9 @@ function useToken() {
     await(await contractNodeGrid.claim()).wait()
   }
 
-  const pay = async (months:number)=>{
+  const pay = async (months:number,fee:BigNumber)=>{
     getContract()
-    await(await contractNodeGrid.pay(months)).wait()
+    await(await contractNodeGrid.pay(months,{value:fee.toString()})).wait()
   }
 
   const allowance = async () : Promise<boolean>=>{
