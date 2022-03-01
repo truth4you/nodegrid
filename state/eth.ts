@@ -72,8 +72,8 @@ function useEth() {
       hideBranding: true,
       // Setup custom wallets for selection
       walletSelect: {
-        heading: `Connect to ProjectX competition`,
-        description: `Please select a wallet to authenticate with $PXT.`,
+        heading: `Connect to NodeGrid App`,
+        description: `Please select a wallet to authenticate with $NODEGRID.`,
         wallets: wallets,
       },
       // Track subscriptions

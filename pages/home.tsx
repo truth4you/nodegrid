@@ -246,7 +246,7 @@ export default function Home() {
     <div className={classNames(loading ? "loading" : "", "flex flex-col")}>
       <div className={classNames(styles.welcome, "pt-10 md:pt-20")}>
         <h1>Welcome Node Grid</h1>
-        <p>You can use this app to create Thor Nodes, view, claim and compound rewards.</p>
+        <p>You can use this app to create NodeGrid Nodes, view, claim and compound rewards.</p>
       </div>
       <div className={classNames(styles.status, "flex flex-wrap justify-between md:gap-10 gap-5 md:pt-20 pt-10")}>
         <ul className="flex-1">
@@ -334,7 +334,7 @@ export default function Home() {
             <h2>Create a  Node with NodeGrid tokens to earn NodeGrid token rewards.</h2>
             <p>Rewards calculations are based on many factors, including the number of nodes, node revenue, token price, and protocol revenue, and they are variable.</p>
           </div>
-          <Link  href="https://testnet.godex.exchange/swap?outputCurrency=0x25A6dC9DB7E0e862Db0B6b3e3612705bbCAd6E03" >
+          <Link href="https://testnet.godex.exchange/swap?outputCurrency=0x25A6dC9DB7E0e862Db0B6b3e3612705bbCAd6E03" >
             <a target="_blank">
               <button className="flex-1 nowrap">Buy NodeGrid</button>
             </a>
@@ -347,7 +347,7 @@ export default function Home() {
           <div className={classNames(styles.group, "flex gap-1 mt-2")}>
             <button onClick={() => setFilterTier(-1)} className={filterTier == -1 ? styles.selected : ""}>All</button>
             {tiers.map((tier, index) =>
-              <button onClick={() => setFilterTier(index)} className={filterTier == index ? styles.selected : ""}>{tier.name}</button>
+              <button onClick={() => setFilterTier(index)} className={filterTier == index ? styles.selected : ""} key={index}>{tier.name}</button>
             )}
           </div>
         </div>

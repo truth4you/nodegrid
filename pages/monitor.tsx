@@ -16,8 +16,11 @@ export default function Monitor() {
   const [listMode, setListMode] = useState('node')
   const [filter, setFilter] = useState<any>({})
   const [loading, setLoading] = useState(false)
-
-  const isMobile = ( window.innerWidth <= 600 );
+  let isMobile = false;
+  if (typeof window !== 'undefined') {
+    isMobile = ( window.innerWidth <= 600 );
+  }
+  
   const parseError = (ex: any) => {
     if (typeof ex == 'object')
       return (ex.data?.message ?? null) ? ex.data.message.replace('execution reverted: ', '') : ex.message
