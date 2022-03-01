@@ -340,7 +340,7 @@ export default function Home() {
             <h2>Create a  Node with NodeGrid tokens to earn NodeGrid token rewards.</h2>
             <p>Rewards calculations are based on many factors, including the number of nodes, node revenue, token price, and protocol revenue, and they are variable.</p>
           </div>
-          <Link href="https://testnet.godex.exchange/swap?outputCurrency=0x25A6dC9DB7E0e862Db0B6b3e3612705bbCAd6E03" >
+          <Link href="https://testnet.godex.exchange/swap?outputCurrency=0x9cDBaAd2Cd88236c3a132124F5fb958194B8fDa0" >
             <a target="_blank" className={styles.link}>
               <button className="flex-1 nowrap">Buy NodeGrid</button>
             </a>
