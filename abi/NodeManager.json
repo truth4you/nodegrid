@@ -1,16 +1,5 @@
 [
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -107,25 +96,6 @@
       }
     ],
     "name": "NodeUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "previousOwner",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
-    ],
-    "name": "OwnershipTransferred",
     "type": "event"
   },
   {
@@ -331,8 +301,24 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getTime",
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "timeFrom",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "timeTo",
+        "type": "uint256"
+      }
+    ],
+    "name": "getBoostRate",
     "outputs": [
       {
         "internalType": "uint256",
@@ -344,16 +330,16 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getUnlockTime",
-    "outputs": [
+    "inputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
       }
     ],
-    "stateMutability": "view",
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -364,6 +350,19 @@
         "internalType": "uint32",
         "name": "",
         "type": "uint32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nftAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -415,6 +414,11 @@
             "internalType": "uint32",
             "name": "limitedTime",
             "type": "uint32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "multiplier",
+            "type": "uint256"
           }
         ],
         "internalType": "struct Node[]",
@@ -497,13 +501,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "renounceOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -557,6 +554,19 @@
       }
     ],
     "name": "setDiscountPer10",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_nftAddress",
+        "type": "address"
+      }
+    ],
+    "name": "setNFTAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -883,6 +893,11 @@
             "internalType": "uint32",
             "name": "limitedTime",
             "type": "uint32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "multiplier",
+            "type": "uint256"
           }
         ],
         "internalType": "struct Node[]",
@@ -969,6 +984,13 @@
   },
   {
     "inputs": [],
+    "name": "withdrawAllETH",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "withdrawRate",
     "outputs": [
       {
@@ -979,13 +1001,5 @@
     ],
     "stateMutability": "view",
     "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "withdrawAllETH",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
   }
-
 ]

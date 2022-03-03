@@ -3,17 +3,20 @@ import { ethers } from "ethers" // Ethers
 import { Contract, Provider, setMulticallAddress } from "ethers-multicall"
 import { useEffect, useState } from "react" // React
 import { createContainer } from "unstated-next" // State management
-import { BigNumber } from "bignumber.js"
+import { BigNumber } from "@ethersproject/bignumber"
 
 const TokenABI = require("abi/NodeManager.json")
 const ERC20ABI = require("abi/ERC20.json")
+const NftABI = require("abi/BoostNFT.json")
 // const MulticallABI = require("abi/Multicall.json")
 const UINT256_MAX = '1000000000000000000000000000000000000000000000000000000000000000'
 // const MULTICALL_ADDRESS = '0x5FC8d32690cc91D4c39d9d3abcBD16989F875707'
 
 let contractNodeGrid: ethers.Contract
 let contractToken: ethers.Contract
+let contractNFT: ethers.Contract
 let tokenAddress: string
+let nftAddress: string
 
 function useToken() {
   const {address,provider} = eth.useContainer()
@@ -41,6 +44,23 @@ function useToken() {
     )
   }
 
+  const getNFT = async () => {
+    if(!contractNodeGrid)
+      getContract()
+    if(!nftAddress)
+      nftAddress = await contractNodeGrid.nftAddress()
+    contractNFT = new ethers.Contract(
+      nftAddress,
+      NftABI,
+      address?provider?.getSigner():defaultProvider
+    )
+  }
+
+  const getMultiplier = async (timeTo:Date) : Promise<BigNumber>=>{
+    await getNFT()
+    return await contractNFT.getLastMultiplier(address, Math.floor(timeTo.getTime()/1000))
+  }
+
   const getTiers = async () : Promise<any[]>=>{
     getContract()
     return await contractNodeGrid.tiers()
@@ -48,6 +68,7 @@ function useToken() {
 
   const getNodes = async (account:string) : Promise<any[]>=>{
     getContract()
+    console.log(await contractNodeGrid.nodes(account))
     return await contractNodeGrid.nodes(account)
   }
 
@@ -188,7 +209,8 @@ function useToken() {
     burnNode,
     pay, 
     claim, 
-    multicall
+    multicall,
+    getMultiplier
   }
 }
 

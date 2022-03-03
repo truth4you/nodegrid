@@ -2,26 +2,28 @@ import classNames from "classnames"
 import { useEffect, useRef, useState } from "react"
 import { eth } from "state/eth"
 import { token } from "state/token"
-import { formatEther } from "ethers/lib/utils"
-import { formatFixed } from "@ethersproject/bignumber"
+import { formatEther,parseEther } from "ethers/lib/utils"
+import { BigNumber } from "@ethersproject/bignumber"
 import styles from "styles/Home.module.scss"
 import { toast } from "react-toastify"
 import Link from "next/link"
-import BigNumber from "bignumber.js"
+// import BigNumber from "bignumber.js"
 
 export default function Home() {
   const { address } = eth.useContainer()
-  const { info, tiers, allowance, getNodes, approve, createNode, compoundNode, transferNode, upgradeNode, claim, pay, multicall } = token.useContainer()
+  const { info, tiers, allowance, getNodes, approve, createNode, compoundNode, transferNode, upgradeNode, claim, pay, multicall, getMultiplier } = token.useContainer()
   const [approved, setApproved] = useState(false)
   const [nodes, setNodes] = useState<any[]>([])
   const [activedTier, activeTier] = useState('')
   const [countCreate, setCountCreate] = useState(0)
   const [countUpgrade, setCountUpgrade] = useState(0)
+  const [multiplier, setMultiplier] = useState<BigNumber>(BigNumber.from("1000000000000000000"))
   const [addressTransfer, setAddressTransfer] = useState('')
   const [showingTransfer, showTransfer] = useState(false)
   const [filterTier, setFilterTier] = useState(-1)
   const [loading, setLoading] = useState(false)
   const [timer, setTimer] = useState(0)
+  let lastTime = new Date()
 
   const parseError = (ex: any) => {
     if (typeof ex == 'object')
@@ -42,9 +44,13 @@ export default function Home() {
 
   const calcRewards = (node: any) => {
     const tier = findTier(node.tierIndex)
-    const diff = new Date().getTime() - node.claimedTime * 1000
+    const now = new Date()
+    const diff = now.getTime() - node.claimedTime * 1000
     if (diff <= 0) return 0
-    return tier?.rewardsPerTime.mul(diff).div(tier.claimInterval).div(1000) ?? 0
+    let one:BigNumber = parseEther("1"), m:BigNumber = parseEther("1")
+    if(node.multiplier)
+      m = node.multiplier.mul(lastTime.getTime()-node.claimedTime).add(multiplier.mul(now.getTime()-lastTime.getTime())).div(now.getTime()-node.claimedTime)
+    return tier?.rewardsPerTime.mul(diff).mul(m).div(one).div(1000).div(tier.claimInterval) ?? 0
   }
 
   const handleApprove = () => {
@@ -79,10 +85,12 @@ export default function Home() {
         setLoading(false)
       }).catch(ex => {
         toast.error(parseError(ex))
+        setCountCreate(0)
         setLoading(false)
       })
     } catch (ex) {
       toast.error(parseError(ex))
+      setCountCreate(0)
       setLoading(false)
     }
   }
@@ -102,10 +110,12 @@ export default function Home() {
         setLoading(false)
       }).catch(ex => {
         toast.error(parseError(ex))
+        setCountCreate(0)
         setLoading(false)
       })
     } catch (ex) {
       toast.error(parseError(ex))
+      setCountCreate(0)
       setLoading(false)
     }
   }
@@ -145,10 +155,12 @@ export default function Home() {
         setLoading(false)
       }).catch(ex => {
         toast.error(parseError(ex))
+        setCountCreate(0)
         setLoading(false)
       })
     } catch (ex) {
       toast.error(parseError(ex))
+      setCountCreate(0)
       setLoading(false)
     }
   }
@@ -196,12 +208,12 @@ export default function Home() {
   const handlePay = (months: number) => {
     setLoading(true)
     try {
-      let fee = new BigNumber(0)
+      let fee = BigNumber.from(0)
       nodes.map(node=>{
         const tier = findTier(node.tierIndex)
-        fee = fee.plus(tier.maintenanceFee.toString())
+        fee = fee.add(tier.maintenanceFee.toString())
       })
-      pay(months,fee.multipliedBy(months)).then(async () => {
+      pay(months,fee.mul(months)).then(async () => {
         toast.success(`Successfully paid!`)
         if (address) getNodes(address).then(nodes => setNodes(nodes))
         await multicall()
@@ -234,6 +246,8 @@ export default function Home() {
 
   useEffect(() => {
     if (address) {
+      lastTime = new Date()
+      getMultiplier(lastTime).then(multiplier=>setMultiplier(multiplier))
       getNodes(address).then(nodes => setNodes(nodes))
       allowance().then(approved => setApproved(approved))
       multicall()
@@ -292,7 +306,7 @@ export default function Home() {
         </div>
         <div className={styles.active}>Active Tier: <label>{activedTier}</label></div>
         <div className={classNames(styles.edit, "flex flex-wrap md:flex-nowrap gap-1 md:gap-10")}>
-          <input placeholder="Number of Nodes" type="number" defaultValue={countCreate ? countCreate : ''} onChange={handleCountCreate} />
+          <input placeholder="Number of Nodes" type="number" className="w-full md:w-auto" value={countCreate ? countCreate : ''} onChange={handleCountCreate} />
           <span>Please approve the contract before creating a node if this is your first interaction with NodeGrid.</span>
         </div>
         {showingTransfer ?
@@ -309,7 +323,7 @@ export default function Home() {
           </div>
           </>
            :
-          <div className="flex flex-wrap justify-between mt-4 md:mt-10">
+          <div className="flex flex-wrap justify-between mt-4 md:mt-10 gap-2">
             {approved ?
               <button disabled className={classNames(styles.approved,"w-full md:w-auto")}>Approved</button> :
               <button onClick={handleApprove} className="w-full md:w-auto">Approve Contract</button>}
@@ -321,12 +335,12 @@ export default function Home() {
         <div className={styles.upgrade}>
           <h2>Upgrade Nodes</h2>
           <p>Upgrading nodes to higher tier needs tokens that equals with difference of tiers' prices.</p>
-          <div className="flex flex-wrap justify-between mt-4 md:mt-10">
-            <input placeholder="Number of Nodes" type="number" defaultValue={countUpgrade ? countUpgrade : ''} onChange={handleCountUpgrade} />
-            <div className={classNames(styles.group, "flex gap-1 mt-3 md:m-0")}>
+          <div className="flex flex-wrap justify-between mt-4 md:mt-10 gap-2">
+            <input placeholder="Number of Nodes" className="w-full md:w-auto" type="number" defaultValue={countUpgrade ? countUpgrade : ''} onChange={handleCountUpgrade} />
+            <div className={classNames(styles.group, "flex  w-full gap-1 md:w-3/5")}>
               {tiers.map((tier1) =>
                 tiers.filter((tier2) => tier1.price.lt(tier2.price)).map((tier2) =>
-                  <button disabled={!approved || nodes.length == 0 || countUpgrade == 0} onClick={() => handleUpgrade(tier1.name, tier2.name)} key={`upgrade-${tier1.id}-${tier2.id}`}>
+                  <button className="flex-1" disabled={!approved || nodes.length == 0 || countUpgrade == 0} onClick={() => handleUpgrade(tier1.name, tier2.name)} key={`upgrade-${tier1.id}-${tier2.id}`}>
                     {tier1.name.toUpperCase()} &rArr; {tier2.name.toUpperCase()}
                   </button>
                 )
@@ -335,15 +349,13 @@ export default function Home() {
           </div>
         </div>
         <hr className="my-10" />
-        <div className={classNames(styles.buy, "md:flex align-center")}>
+        <div className={classNames(styles.buy, "flex md:flex-row flex-col gap-5 align-center")}>
           <div>
             <h2>Create a  Node with NodeGrid tokens to earn NodeGrid token rewards.</h2>
             <p>Rewards calculations are based on many factors, including the number of nodes, node revenue, token price, and protocol revenue, and they are variable.</p>
           </div>
-          <Link href="https://testnet.godex.exchange/swap?outputCurrency=0x9cDBaAd2Cd88236c3a132124F5fb958194B8fDa0" >
-            <a target="_blank" className={styles.link}>
-              <button className="flex-1 nowrap">Buy NodeGrid</button>
-            </a>
+          <Link href="https://testnet.godex.exchange/swap?outputCurrency=0xE02Bde489389C9b115070AD2b994Eea7985d84B5" >
+            <a target="_blank" className={classNames(styles.link,"w-full md:w-auto")}>Buy NodeGrid</a>
           </Link>
         </div>
       </div>
