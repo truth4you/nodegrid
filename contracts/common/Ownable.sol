@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.9;
-import "./Context.sol";
-contract Ownable is Context {
+
+contract Ownable {
     address private _owner;
     address private _previousOwner;
     uint256 private _lockTime;
@@ -13,7 +13,7 @@ contract Ownable is Context {
     );
 
     constructor() {
-        address msgSender = _msgSender();
+        address msgSender = msg.sender;
         _owner = msgSender;
         emit OwnershipTransferred(address(0), msgSender);
     }
@@ -23,7 +23,7 @@ contract Ownable is Context {
     }
 
     modifier onlyOwner() {
-        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        require(_owner == msg.sender, "Ownable: caller is not the owner");
         _;
     }
 

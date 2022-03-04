@@ -2,8 +2,20 @@
 pragma solidity ^0.8.9;
 
 import '@openzeppelin/contracts/token/ERC1155/ERC1155.sol';
+import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '../common/SafeMath.sol';
+import '../common/Ownable.sol';
 import 'hardhat/console.sol';
+
+struct Category {
+  uint8 id;
+  string name;
+  uint256 multiplier;
+  uint256 maxSupply;
+  uint256 totalSupply;
+  uint256 cost;
+  address token;
+}
 
 struct Log {
   uint256 timestamp;
@@ -11,45 +23,65 @@ struct Log {
   uint256 multiplier;
 }
 
-contract BoostNFT is ERC1155 {
+contract BoostNFT is ERC1155, Ownable {
   using SafeMath for uint256;
-  mapping(uint8 => string) private categoryNames;
-  mapping(string => uint8) private categoryIndex;
+  Category[] public categories;
+  uint8 public categoryLength;
+  mapping(string => uint8) public nameToIndex;
   mapping(address => Log[]) private userLogs;
   mapping(uint8 => Log[]) private tokenLogs;
-  mapping(uint8 => uint256) public multipliers;
-  uint8[] private tokens;
-
-  uint8 public constant GOLD = 0;
-  uint8 public constant SILVER = 1;
-  uint8 public constant TITANIUM = 2;
-  uint8 public constant COPPER = 3;
-  uint8 public constant WOODEN = 4;
 
   constructor() ERC1155('https://ipfs.io/ipfs/QmNqL26bqoEkvyEpwrqSsP5KGbFEsSNFKrRMwvLQ74jR59/') {
-    _mint(msg.sender, uint256(GOLD), 10**10, 'gold');
-    _mint(msg.sender, uint256(SILVER), 10**10, 'silver');
-    _mint(msg.sender, uint256(TITANIUM), 10**10, 'titanium');
-    _mint(msg.sender, uint256(COPPER), 10**10, 'copper');
-    _mint(msg.sender, uint256(WOODEN), 10**10, 'wooden');
+    add('gold', 10**10, 0.01 ether, address(0));
+    add('silver', 10**10, 0.008 ether, address(0));
+    add('titanium', 10**10, 0.006 ether, address(0));
+    add('copper', 10**10, 0.004 ether, address(0));
+    add('wooden', 10**10, 0.002 ether, address(0));
 
-    setMultiplier(GOLD, 2000);
-    setMultiplier(SILVER, 1500);
-    setMultiplier(TITANIUM, 1300);
-    setMultiplier(COPPER, 1200);
-    setMultiplier(WOODEN, 1100);
+    setMultiplier('gold', 2000);
+    setMultiplier('silver', 1500);
+    setMultiplier('titanium', 1300);
+    setMultiplier('copper', 1200);
+    setMultiplier('wooden', 1100);
   }
 
-  function _mint(
-    address to,
-    uint256 id,
-    uint256 amount,
-    bytes memory data
-  ) internal override {
-    super._mint(to, id, amount, data);
-    tokens.push(uint8(id));
-    categoryNames[uint8(id)] = string(data);
-    categoryIndex[string(data)] = uint8(id);
+  function add(
+    string memory name,
+    uint256 maxSupply,
+    uint256 cost,
+    address token
+  ) public onlyOwner {
+    nameToIndex[name] = categoryLength;
+    categories.push(Category({
+      id: categoryLength,
+      name: name,
+      multiplier: 1000,
+      maxSupply: maxSupply,
+      totalSupply: 0,
+      cost: cost,
+      token: token
+    }));
+    categoryLength++;
+  }
+
+  function mint(
+    string memory name,
+    uint256 amount
+  ) public payable {
+    uint8 id = nameToIndex[name];
+    require(id<categoryLength, "Invalid token index.");
+    Category storage category = categories[uint8(id)];
+    category.totalSupply = category.totalSupply.add(amount);
+    require(category.totalSupply<=category.maxSupply,"Overflow max supply.");
+    uint256 price = category.cost.mul(amount);
+    if(category.token==address(0))
+      require(msg.value >= price, "Insufficient ETH for purchase.");
+    else {
+      IERC20 token = IERC20(category.token);
+      require(token.balanceOf(msg.sender) >= price, "Insufficient Token for purchase.");
+      token.transferFrom(msg.sender, owner(), price);
+    }
+    _mint(msg.sender, id, amount, '');
   }
 
   function _safeTransferFrom(
@@ -66,22 +98,25 @@ contract BoostNFT is ERC1155 {
     // from
     uint256 multiplier = 1000;
     uint8 token = 0;
-    for (uint8 i = 0; i < tokens.length; i++) {
-      if (balanceOf(from, tokens[i]) > 0 && multiplier < multipliers[tokens[i]]) {
-        token = tokens[i];
-        multiplier = multipliers[token];
+    for (uint8 i = 0; i < categories.length; i++) {
+      Category storage category = categories[i];
+      if (balanceOf(from, category.id) > 0 && multiplier < category.multiplier) {
+        token = category.id;
+        multiplier = category.multiplier;
       }
     }
     if (logs1.length > 0 && logs1[logs1.length - 1].multiplier != multiplier) {
       logs1.push(Log({timestamp: block.timestamp, token: token, multiplier: multiplier}));
     }
     // to
+    Category storage curCategory = categories[uint8(id)];
     token = uint8(id);
-    multiplier = multipliers[uint8(id)];
-    for (uint8 i = 0; i < tokens.length; i++) {
-      if (balanceOf(to, tokens[i]) > 0 && multiplier < multipliers[tokens[i]]) {
-        token = tokens[i];
-        multiplier = multipliers[token];
+    multiplier = curCategory.multiplier;
+    for (uint8 i = 0; i < categories.length; i++) {
+      Category storage category = categories[i];
+      if (balanceOf(to, category.id) > 0 && multiplier < category.multiplier) {
+        token = category.id;
+        multiplier = category.multiplier;
       }
     }
     if (logs2.length == 0 || logs2[logs2.length - 1].multiplier != multiplier) {
@@ -148,21 +183,25 @@ contract BoostNFT is ERC1155 {
     return multiplier.div(timeTo.sub(timeFrom));
   }
 
-  function setMultiplier(uint8 id, uint256 multiplier) public {
-    multipliers[id] = multiplier;
+  function setMultiplier(string memory name, uint256 multiplier) public {
+    uint8 id = nameToIndex[name];
+    Category storage category = categories[id];      
+    category.multiplier = multiplier;
     Log[] storage logs = tokenLogs[id];
     logs.push(Log({timestamp: block.timestamp, token: id, multiplier: multiplier}));
   }
 
   function uri(uint256 id) public view override returns (string memory) {
-    bytes memory name = bytes(categoryNames[uint8(id)]);
+    Category storage category = categories[id]; 
+    bytes memory name = bytes(category.name);
     require(name.length > 0, 'Invalid token id.');
     string memory _uri = super.uri(id);
     return string(bytes.concat(bytes(_uri), name, bytes('.json')));
   }
 
-  function hasBalance(address account, string memory name) public view returns (bool) {
-    require(categoryIndex[name] >= 0, 'Invalid token name.');
-    return balanceOf(account, uint256(categoryIndex[name])) > 0;
+  function getBalanceOf(address account, string memory name) public view returns (uint256) {
+    uint256 id = uint256(nameToIndex[name]);
+    require(id < categories.length, 'Invalid token name.');
+    return balanceOf(account, id);
   }
 }
