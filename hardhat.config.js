@@ -77,7 +77,7 @@ module.exports = {
             runs: 100,
           },
         },
-      },
+      }
     ]
   },
   // contractSizer: {
@@ -107,6 +107,6 @@ module.exports = {
     clear: true,
     flat: true,
     spacing: 2,
-    pretty: true,
+    pretty: true
   }
 };
