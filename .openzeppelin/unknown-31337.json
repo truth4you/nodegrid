@@ -1,25 +1,45 @@
 {
   "manifestVersion": "3.2",
   "admin": {
-    "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
-    "txHash": "0x455d67e7e8612b6411f440166383af289313bb81992b9d4fcb2544d211c10a94"
+    "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+    "txHash": "0xc4648ba9360a9a01ac654d8511c1d261dde062c869f45eb12da01550d19b455e"
   },
   "proxies": [
     {
-      "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      "txHash": "0x0ccb6e27a997acc872df0f2286336bddc82ec1873972905e3eae9dec4c28239e",
+      "address": "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
+      "txHash": "0x92e2f88e2c1878c7d18cbefda9965acad5847655a37c77d9b77500df6d085b48",
       "kind": "transparent"
     },
     {
-      "address": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
-      "txHash": "0xdc12143ee3901e6ecb29340253ed4466901bcff50f44c3a17dec7b5485564cce",
+      "address": "0xc6e7DF5E7b4f2A278906862b61205850344D4e7d",
+      "txHash": "0xfdde0c78bf4aa4c4367d678f59fa5d8a9c79bfb5d163babfc025230097ed6c3e",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x4A679253410272dd5232B3Ff7cF5dbB88f295319",
+      "txHash": "0xfc50f0cf6371718d9e661c336cfc46c32ade65a4a88d0b4f4614b34260764053",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x09635F643e140090A9A8Dcd712eD6285858ceBef",
+      "txHash": "0x820d2958ec9d70c2f05e1b213ad1436a70ad8122727c70ae8db386f35fae5551",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x851356ae760d987E095750cCeb3bC6014560891C",
+      "txHash": "0xa6be87cf788ca746dce35b3c2567f482607f2a586f51e7d08813faaf3902d8b3",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x95401dc811bb5740090279Ba06cfA8fcF6113778",
+      "txHash": "0x91ce7f144148b42f9bf0d78dcabe32dc5849f2a047881048443753e87c6371c9",
       "kind": "transparent"
     }
   ],
   "impls": {
-    "dec84d06f8f0c0a7866a846d104d0b52d1ea7fef1265eda719cbda3d2636f303": {
-      "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0xa29260aadf7549a828134e84f38332201bf83721f7147d8ee8b3a9cd379e7b16",
+    "ed95c082eb132ef1e8a1673b85a9baf430ef5e77898bc669403b327b6b2f3e26": {
+      "address": "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
+      "txHash": "0xa47d5830e9cc13ded1261561ea0b3cca0462bbbcd91d65084921d8e7c5eca6ca",
       "layout": {
         "storage": [
           {
@@ -95,12 +115,92 @@
             "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:394"
           },
           {
-            "label": "txFee",
+            "label": "_inSwapAndLiquify",
             "offset": 0,
             "slot": "101",
+            "type": "t_bool",
+            "contract": "TokenV4",
+            "src": "contracts\\nodegrid\\TokenV4.sol:20"
+          },
+          {
+            "label": "transferTaxRate",
+            "offset": 1,
+            "slot": "101",
+            "type": "t_uint32",
+            "contract": "TokenV4",
+            "src": "contracts\\nodegrid\\TokenV4.sol:21"
+          },
+          {
+            "label": "buyBackFee",
+            "offset": 5,
+            "slot": "101",
+            "type": "t_uint32",
+            "contract": "TokenV4",
+            "src": "contracts\\nodegrid\\TokenV4.sol:22"
+          },
+          {
+            "label": "operatorFee",
+            "offset": 9,
+            "slot": "101",
+            "type": "t_uint32",
+            "contract": "TokenV4",
+            "src": "contracts\\nodegrid\\TokenV4.sol:23"
+          },
+          {
+            "label": "liquidityFee",
+            "offset": 13,
+            "slot": "101",
+            "type": "t_uint32",
+            "contract": "TokenV4",
+            "src": "contracts\\nodegrid\\TokenV4.sol:24"
+          },
+          {
+            "label": "minAmountToLiquify",
+            "offset": 0,
+            "slot": "102",
             "type": "t_uint256",
-            "contract": "TokenV2",
-            "src": "contracts\\nodeGrid\\nodegrid\\TokenV2.sol:7"
+            "contract": "TokenV4",
+            "src": "contracts\\nodegrid\\TokenV4.sol:25"
+          },
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "103",
+            "type": "t_address",
+            "contract": "TokenV4",
+            "src": "contracts\\nodegrid\\TokenV4.sol:27"
+          },
+          {
+            "label": "operator",
+            "offset": 0,
+            "slot": "104",
+            "type": "t_address",
+            "contract": "TokenV4",
+            "src": "contracts\\nodegrid\\TokenV4.sol:28"
+          },
+          {
+            "label": "isExcludedFromFee",
+            "offset": 0,
+            "slot": "105",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "TokenV4",
+            "src": "contracts\\nodegrid\\TokenV4.sol:29"
+          },
+          {
+            "label": "uniswapV2Router",
+            "offset": 0,
+            "slot": "106",
+            "type": "t_contract(IUniswapV2Router02)3402",
+            "contract": "TokenV4",
+            "src": "contracts\\nodegrid\\TokenV4.sol:31"
+          },
+          {
+            "label": "uniswapV2Pair",
+            "offset": 0,
+            "slot": "107",
+            "type": "t_address",
+            "contract": "TokenV4",
+            "src": "contracts\\nodegrid\\TokenV4.sol:32"
           }
         ],
         "types": {
@@ -116,6 +216,12 @@
           "t_bool": {
             "label": "bool"
           },
+          "t_contract(IUniswapV2Router02)3402": {
+            "label": "contract IUniswapV2Router02"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
           "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
             "label": "mapping(address => mapping(address => uint256))"
           },
@@ -127,13 +233,16 @@
           },
           "t_uint256": {
             "label": "uint256"
+          },
+          "t_uint32": {
+            "label": "uint32"
           }
         }
       }
     },
-    "1bbb9fbc7a266a8821058c2d7172c73eb56b2c269894c9afaa5e45f5e483cf0b": {
-      "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
-      "txHash": "0x390ff1baef5fbf460f16b1c71176e4e68b1623168cb7e81fb32b18d96b6e19ba",
+    "ce809e448c23a72422eb9551f3d78d3b9750690d59a7ed0817e09f58f5fefcc5": {
+      "address": "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
+      "txHash": "0x457522c7621e234ef8847221c0c5371873928e8e0c3fd02f13576601a82e75c2",
       "layout": {
         "storage": [
           {
@@ -158,7 +267,7 @@
             "slot": "0",
             "type": "t_address",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:37"
+            "src": "contracts\\nodegrid\\manager.sol:37"
           },
           {
             "label": "nftAddress",
@@ -166,7 +275,7 @@
             "slot": "1",
             "type": "t_address",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:38"
+            "src": "contracts\\nodegrid\\manager.sol:38"
           },
           {
             "label": "treasury",
@@ -174,7 +283,7 @@
             "slot": "2",
             "type": "t_address",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:39"
+            "src": "contracts\\nodegrid\\manager.sol:39"
           },
           {
             "label": "operators",
@@ -182,15 +291,15 @@
             "slot": "3",
             "type": "t_array(t_address)dyn_storage",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:40"
+            "src": "contracts\\nodegrid\\manager.sol:40"
           },
           {
             "label": "tierArr",
             "offset": 0,
             "slot": "4",
-            "type": "t_array(t_struct(Tier)5358_storage)dyn_storage",
+            "type": "t_array(t_struct(Tier)6718_storage)dyn_storage",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:41"
+            "src": "contracts\\nodegrid\\manager.sol:41"
           },
           {
             "label": "tierMap",
@@ -198,7 +307,7 @@
             "slot": "5",
             "type": "t_mapping(t_string_memory_ptr,t_uint8)",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:42"
+            "src": "contracts\\nodegrid\\manager.sol:42"
           },
           {
             "label": "tierTotal",
@@ -206,15 +315,15 @@
             "slot": "6",
             "type": "t_uint8",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:43"
+            "src": "contracts\\nodegrid\\manager.sol:43"
           },
           {
             "label": "nodesTotal",
             "offset": 0,
             "slot": "7",
-            "type": "t_array(t_struct(Node)5375_storage)dyn_storage",
+            "type": "t_array(t_struct(Node)6735_storage)dyn_storage",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:44"
+            "src": "contracts\\nodegrid\\manager.sol:44"
           },
           {
             "label": "nodesOfUser",
@@ -222,7 +331,7 @@
             "slot": "8",
             "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:45"
+            "src": "contracts\\nodegrid\\manager.sol:45"
           },
           {
             "label": "countTotal",
@@ -230,7 +339,7 @@
             "slot": "9",
             "type": "t_uint32",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:46"
+            "src": "contracts\\nodegrid\\manager.sol:46"
           },
           {
             "label": "countOfUser",
@@ -238,7 +347,7 @@
             "slot": "10",
             "type": "t_mapping(t_address,t_uint32)",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:47"
+            "src": "contracts\\nodegrid\\manager.sol:47"
           },
           {
             "label": "countOfTier",
@@ -246,7 +355,7 @@
             "slot": "11",
             "type": "t_mapping(t_string_memory_ptr,t_uint32)",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:48"
+            "src": "contracts\\nodegrid\\manager.sol:48"
           },
           {
             "label": "rewardsTotal",
@@ -254,7 +363,7 @@
             "slot": "12",
             "type": "t_uint256",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:49"
+            "src": "contracts\\nodegrid\\manager.sol:49"
           },
           {
             "label": "rewardsOfUser",
@@ -262,7 +371,7 @@
             "slot": "13",
             "type": "t_mapping(t_address,t_uint256)",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:50"
+            "src": "contracts\\nodegrid\\manager.sol:50"
           },
           {
             "label": "discountPer10",
@@ -270,7 +379,7 @@
             "slot": "14",
             "type": "t_uint32",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:52"
+            "src": "contracts\\nodegrid\\manager.sol:52"
           },
           {
             "label": "withdrawRate",
@@ -278,7 +387,7 @@
             "slot": "14",
             "type": "t_uint32",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:53"
+            "src": "contracts\\nodegrid\\manager.sol:53"
           },
           {
             "label": "transferFee",
@@ -286,7 +395,7 @@
             "slot": "14",
             "type": "t_uint32",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:54"
+            "src": "contracts\\nodegrid\\manager.sol:54"
           },
           {
             "label": "rewardsPoolFee",
@@ -294,7 +403,7 @@
             "slot": "14",
             "type": "t_uint32",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:55"
+            "src": "contracts\\nodegrid\\manager.sol:55"
           },
           {
             "label": "treasuryFee",
@@ -302,7 +411,7 @@
             "slot": "14",
             "type": "t_uint32",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:56"
+            "src": "contracts\\nodegrid\\manager.sol:56"
           },
           {
             "label": "operatorFee",
@@ -310,7 +419,7 @@
             "slot": "14",
             "type": "t_uint32",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:57"
+            "src": "contracts\\nodegrid\\manager.sol:57"
           },
           {
             "label": "maxCountOfUser",
@@ -318,7 +427,7 @@
             "slot": "14",
             "type": "t_uint32",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:58"
+            "src": "contracts\\nodegrid\\manager.sol:58"
           },
           {
             "label": "uniswapV2Router",
@@ -326,7 +435,7 @@
             "slot": "15",
             "type": "t_contract(IUniswapV2Router02)3402",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:60"
+            "src": "contracts\\nodegrid\\manager.sol:60"
           },
           {
             "label": "owner",
@@ -334,7 +443,7 @@
             "slot": "16",
             "type": "t_address",
             "contract": "NodeManager",
-            "src": "contracts\\nodeGrid\\nodegrid\\manager.sol:62"
+            "src": "contracts\\nodegrid\\manager.sol:62"
           }
         ],
         "types": {
@@ -344,10 +453,10 @@
           "t_array(t_address)dyn_storage": {
             "label": "address[]"
           },
-          "t_array(t_struct(Node)5375_storage)dyn_storage": {
+          "t_array(t_struct(Node)6735_storage)dyn_storage": {
             "label": "struct Node[]"
           },
-          "t_array(t_struct(Tier)5358_storage)dyn_storage": {
+          "t_array(t_struct(Tier)6718_storage)dyn_storage": {
             "label": "struct Tier[]"
           },
           "t_array(t_uint256)dyn_storage": {
@@ -380,7 +489,7 @@
           "t_string_storage": {
             "label": "string"
           },
-          "t_struct(Node)5375_storage": {
+          "t_struct(Node)6735_storage": {
             "label": "struct Node",
             "members": [
               {
@@ -417,7 +526,7 @@
               }
             ]
           },
-          "t_struct(Tier)5358_storage": {
+          "t_struct(Tier)6718_storage": {
             "label": "struct Tier",
             "members": [
               {

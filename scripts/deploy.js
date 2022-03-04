@@ -1,55 +1,52 @@
-const { ethers, waffle, upgrades} = require("hardhat");
-const provider = waffle.provider;
-// const hre = require("@nomiclabs/buidler");
-// This is a script for deploying your contracts. You can adapt it to deploy
-// yours, or create new ones.
-async function main() {
-  // This is just a convenience check
-  // if (network.name === "hardhat") {
-  //   console.warn(
-  //     "You are trying to deploy a contract to the Hardhat Network, which" +
-  //       "gets automatically created and destroyed every time. Use the Hardhat" +
-  //       " option '--network localhost'"
-  //   );
-  // }
-  // ethers is available in the global scope
-  const [owner] = await ethers.getSigners();
-  console.log(
-    "Deploying the contracts with the account:",
-    owner.address
-  );
+const { ethers, upgrades} = require("hardhat")
+const fs = require('fs')
 
-  console.log("Account balance:", (await owner.getBalance()).toString());
-  
-  // const TokenFactory = await ethers.getContractFactory("TokenV2");
-  // const Token = await upgrades.deployProxy(TokenFactory)
-  // await Token.deployed();
-  //   console.log("Token:", Token.address)
-
-  const NftFactory = await ethers.getContractFactory("BoostNFT")
-  NFT = await NftFactory.deploy()
-  await NFT.deployed()
-    console.log("NFT address", NFT.address)
-
-  // const nodegirdFactory = await ethers.getContractFactory("NodeManager");
-  // NodeGrid = await upgrades.deployProxy(nodegirdFactory,[Token.address]);
-  // await NodeGrid.deployed();
-  //   console.log("NodeGrid:", NodeGrid.address)
-
-  // await (await NodeGrid.setNFTAddress(NFT.address)).wait()
-  
-  // transfer NFT
-  await(await NFT.setApprovalForAll("0x37112CB8E83B30B24bB39f453dcEE69f8cA61058", true)).wait()
-  await(await NFT.safeTransferFrom(owner.address, "0x37112CB8E83B30B24bB39f453dcEE69f8cA61058", 0, 100,[])).wait()
-  
-
-  // await (await NodeGrid.setTreasury("0x388f90C29a5eb9214dBc58bbcF48cB83e45ef1eC")).wait()
-  // await (await NodeGrid.setOperator("0x388f90C29a5eb9214dBc58bbcF48cB83e45ef1eC")).wait()
-  // await(await NodeGrid.setRouter("0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3")).wait()
-  
-
+const deploy = async (contractName,...args)=>{
+  const factory = await ethers.getContractFactory(contractName)
+  const contract = await factory.deploy(...args)
+  await contract.deployed()
+  console.log(contractName, contract.address)
+  return contract
 }
 
+const deployProxy = async (contractName,args)=>{
+  const factory = await ethers.getContractFactory(contractName)
+  const contract = await upgrades.deployProxy(factory,args)
+  await contract.deployed()
+  console.log(contractName, contract.address)
+  return contract
+}
+
+async function main() {
+  const [owner, addr1, addr2, addr3, addr4] = await ethers.getSigners();
+
+  let addrTreasury = "0x388f90C29a5eb9214dBc58bbcF48cB83e45ef1eC"
+  let addrOperator = "0x388f90C29a5eb9214dBc58bbcF48cB83e45ef1eC"
+  let addrRouter = "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3"
+
+  console.log("Deploying the contracts with %s on %s",owner.address,network.name)
+
+  if (network.name === "localhost") {
+    const WETH = await deploy("WETH")
+    const Factory = await deploy("PancakeFactory",WETH.address)
+    const path = './contracts/Uniswap/Router.sol'
+    const content = fs.readFileSync(path)
+    fs.writeFileSync(path,content.toString('utf8').replace(/[\da-f]{64}/mi,String(await Factory.INIT_CODE_PAIR_HASH()).slice(2)))
+    const Router = await deploy("PancakeRouter", Factory.address, WETH.address)
+    await deploy("Multicall")
+    addrRouter = Router.address
+    addrTreasury = addr3.address
+    addrOperator = addr4.address
+  }
+  const Token = await deployProxy("TokenV4")
+  const NFT = await deploy("BoostNFT")
+  const NodeGrid = await deployProxy("NodeManager",[Token.address]);
+
+  await (await NodeGrid.setNFTAddress(NFT.address)).wait()
+  await (await NodeGrid.setTreasury(addrTreasury)).wait()
+  await (await NodeGrid.setOperator(addrOperator)).wait()
+  await(await NodeGrid.setRouter(addrRouter)).wait()
+}
 
 main()
   .then(() => process.exit(0))

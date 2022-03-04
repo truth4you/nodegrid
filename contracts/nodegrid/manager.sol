@@ -6,10 +6,10 @@ import "../Uniswap/IUniswapV2Router02.sol";
 import '../common/Address.sol';
 import '../common/SafeMath.sol';
 import '../common/IERC20.sol';
-import "./IBoostNFT.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
+import "./IBoostNFT.sol";
 import "hardhat/console.sol";
 
 struct Tier {
@@ -315,7 +315,7 @@ contract NodeManager is Initializable {
     string memory tierName,
     string memory title,
     uint32 count
-  ) public {
+  ) public onlyOwner {
     require(accounts.length>0, "Empty account list.");
     for(uint256 i = 0;i<accounts.length;i++) {
       _create(accounts[i], tierName, title, count);
@@ -407,7 +407,7 @@ contract NodeManager is Initializable {
     string memory title,
     uint32 count
   ) public {
-    uint256 amount = _create(tierName, title, count);
+    uint256 amount = _create(msg.sender, tierName, title, count);
     _claim(amount);
     emit NodeCreated(
       msg.sender,

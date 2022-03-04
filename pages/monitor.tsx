@@ -9,18 +9,24 @@ import { toast } from "react-toastify"
 
 export default function Monitor() {
   const { address } = eth.useContainer()
-  const { tiers, getUnpaidNodes, burnNode } = token.useContainer()
+  const { tiers, getUnpaidNodes, burnNode, mintNode } = token.useContainer()
   const [nodes, setNodes] = useState<any[]>([])
   const [accounts, setAccounts] = useState<any>({})
   const [checked, setChecked] = useState<string[]>([])
   const [listMode, setListMode] = useState('node')
   const [filter, setFilter] = useState<any>({})
+  const [tierFund, setTierFund] = useState<string>('')
+  const [countFund, setCountFund] = useState<number>(0)
+  const [addresses, setAddresses] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
+
+  const textarea = useRef<HTMLDivElement>(null)
+
   let isMobile = false;
   if (typeof window !== 'undefined') {
-    isMobile = ( window.innerWidth <= 600 );
+    isMobile = (window.innerWidth <= 600);
   }
-  
+
   const parseError = (ex: any) => {
     if (typeof ex == 'object')
       return (ex.data?.message ?? null) ? ex.data.message.replace('execution reverted: ', '') : ex.message
@@ -136,6 +142,53 @@ export default function Monitor() {
     return undefined
   }
 
+  const handleInputAddress = (e: any) => {
+    const regexp = /\b0x[\da-f]{40}\b/gi
+    const content = e.target.innerText
+    const matches = content.matchAll(regexp)
+    const addrs = []
+    for (const match of matches) {
+      addrs.push(match[0])
+    }
+    // const match = /[\b](|0|0x|0x[\da-f]{1,4})$/i.exec(content)
+    // if (match)
+    //   setAddressLast(match[0])
+    // console.log(match)
+    setAddresses(addrs)
+  }
+
+  const handleInput = (e: any) => {
+    const name = e.target.name
+    const value = e.target.value
+    if (name == "tierFund")
+      setTierFund(value)
+    else if (name == "countFund")
+      setCountFund(Number(value))
+  }
+
+  const handleFund = () => {
+    if (addresses.length == 0) {
+      toast.warning(`You have to input addresses to find first.`)
+      return
+    }
+    setLoading(true)
+    try {
+      mintNode(addresses, tierFund, countFund).then(async () => {
+        toast.success(`Successfully funded!`)
+        if (textarea.current)
+          textarea.current.innerText = ''
+        setAddresses([])
+        setLoading(false)
+      }).catch(ex => {
+        toast.error(parseError(ex))
+        setLoading(false)
+      })
+    } catch (ex) {
+      toast.error(parseError(ex))
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
     loadNodes()
   }, [address])
@@ -153,8 +206,8 @@ export default function Monitor() {
             <button className={styles.danger} disabled={checked.length == 0} onClick={handleBurn}>Burn Selected {checked.length ? `(${checked.length})` : ''}</button>
           </div>
           <div className="md:hidden" >
-            <input name="days" placeholder="Past before (days)" type="number" value={filter.days ?? ''} onChange={handleChangeFilter} className="py-1 my-3 w-full"/>
-            <button className={classNames(styles.danger,"w-full")} disabled={checked.length == 0} onClick={handleBurn}>Burn Selected {checked.length ? `(${checked.length})` : ''}</button>
+            <input name="days" placeholder="Past before (days)" type="number" value={filter.days ?? ''} onChange={handleChangeFilter} className="py-1 my-3 w-full" />
+            <button className={classNames(styles.danger, "w-full")} disabled={checked.length == 0} onClick={handleBurn}>Burn Selected {checked.length ? `(${checked.length})` : ''}</button>
           </div>
         </div>
         <div className="overflow-x-auto">
@@ -187,7 +240,8 @@ export default function Monitor() {
             </thead>
             <tbody>
               {listMode == 'node' ?
-                nodes.filter(node => {                if (filter.days) {
+                nodes.filter(node => {
+                  if (filter.days) {
                     return Math.floor((node.limitedTime - new Date().getTime() / 1000) / 86400) <= -filter.days
                   }
                   return true
@@ -198,7 +252,7 @@ export default function Monitor() {
                   <tr key={index}>
                     {/* <td>{node.title}</td> */}
                     <td>{index + 1}</td>
-                    <td>{isMobile?`${node.owner.substring(0, 4)}`:`${node.owner.substring(0, 10)}...${node.owner.slice(-8)}`}</td>
+                    <td>{isMobile ? `${node.owner.substring(0, 4)}` : `${node.owner.substring(0, 10)}...${node.owner.slice(-8)}`}</td>
                     <td>{findTier(node.tierIndex)?.name?.toUpperCase()}</td>
                     <td>{formatTime(node.createdTime)}</td>
                     <td>{formatDays(node.limitedTime)}</td>
@@ -219,7 +273,7 @@ export default function Monitor() {
                   <tr key={account.owner}>
                     {/* <td>{node.title}</td> */}
                     <td>{index + 1}</td>
-                    <td>{isMobile?`${account.owner.substring(0, 4)}`:`${account.owner.substring(0, 10)}...${account.owner.slice(-8)}`}</td>
+                    <td>{isMobile ? `${account.owner.substring(0, 4)}` : `${account.owner.substring(0, 10)}...${account.owner.slice(-8)}`}</td>
                     <td>{account.count}</td>
                     <td><span className="text-red-500">{account.maxLimitedDay} days</span></td>
                     <td><span className="text-red-500">{account.minLimitedDay} days</span></td>
@@ -231,6 +285,19 @@ export default function Monitor() {
                 )}
             </tbody>
           </table>
+        </div>
+      </div>
+      <div className={styles.mint}>
+        <h1>Fund nodes</h1>
+        <div className={styles.textarea} ref={textarea} contentEditable onInput={handleInputAddress} />
+        <div className={classNames(styles.group, "md:flex gap-1 mt-4 mt-2 gap-4 md:block")}>
+          <select name="tierFund" value={tierFund} onChange={handleInput}>
+            {tiers.map(tier =>
+              <option key={tier.id}>{tier.name}</option>
+            )}
+          </select>
+          <input placeholder="Number of nodes" name="countFund" type="number" defaultValue={countFund ? countFund : ''} onChange={handleInput} />
+          <button disabled={addresses.length == 0} onClick={handleFund}>Fund</button>
         </div>
       </div>
     </div >

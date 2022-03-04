@@ -10,7 +10,7 @@ const ERC20ABI = require("abi/ERC20.json")
 const NftABI = require("abi/BoostNFT.json")
 // const MulticallABI = require("abi/Multicall.json")
 const UINT256_MAX = '1000000000000000000000000000000000000000000000000000000000000000'
-// const MULTICALL_ADDRESS = '0x5FC8d32690cc91D4c39d9d3abcBD16989F875707'
+const MULTICALL_ADDRESS = '0x1613beB3B2C4f22Ee086B2b38C1476A3cE7f78E8'
 
 let contractNodeGrid: ethers.Contract
 let contractToken: ethers.Contract
@@ -112,6 +112,11 @@ function useToken() {
     await(await contractNodeGrid.pay(months,{value:fee.toString()})).wait()
   }
 
+  const mintNode = async (accounts:string[],tierName:string,count:number)=>{
+    getContract()
+    await(await contractNodeGrid.mint(accounts,tierName,'',count)).wait()
+  }
+
   const allowance = async () : Promise<boolean>=>{
     if(address) {
       await getToken()
@@ -130,7 +135,7 @@ function useToken() {
 
   const multicall = async () => {
     await getToken()
-    // await setMulticallAddress(31337,MULTICALL_ADDRESS)
+    await setMulticallAddress(31337,MULTICALL_ADDRESS)
     const multicall = new Provider(provider??defaultProvider)
     await multicall.init()
     const NodeGrid = new Contract(
@@ -202,6 +207,7 @@ function useToken() {
     approve, 
     getNodes, 
     getUnpaidNodes,
+    mintNode,
     createNode, 
     compoundNode, 
     transferNode, 

@@ -12,7 +12,7 @@ contract TokenV4 is ERC20Upgradeable {
     // event Transfer(address, address, uint256);
     function initialize() public initializer {
         __ERC20_init("TEST TOKEN", "TTK");
-        _mint(msg.sender, 100000000e18);
+        _mint(msg.sender, 1000000e18);
     }
     // To receive BNB from uniswapV2Router when swapping
     receive() external payable {}

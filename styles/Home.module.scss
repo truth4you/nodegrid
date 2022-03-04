@@ -141,7 +141,6 @@
     }
     &:not(.approved)[disabled] {
       opacity: 0.3;
-      
     }
     &.approved {
       background-color: rgb(199, 113, 0);
