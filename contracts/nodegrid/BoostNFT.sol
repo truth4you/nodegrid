@@ -92,6 +92,8 @@ contract BoostNFT is ERC1155 {
   function getLastMultiplier(address account, uint256 timeTo) public view returns (uint256) {
     Log[] storage logs = userLogs[account];
     uint256 one = 1 ether;
+    if(logs.length==0)
+      return one;
     for (uint256 i = logs.length - 1; i >= 0; i--) {
       if (logs[i].timestamp <= timeTo) return one.mul(logs[i].multiplier).div(1000);
     }
@@ -109,6 +111,8 @@ contract BoostNFT is ERC1155 {
     if(timeTo==timeFrom)
       return one;
     Log[] storage logsUser = userLogs[account];
+    if(logsUser.length==0)
+      return one;
     for (uint256 i = logsUser.length; i > 0; i--) {
       uint256 timeBlockStart = logsUser[i - 1].timestamp > timeFrom
         ? logsUser[i - 1].timestamp

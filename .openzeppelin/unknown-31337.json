@@ -1,8 +1,8 @@
 {
   "manifestVersion": "3.2",
   "admin": {
-    "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
-    "txHash": "0xc4648ba9360a9a01ac654d8511c1d261dde062c869f45eb12da01550d19b455e"
+    "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "txHash": "0x38446861de246ea3c0df3b6c77dddd4257932039251b2e0c9870fb8761147ae5"
   },
   "proxies": [
     {
@@ -44,12 +44,42 @@
       "address": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
       "txHash": "0x43f3387a8ac3354155f7cfc7499d630c41363542d0126674dc201f4b9ecf8ee2",
       "kind": "transparent"
+    },
+    {
+      "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "txHash": "0xfb5d363fa2b60d8327960c936dcd58dccf421cc804400d18897c61175dc7096f",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+      "txHash": "0x0aef87840cfc60622e9f71969d83cfe78f01d2795bb34153d6eb23f38bb5edfa",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+      "txHash": "0xeb6ae3eda6cf391a9163ee3614d214589b4bb51509b1a74eaa5ac47dbda72e45",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x68B1D87F95878fE05B998F19b66F4baba5De1aed",
+      "txHash": "0xfaae996ddca88378c378491ae2289e703f18daf4ffea5a33d4e663d721411630",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x67d269191c92Caf3cD7723F116c85e6E9bf55933",
+      "txHash": "0x8197625ce1190618b1995ee775f9e646b4bbe79d6f7b14b9b05c7c30dc4e9371",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690",
+      "txHash": "0xc54f115b24e709cda053e54500e83da2b1b33588962e22040e23b5c3924dbee1",
+      "kind": "transparent"
     }
   ],
   "impls": {
     "ed95c082eb132ef1e8a1673b85a9baf430ef5e77898bc669403b327b6b2f3e26": {
-      "address": "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
-      "txHash": "0xa47d5830e9cc13ded1261561ea0b3cca0462bbbcd91d65084921d8e7c5eca6ca",
+      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "txHash": "0x8d5b36da7195301384e9c83148943ac21d4bf8a335a8642e2ef562d453b7338c",
       "layout": {
         "storage": [
           {
@@ -251,8 +281,8 @@
       }
     },
     "ce809e448c23a72422eb9551f3d78d3b9750690d59a7ed0817e09f58f5fefcc5": {
-      "address": "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
-      "txHash": "0x457522c7621e234ef8847221c0c5371873928e8e0c3fd02f13576601a82e75c2",
+      "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+      "txHash": "0xb6559690660c6881c3fd7de6b0820e01ea3dc60bafc948517c5945a3b0a0c777",
       "layout": {
         "storage": [
           {
@@ -307,7 +337,7 @@
             "label": "tierArr",
             "offset": 0,
             "slot": "4",
-            "type": "t_array(t_struct(Tier)6718_storage)dyn_storage",
+            "type": "t_array(t_struct(Tier)6724_storage)dyn_storage",
             "contract": "NodeManager",
             "src": "contracts\\nodegrid\\manager.sol:41"
           },
@@ -331,7 +361,7 @@
             "label": "nodesTotal",
             "offset": 0,
             "slot": "7",
-            "type": "t_array(t_struct(Node)6735_storage)dyn_storage",
+            "type": "t_array(t_struct(Node)6741_storage)dyn_storage",
             "contract": "NodeManager",
             "src": "contracts\\nodegrid\\manager.sol:44"
           },
@@ -463,10 +493,10 @@
           "t_array(t_address)dyn_storage": {
             "label": "address[]"
           },
-          "t_array(t_struct(Node)6735_storage)dyn_storage": {
+          "t_array(t_struct(Node)6741_storage)dyn_storage": {
             "label": "struct Node[]"
           },
-          "t_array(t_struct(Tier)6718_storage)dyn_storage": {
+          "t_array(t_struct(Tier)6724_storage)dyn_storage": {
             "label": "struct Tier[]"
           },
           "t_array(t_uint256)dyn_storage": {
@@ -499,7 +529,7 @@
           "t_string_storage": {
             "label": "string"
           },
-          "t_struct(Node)6735_storage": {
+          "t_struct(Node)6741_storage": {
             "label": "struct Node",
             "members": [
               {
@@ -536,7 +566,7 @@
               }
             ]
           },
-          "t_struct(Tier)6718_storage": {
+          "t_struct(Tier)6724_storage": {
             "label": "struct Tier",
             "members": [
               {

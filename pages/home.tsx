@@ -288,7 +288,9 @@ export default function Home() {
           <ins>
             {nodes.length > 0 ? [...nodes].map((node) => parseFloat(formatEther(calcRewards(node)))).reduce((a, b) => a + b).toFixed(8) : null}
           </ins>
-          <ins><button className="w-full" onClick={handleClaim}>Claim Rewards</button></ins>
+          <ins>
+            {nodes.length > 0 && <button className="w-full" onClick={handleClaim}>Claim Rewards</button>}
+          </ins>
         </ul>
       </div>
       <div className={classNames(styles.create, "md:mt-10 mt-5")}>
