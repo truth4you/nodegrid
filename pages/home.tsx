@@ -355,7 +355,7 @@ export default function Home() {
             <p>Rewards calculations are based on many factors, including the number of nodes, node revenue, token price, and protocol revenue, and they are variable.</p>
           </div>
           <Link href="https://testnet.godex.exchange/swap?outputCurrency=0xE02Bde489389C9b115070AD2b994Eea7985d84B5" >
-            <a target="_blank" className={classNames(styles.link,"w-full md:w-auto")}>Buy NodeGrid</a>
+            <a target="_blank" className={classNames(styles.link,"w-full md:w-auto")}>Buy $TTK</a>
           </Link>
         </div>
       </div>
