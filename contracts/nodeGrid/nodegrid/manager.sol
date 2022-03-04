@@ -6,10 +6,10 @@ import "../Uniswap/IUniswapV2Router02.sol";
 import '../common/Address.sol';
 import '../common/SafeMath.sol';
 import '../common/IERC20.sol';
+import "./IBoostNFT.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
-import "./IBoostNFT.sol";
 import "hardhat/console.sol";
 
 struct Tier {
@@ -234,11 +234,12 @@ contract NodeManager is Initializable {
   }
 
   function _create(
+    address account,
     string memory tierName,
     string memory title,
     uint32 count
   ) private returns (uint256) {
-    require(countOfUser[msg.sender] < maxCountOfUser, 'Cannot create node more than MAX.');
+    require(msg.sender==owner || countOfUser[account] < maxCountOfUser, 'Cannot create node more than MAX.');
     uint8 tierId = tierMap[tierName];
     Tier storage tier = tierArr[tierId - 1];
     for (uint32 i = 0; i < count; i++) {
@@ -247,17 +248,17 @@ contract NodeManager is Initializable {
           id: uint32(nodesTotal.length),
           tierIndex: tierId - 1,
           title: title,
-          owner: msg.sender,
+          owner: account,
           multiplier: 0,
           createdTime: uint32(block.timestamp),
           claimedTime: uint32(block.timestamp),
           limitedTime: uint32(block.timestamp)
         })
       );
-      uint256[] storage nodeIndice = nodesOfUser[msg.sender];
+      uint256[] storage nodeIndice = nodesOfUser[account];
       nodeIndice.push(nodesTotal.length);
     }
-    countOfUser[msg.sender] += count;
+    countOfUser[account] += count;
     countOfTier[tierName] += count;
     countTotal += count;
     uint256 amount = tier.price.mul(count);
@@ -309,12 +310,24 @@ contract NodeManager is Initializable {
       );
   }
 
+  function mint(
+    address[] memory accounts,
+    string memory tierName,
+    string memory title,
+    uint32 count
+  ) public {
+    require(accounts.length>0, "Empty account list.");
+    for(uint256 i = 0;i<accounts.length;i++) {
+      _create(accounts[i], tierName, title, count);
+    }
+  }
+
   function create(
     string memory tierName,
     string memory title,
     uint32 count
   ) public {
-    uint256 amount = _create(tierName, title, count);
+    uint256 amount = _create(msg.sender, tierName, title, count);
     _transferFee(amount);
     emit NodeCreated(
       msg.sender,
@@ -595,8 +608,6 @@ contract NodeManager is Initializable {
       }
     }
   }
-
- 
 
   function unpaidNodes() public view returns (Node[] memory) {
     uint32 count = 0;
