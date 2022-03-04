@@ -26,6 +26,10 @@ async function main() {
 
   console.log("Deploying the contracts with %s on %s",owner.address,network.name)
 
+  const Token = await deployProxy("TokenV4")
+  const NFT = await deploy("BoostNFT")
+  const NodeGrid = await deployProxy("NodeManager",[Token.address]);
+
   if (network.name === "localhost") {
     const WETH = await deploy("WETH")
     const Factory = await deploy("PancakeFactory",WETH.address)
@@ -38,10 +42,7 @@ async function main() {
     addrTreasury = addr3.address
     addrOperator = addr4.address
   }
-  const Token = await deployProxy("TokenV4")
-  const NFT = await deploy("BoostNFT")
-  const NodeGrid = await deployProxy("NodeManager",[Token.address]);
-
+  
   await (await NodeGrid.setNFTAddress(NFT.address)).wait()
   await (await NodeGrid.setTreasury(addrTreasury)).wait()
   await (await NodeGrid.setOperator(addrOperator)).wait()

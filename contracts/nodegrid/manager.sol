@@ -225,8 +225,7 @@ contract NodeManager is Initializable {
         Node storage node = nodesTotal[nodeIndex - 1];
         if (node.owner == account) {
           nodesActive[j] = node;
-          nodesActive[j++].multiplier = getBoostRate(account, node.claimedTime, block.timestamp);
-          
+          nodesActive[j++].multiplier = getBoostRate(account, node.claimedTime, block.timestamp);          
         }
       }
     }

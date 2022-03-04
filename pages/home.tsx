@@ -2,7 +2,7 @@ import classNames from "classnames"
 import { useEffect, useRef, useState } from "react"
 import { eth } from "state/eth"
 import { token } from "state/token"
-import { formatEther,parseEther } from "ethers/lib/utils"
+import { formatEther, parseEther } from "ethers/lib/utils"
 import { BigNumber } from "@ethersproject/bignumber"
 import styles from "styles/Home.module.scss"
 import { toast } from "react-toastify"
@@ -47,9 +47,9 @@ export default function Home() {
     const now = new Date()
     const diff = now.getTime() - node.claimedTime * 1000
     if (diff <= 0) return 0
-    let one:BigNumber = parseEther("1"), m:BigNumber = parseEther("1")
-    if(node.multiplier)
-      m = node.multiplier.mul(lastTime.getTime()-node.claimedTime).add(multiplier.mul(now.getTime()-lastTime.getTime())).div(now.getTime()-node.claimedTime)
+    let one: BigNumber = parseEther("1"), m: BigNumber = parseEther("1")
+    if (node.multiplier)
+      m = node.multiplier.mul(lastTime.getTime() - node.claimedTime).add(multiplier.mul(now.getTime() - lastTime.getTime())).div(now.getTime() - node.claimedTime)
     return tier?.rewardsPerTime.mul(diff).mul(m).div(one).div(1000).div(tier.claimInterval) ?? 0
   }
 
@@ -209,11 +209,11 @@ export default function Home() {
     setLoading(true)
     try {
       let fee = BigNumber.from(0)
-      nodes.map(node=>{
+      nodes.map(node => {
         const tier = findTier(node.tierIndex)
         fee = fee.add(tier.maintenanceFee.toString())
       })
-      pay(months,fee.mul(months)).then(async () => {
+      pay(months, fee.mul(months)).then(async () => {
         toast.success(`Successfully paid!`)
         if (address) getNodes(address).then(nodes => setNodes(nodes))
         await multicall()
@@ -247,7 +247,7 @@ export default function Home() {
   useEffect(() => {
     if (address) {
       lastTime = new Date()
-      getMultiplier(lastTime).then(multiplier=>setMultiplier(multiplier))
+      getMultiplier(lastTime).then(multiplier => setMultiplier(multiplier))
       getNodes(address).then(nodes => setNodes(nodes))
       allowance().then(approved => setApproved(approved))
       multicall()
@@ -311,21 +311,21 @@ export default function Home() {
         </div>
         {showingTransfer ?
           <>
-          <div className={classNames(styles.group, "md:flex gap-1 mt-4 mt-10 hidden md:block")}>
-            <input placeholder="Address of Recipient" type="text" className="flex-1 w-full mb-2" value={addressTransfer} onInput={handleInputAddress} />
-            <button disabled={nodes.length == 0} onClick={handleTransfer}>Confirm</button>
-            <button disabled={nodes.length == 0} onClick={() => showTransfer(false)}>Cancel</button>
-          </div>
-          <div className={"md:flex gap-1 mt-4 mt-10 md:hidden"}>
-            <input placeholder="Address of Recipient" type="text" className="flex-1 w-full mb-2" value={addressTransfer} onInput={handleInputAddress} />
-            <button disabled={nodes.length == 0} onClick={handleTransfer} className={"mr-4"}>Confirm</button>
-            <button disabled={nodes.length == 0} onClick={() => showTransfer(false)}>Cancel</button>
-          </div>
+            <div className={classNames(styles.group, "md:flex gap-1 mt-4 mt-10 hidden md:block")}>
+              <input placeholder="Address of Recipient" type="text" className="flex-1 w-full mb-2" value={addressTransfer} onInput={handleInputAddress} />
+              <button disabled={nodes.length == 0} onClick={handleTransfer}>Confirm</button>
+              <button disabled={nodes.length == 0} onClick={() => showTransfer(false)}>Cancel</button>
+            </div>
+            <div className={"md:flex gap-1 mt-4 mt-10 md:hidden"}>
+              <input placeholder="Address of Recipient" type="text" className="flex-1 w-full mb-2" value={addressTransfer} onInput={handleInputAddress} />
+              <button disabled={nodes.length == 0} onClick={handleTransfer} className={"mr-4"}>Confirm</button>
+              <button disabled={nodes.length == 0} onClick={() => showTransfer(false)}>Cancel</button>
+            </div>
           </>
-           :
+          :
           <div className="flex flex-wrap justify-between mt-4 md:mt-10 gap-2">
             {approved ?
-              <button disabled className={classNames(styles.approved,"w-full md:w-auto")}>Approved</button> :
+              <button disabled className={classNames(styles.approved, "w-full md:w-auto")}>Approved</button> :
               <button onClick={handleApprove} className="w-full md:w-auto">Approve Contract</button>}
             <button disabled={!approved} onClick={handleCreate} className="w-full md:w-auto">Create Nodes</button>
             <button disabled={!approved} onClick={handleCompound} className="w-full md:w-auto">Compound Nodes</button>
@@ -355,11 +355,11 @@ export default function Home() {
             <p>Rewards calculations are based on many factors, including the number of nodes, node revenue, token price, and protocol revenue, and they are variable.</p>
           </div>
           <Link href="https://testnet.godex.exchange/swap?outputCurrency=0x41512d704bef37902e2af615e5a6ecb5b13d7686" >
-            <a target="_blank" className={classNames(styles.link,"w-full md:w-auto")}>Buy $TTK</a> 
+            <a target="_blank" className={classNames(styles.link, "w-full md:w-auto")}>Buy $TTK</a>
           </Link>
         </div>
       </div>
-      {nodes.length>0 && <div className={classNames(styles.nodes, "md:mt-10 mt-5")}>
+      {nodes.length > 0 && <div className={classNames(styles.nodes, "md:mt-10 mt-5")}>
         <div className="md:flex justify-between items-end mb-4">
           <h1>Nodes</h1>
           <div className={classNames(styles.group, "flex gap-1 mt-2")}>

@@ -106,6 +106,8 @@ contract BoostNFT is ERC1155 {
     uint256 multiplier = 0;
     uint256 timeBlockEnd = timeTo;
     uint256 one = 1 ether;
+    if(timeTo==timeFrom)
+      return one;
     Log[] storage logsUser = userLogs[account];
     for (uint256 i = logsUser.length; i > 0; i--) {
       uint256 timeBlockStart = logsUser[i - 1].timestamp > timeFrom
