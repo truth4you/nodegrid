@@ -26,7 +26,7 @@ async function main() {
 
   console.log("Deploying the contracts with %s on %s",owner.address,network.name)
 
-  const Token = await deployProxy("TokenV4")
+  const Token = await deployProxy("Token")
   const NFT = await deploy("BoostNFT")
   const NodeGrid = await deployProxy("NodeManager",[Token.address]);
 

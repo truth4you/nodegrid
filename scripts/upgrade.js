@@ -12,8 +12,8 @@ async function main() {
 
     console.log("Account balance:", (await owner.getBalance()).toString());
     
-    const TokenFactory = await ethers.getContractFactory("TokenV4");
-    Token =  await upgrades.upgradeProxy("0x41512d704bef37902e2af615e5a6ecb5b13d7686", TokenFactory)
+    const TokenFactory = await ethers.getContractFactory("TokenV1");
+    Token =  await upgrades.deployProxy(TokenFactory)
     await Token.deployed();
     console.log("Token:", Token.address)
 

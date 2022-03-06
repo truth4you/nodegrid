@@ -7,21 +7,31 @@ import '../common/Address.sol';
 import '../common/SafeMath.sol';
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 
-contract TokenV3 is ERC20Upgradeable {
+contract TokenV1 is ERC20Upgradeable {
     using SafeMath for uint256;
-    // event Transfer(address, address, uint256);
     function initialize() public initializer {
         __ERC20_init("TEST TOKEN", "TTK");
-        _mint(msg.sender, 100000000e18);
+        _mint(msg.sender, 1000000e18);
+        owner = msg.sender;
+        operator = msg.sender;
+        transferTaxRate = 1000;
+        buyBackFee = 3000;
+        operatorFee = 60;
+        liquidityFee = 40;
+        minAmountToLiquify = 10 * 1e18;
+        maxTransferAmount = 1000 * 1e18;
+        setExcludedFromFee(msg.sender);
+        
     }
     // To receive BNB from uniswapV2Router when swapping
-    receive() external payable {}
+    // receive() external payable {}
 
     bool private _inSwapAndLiquify;
     uint32 public transferTaxRate;  // 1000 => 10%
     uint32 private buyBackFee;      // 3000 => 30%
     uint32 public operatorFee;      // 60 => 6% (60*0.1)
     uint32 public liquidityFee;     // 40 => 4% (40*0.1)
+    
     uint256 private minAmountToLiquify;
     
     address public owner;
@@ -30,9 +40,11 @@ contract TokenV3 is ERC20Upgradeable {
     
     IUniswapV2Router02 public uniswapV2Router;
     address public uniswapV2Pair;
+    uint256 public maxTransferAmount; // 1000
 
     event SwapAndLiquify(uint256, uint256, uint256);
     event uniswapV2RouterUpdated(address, address, address);
+    event LiquidityAdded(uint256, uint256);
 
     modifier onlyOwner() {
         require(owner == msg.sender, "Ownable: caller is not the owner");
@@ -51,6 +63,10 @@ contract TokenV3 is ERC20Upgradeable {
         transferTaxRate = 0;
         _;
         transferTaxRate = _transferTaxRate;
+    }
+
+    function transferOwnerShip(address account) public onlyOwner {
+        owner = account;
     }
 
     function setTransferTaxRate(uint32 _transferTaxRate) public onlyOwner{
@@ -81,10 +97,13 @@ contract TokenV3 is ERC20Upgradeable {
         minAmountToLiquify = value;
     }
 
+    function setMaxTransferAmount(uint256 value) public onlyOwner{
+        maxTransferAmount = value;
+    }
+
 
     /// @dev overrides transfer function to meet tokenomics
     function _transfer(address from, address to, uint256 amount) internal virtual override {
-        
         // swap and liquify
         if (_inSwapAndLiquify == false
             && address(uniswapV2Router) != address(0)
@@ -94,26 +113,31 @@ contract TokenV3 is ERC20Upgradeable {
         ) {
             swapAndLiquify();
         }
-
         if (transferTaxRate == 0 || isExcludedFromFee[from] || isExcludedFromFee[to]) {
             super._transfer(from, to, amount);
         } else {
+            if(from==uniswapV2Pair){
+                require(amount<=maxTransferAmount,"Token: anti whale!");
+            }
+                
             uint256 taxAmount = 0;
-            if(to == uniswapV2Pair)
+            if(to == uniswapV2Pair){
                 taxAmount = amount.mul(buyBackFee).div(10000);
-            else
+            }else{
                 // default tax is 10% of every transfer
                 taxAmount = amount.mul(transferTaxRate).div(10000);
+            }
+            if(taxAmount>0){
+                uint256 operatorFeeAmount = taxAmount.mul(operatorFee).div(100);
+                super._transfer(from, operator, operatorFeeAmount);
 
-            uint256 operatorFeeAmount = taxAmount.mul(operatorFee).div(100);
-            uint256 liquidityAmount = taxAmount.sub(operatorFeeAmount);
+                uint256 liquidityAmount = taxAmount.mul(liquidityFee).div(100);
+                super._transfer(from, address(this), liquidityAmount);
 
-            // default 90% of transfer sent to recipient
-            uint256 sendAmount = amount.sub(taxAmount);
-
-            super._transfer(from, operator, operatorFeeAmount);
-            super._transfer(from, address(this), liquidityAmount);
-            super._transfer(from, to, sendAmount);
+                super._transfer(from, to, amount.sub(operatorFeeAmount.add(liquidityAmount)));
+            }else
+                super._transfer(from, to, amount);
+            
         }
     }
 
@@ -140,7 +164,6 @@ contract TokenV3 is ERC20Upgradeable {
 
             // how much ETH did we just swap into?
             uint256 newBalance = address(this).balance.sub(initialBalance);
-
             // add liquidity
             addLiquidity(otherHalf, newBalance);
 
@@ -156,7 +179,7 @@ contract TokenV3 is ERC20Upgradeable {
         path[1] = uniswapV2Router.WETH();
 
         _approve(address(this), address(uniswapV2Router), tokenAmount);
-
+        
         // make the swap
         uniswapV2Router.swapExactTokensForETHSupportingFeeOnTransferTokens(
             tokenAmount,
@@ -181,6 +204,7 @@ contract TokenV3 is ERC20Upgradeable {
             owner,
             block.timestamp
         );
+        emit LiquidityAdded(tokenAmount, ethAmount);
     }
 
     /**
