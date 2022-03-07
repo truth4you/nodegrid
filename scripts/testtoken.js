@@ -37,11 +37,8 @@ describe("Token", ()=>{
         addrTreasury = addrs[3].address
         addrOperator = addrs[4].address
         await(await Token.approve(Router.address, ethers.utils.parseEther("100000000"))).wait()
-        await(await Router.addLiquidityETH(Token.address, ethers.utils.parseEther("1000") ,"0","0", owner.address, parseInt(new Date().getTime()/1000)+100 ,{ value: ethers.utils.parseEther("1000") })).wait()
+        await(await Router.addLiquidityETH(Token.address, ethers.utils.parseEther("1000000") ,"0","0", owner.address, parseInt(new Date().getTime()/1000)+100 ,{ value: ethers.utils.parseEther("1000") })).wait()
         await(await Token.updateuniswapV2Router(Router.address)).wait()
-        
-        
-        
     })
 
   })
@@ -57,7 +54,7 @@ describe("Token", ()=>{
     //     await(await Token.connect(addr1).transfer(addr2.address, ethers.utils.parseEther("50000"))).wait()
     // })
     it("buy token from Router" ,async ()=>{
-        await(await Router.connect(addr1).swapExactETHForTokens(0,[await(Router.WETH()),Token.address],addr1.address,parseInt(new Date().getTime()/1000)+100,{value:ethers.utils.parseEther("5")} )).wait()
+        await(await Router.connect(addr1).swapExactETHForTokens(0,[await(Router.WETH()),Token.address],addr1.address,parseInt(new Date().getTime()/1000)+100,{value:ethers.utils.parseEther("1")} )).wait()
     })
     it("Sell token from Router" ,async ()=>{
         const amount = await Token.balanceOf(addr1.address)
@@ -68,10 +65,6 @@ describe("Token", ()=>{
      
     
   })
-
-
-  
-
 
 })
 

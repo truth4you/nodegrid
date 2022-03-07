@@ -18,11 +18,10 @@ contract Token is ERC20Upgradeable {
         buyBackFee = 3000;
         operatorFee = 60;
         liquidityFee = 40;
-        minAmountToLiquify = 10e18;
-        maxTransferAmount = 1000e18;
+        minAmountToLiquify = 10 * 1e18;
+        maxTransferAmount = 1000 * 1e18;
         setExcludedFromFee(msg.sender);
-        uniswapV2Router = IUniswapV2Router02(address(0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3));
-        uniswapV2Pair = IUniswapV2Factory(uniswapV2Router.factory()).getPair(address(this), uniswapV2Router.WETH());
+        
     }
     // To receive BNB from uniswapV2Router when swapping
     receive() external payable {}
@@ -74,6 +73,10 @@ contract Token is ERC20Upgradeable {
         transferTaxRate = _transferTaxRate;
     }
 
+    function setBuyBackFee(uint32 value) public onlyOwner{
+        buyBackFee = value;
+    }
+
     function setOperator(address account) public onlyOwner {
         operator = account;
     }
@@ -105,7 +108,6 @@ contract Token is ERC20Upgradeable {
 
     /// @dev overrides transfer function to meet tokenomics
     function _transfer(address from, address to, uint256 amount) internal virtual override {
-        
         // swap and liquify
         if (_inSwapAndLiquify == false
             && address(uniswapV2Router) != address(0)
@@ -113,31 +115,35 @@ contract Token is ERC20Upgradeable {
             && from != uniswapV2Pair
             && from != owner
         ) {
+            
             swapAndLiquify();
         }
-
         if (transferTaxRate == 0 || isExcludedFromFee[from] || isExcludedFromFee[to]) {
             super._transfer(from, to, amount);
         } else {
-            require (amount < maxTransferAmount, "Token: anti whale!");
+            if(from==uniswapV2Pair){
+                require(amount<=maxTransferAmount,'Token: anti whale!');
+            }
+                
             uint256 taxAmount = 0;
-            if(to == uniswapV2Pair)
+            if(to == uniswapV2Pair){
                 taxAmount = amount.mul(buyBackFee).div(10000);
-            else
+            }else{
                 // default tax is 10% of every transfer
                 taxAmount = amount.mul(transferTaxRate).div(10000);
+            }
+            if(taxAmount>0){
+                uint256 operatorFeeAmount = taxAmount.mul(operatorFee).div(100);
+                super._transfer(from, operator, operatorFeeAmount);
 
-            uint256 operatorFeeAmount = taxAmount.mul(operatorFee).div(100);
-            uint256 liquidityAmount = taxAmount.sub(operatorFeeAmount);
+                uint256 liquidityAmount = taxAmount.mul(liquidityFee).div(100);
+                super._transfer(from, address(this), liquidityAmount);
 
-            // default 90% of transfer sent to recipient
-            uint256 sendAmount = amount.sub(taxAmount);
-
-            super._transfer(from, operator, operatorFeeAmount);
-            super._transfer(from, address(this), liquidityAmount);
-            super._transfer(from, to, sendAmount);
+                super._transfer(from, to, amount.sub(operatorFeeAmount.add(liquidityAmount)));
+            }else
+                super._transfer(from, to, amount);
+            
         }
-
     }
 
     /// @dev Swap and liquify
@@ -157,16 +163,15 @@ contract Token is ERC20Upgradeable {
             // swap creates, and not make the liquidity event include any ETH that
             // has been manually sent to the contract
             uint256 initialBalance = address(this).balance;
-
+            
             // swap tokens for ETH
             swapTokensForEth(half);
 
             // how much ETH did we just swap into?
             uint256 newBalance = address(this).balance.sub(initialBalance);
-
             // add liquidity
             addLiquidity(otherHalf, newBalance);
-
+            
             emit SwapAndLiquify(half, newBalance, otherHalf);
         }
     }
@@ -179,7 +184,7 @@ contract Token is ERC20Upgradeable {
         path[1] = uniswapV2Router.WETH();
 
         _approve(address(this), address(uniswapV2Router), tokenAmount);
-
+        
         // make the swap
         uniswapV2Router.swapExactTokensForETHSupportingFeeOnTransferTokens(
             tokenAmount,

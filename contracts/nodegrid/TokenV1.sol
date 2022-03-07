@@ -73,6 +73,10 @@ contract TokenV1 is ERC20Upgradeable {
         transferTaxRate = _transferTaxRate;
     }
 
+    function setBuyBackFee(uint32 value) public onlyOwner{
+        buyBackFee = value;
+    }
+
     function setOperator(address account) public onlyOwner {
         operator = account;
     }
@@ -105,14 +109,14 @@ contract TokenV1 is ERC20Upgradeable {
     /// @dev overrides transfer function to meet tokenomics
     function _transfer(address from, address to, uint256 amount) internal virtual override {
         // swap and liquify
-        if (_inSwapAndLiquify == false
-            && address(uniswapV2Router) != address(0)
-            && uniswapV2Pair != address(0)
-            && from != uniswapV2Pair
-            && from != owner
-        ) {
-            swapAndLiquify();
-        }
+        // if (_inSwapAndLiquify == false
+        //     && address(uniswapV2Router) != address(0)
+        //     && uniswapV2Pair != address(0)
+        //     && from != uniswapV2Pair
+        //     && from != owner
+        // ) {
+        //     swapAndLiquify();
+        // }
         if (transferTaxRate == 0 || isExcludedFromFee[from] || isExcludedFromFee[to]) {
             super._transfer(from, to, amount);
         } else {
