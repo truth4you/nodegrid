@@ -60,6 +60,7 @@ contract NodeManager is Initializable {
   IUniswapV2Router02 public uniswapV2Router;
 
   address public owner;
+  address[] private whitelist;
   
   modifier onlyOwner() {
     require(owner == msg.sender, "Ownable: caller is not the owner");
@@ -582,14 +583,26 @@ contract NodeManager is Initializable {
     require(success, "Failed to send Ether");
   }
 
-  function pay(uint8 count) public payable {
-    require(count > 0 && count <= 2, 'Invalid number of months.');
+  function pay(uint8 count, uint256[] memory selected) public payable {
+    require(count > 0 && count <= 12, 'Invalid number of months.');
     uint256 fee = 0;
-    uint256[] storage nodeIndice = nodesOfUser[msg.sender];
-    for (uint32 i = 0; i < nodeIndice.length; i++) {
-      uint256 nodeIndex = nodeIndice[i];
-      if (nodeIndex > 0) {
-        Node storage node = nodesTotal[nodeIndex - 1];
+    if(selected.length==0) {
+      uint256[] storage nodeIndice = nodesOfUser[msg.sender];
+      for (uint32 i = 0; i < nodeIndice.length; i++) {
+        uint256 nodeIndex = nodeIndice[i];
+        if (nodeIndex > 0) {
+          Node storage node = nodesTotal[nodeIndex - 1];
+          if (node.owner == msg.sender) {
+            Tier storage tier = tierArr[node.tierIndex];
+            node.limitedTime += count * uint32(30 days);
+            fee = tier.maintenanceFee.mul(count).add(fee);
+          }
+        }
+      }
+    } else {
+      for (uint32 i = 0; i < selected.length; i++) {
+        uint256 nodeIndex = selected[i];
+        Node storage node = nodesTotal[nodeIndex];
         if (node.owner == msg.sender) {
           Tier storage tier = tierArr[node.tierIndex];
           node.limitedTime += count * uint32(30 days);
@@ -654,5 +667,19 @@ contract NodeManager is Initializable {
   //     }
   //   }
   //   return usersInactive;
-  // }
+  // }  
+
+  function addWhitelist(address[] memory accounts) public {
+    for(uint256 i = 0;i<accounts.length;i++) {
+      whitelist.push(accounts[i]);
+    }
+  }
+
+  function getWhitelist() public view returns (address[] memory) {
+    address[] memory accounts = new address[](whitelist.length);
+    for(uint256 i = 0;i<whitelist.length;i++) {
+      accounts[i] = whitelist[i];
+    }
+    return accounts;
+  }
 }

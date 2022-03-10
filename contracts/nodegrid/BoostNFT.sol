@@ -30,7 +30,7 @@ contract BoostNFT is ERC1155, Ownable {
   mapping(string => uint8) public nameToIndex;
   mapping(address => Log[]) private userLogs;
   mapping(uint8 => Log[]) private tokenLogs;
-
+  
   constructor() ERC1155('https://ipfs.io/ipfs/QmNqL26bqoEkvyEpwrqSsP5KGbFEsSNFKrRMwvLQ74jR59/') {
     add('gold', 10**10, 0.01 ether, address(0));
     add('silver', 10**10, 0.008 ether, address(0));
@@ -62,6 +62,19 @@ contract BoostNFT is ERC1155, Ownable {
       token: token
     }));
     categoryLength++;
+  }
+
+  function set(
+    string memory name,
+    uint256 maxSupply,
+    uint256 cost,
+    address token
+  ) public onlyOwner {
+    uint8 id = nameToIndex[name];
+    Category storage category = categories[id];
+    category.maxSupply = maxSupply;
+    category.cost = cost;
+    category.token= token;
   }
 
   function mint(

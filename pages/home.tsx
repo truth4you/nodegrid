@@ -11,16 +11,18 @@ import Link from "next/link"
 
 export default function Home() {
   const { address } = eth.useContainer()
-  const { info, tiers, allowance, getNodes, approve, createNode, compoundNode, transferNode, upgradeNode, claim, pay, multicall, getMultiplier } = token.useContainer()
+  const { info, tiers, allowance, getNodes, getWhitelist, approve, createNode, compoundNode, transferNode, upgradeNode, claim, pay, multicall, getMultiplier } = token.useContainer()
   const [approved, setApproved] = useState(false)
   const [nodes, setNodes] = useState<any[]>([])
   const [activedTier, activeTier] = useState('')
+  const [checked, setChecked] = useState<string[]>([])
   const [countCreate, setCountCreate] = useState(0)
   const [countUpgrade, setCountUpgrade] = useState(0)
   const [multiplier, setMultiplier] = useState<BigNumber>(BigNumber.from("1000000000000000000"))
   const [addressTransfer, setAddressTransfer] = useState('')
   const [showingTransfer, showTransfer] = useState(false)
   const [filterTier, setFilterTier] = useState(-1)
+  const [months, setMonths] = useState(1)
   const [loading, setLoading] = useState(false)
   const [timer, setTimer] = useState(0)
   let lastTime = new Date()
@@ -38,8 +40,8 @@ export default function Home() {
   const formatDays = (time: number) => {
     const days = Math.floor((time - new Date().getTime() / 1000) / 86400)
     if (days < 0)
-      return <span className="text-red-500">{-days} days</span>
-    return <span className="text-green-500">{days} days</span>
+      return <span className="text-red-500">{-days} days over</span>
+    return <span className="text-green-500">in {days} days</span>
   }
 
   const calcRewards = (node: any) => {
@@ -205,15 +207,21 @@ export default function Home() {
     }
   }
 
-  const handlePay = (months: number) => {
+  const handlePay = () => {
     setLoading(true)
     try {
       let fee = BigNumber.from(0)
-      nodes.map(node => {
+      const selected: number[] = []
+      const allChecked = countChecked() == 0
+      nodes.filter(cbFilter).map(node => {
         const tier = findTier(node.tierIndex)
-        fee = fee.add(tier.maintenanceFee.toString())
+        if (allChecked || checked.indexOf(String(node.id)) > -1) {
+          fee = fee.add(tier.maintenanceFee.mul(months))
+          selected.push(node.id)
+        }
       })
-      pay(months, fee.mul(months)).then(async () => {
+      console.log(fee.toString(), selected)
+      pay(months, selected, fee).then(async () => {
         toast.success(`Successfully paid!`)
         if (address) getNodes(address).then(nodes => setNodes(nodes))
         await multicall()
@@ -236,12 +244,75 @@ export default function Home() {
     setCountUpgrade(Number(e.target.value))
   }
 
+  const handleMonthsMinus = () => {
+    if (months > 1)
+      setMonths(months - 1)
+  }
+
+  const handleMonthsPlus = () => {
+    if (months < 12)
+      setMonths(months + 1)
+  }
+
+  const handleCheck = (e: any) => {
+    const id = String(e.target.value)
+    const chk = e.target.checked
+    const pos = checked.indexOf(id)
+    if (chk && pos == -1) {
+      checked.push(id)
+    } else if (!chk && pos > -1) {
+      checked.splice(pos, 1)
+    }
+    setChecked([...checked])
+  }
+
+  const handleCheckAll = (e: any) => {
+    const chk = e.target.checked
+    if (chk) {
+      const checkedNew = nodes.filter(cbFilter).map(node => String(node.id))
+      setChecked([...checked, ...checkedNew])
+    } else {
+      setChecked([])
+    }
+  }
+
+  const handleDownloadWhitelist = () => {
+    getWhitelist().then(accounts => {
+      var link = document.createElement('a')
+      let text = ''
+      for (const account of accounts) {
+        text += `${account}\n`
+      }
+      link.href = 'data:text/plain;charset=UTF-8,' + escape(text)
+      link.download = `whitelist.csv`
+      link.click()
+    })
+  }
+
+  const isCheckedAll = () => {
+    if (checked.length == 0)
+      return false
+    return nodes.filter(cbFilter).reduce((a, b) => a && checked.indexOf(String(b.id)) > -1, true)
+  }
+
+  const countChecked = () => {
+    if (checked.length == 0)
+      return 0
+    return nodes.filter(cbFilter).reduce((a, b) => a + (checked.indexOf(String(b.id)) > -1 ? 1 : 0), 0)
+  }
+
   const findTier = (tierIndex: number) => {
     if (tiers.length) for (const tier of tiers) {
       if (tier.id == tierIndex)
         return tier
     }
     return undefined
+  }
+
+  const cbFilter = (node: any) => {
+    if (filterTier == -1)
+      return true
+    return node.tierIndex == filterTier
   }
 
   useEffect(() => {
@@ -377,17 +448,16 @@ export default function Home() {
               {/* <th>Title</th> */}
               <th>#</th>
               <th>Tier</th>
-              <th className="hidden md:block">Creation Time</th>
-              <th>Limited</th>
+              <th className="hidden md:table-cell">Creation Time</th>
+              <th>Fee Due</th>
               <th>Rewards</th>
+              <th>
+                <input type="checkbox" onChange={handleCheckAll} checked={isCheckedAll()} />
+              </th>
             </tr>
           </thead>
           <tbody className={`${timer}`}>
-            {[...nodes].filter(node => {
-              if (filterTier == -1)
-                return true
-              return node.tierIndex == filterTier
-            }).sort((a: any, b: any) => {
+            {[...nodes].filter(cbFilter).sort((a: any, b: any) => {
               if (a.tierIndex > b.tierIndex) return -1
               else if (a.tierIndex == b.tierIndex && a.createdTime < b.createdTime) return -1
               return 1
@@ -396,21 +466,39 @@ export default function Home() {
                 {/* <td>{node.title}</td> */}
                 <td>{index + 1}</td>
                 <td><span className="uppercase">{findTier(node.tierIndex)?.name}</span></td>
-                <td className="hidden md:block" >{formatTime(node.createdTime)}</td>
+                <td className="hidden md:table-cell" >{formatTime(node.createdTime)}</td>
                 <td>{formatDays(node.limitedTime)}</td>
                 <td>{parseFloat(formatEther(calcRewards(node))).toFixed(5)}</td>
+                <td>
+                  <input type="checkbox" checked={checked.indexOf(String(node.id)) > -1} onChange={handleCheck} value={node.id ?? ''} />
+                </td>
               </tr>
             )}
           </tbody>
         </table>
+        <div className={classNames(styles.group, styles.pay, "flex gap-1 w-full md:w-auto mt-4 justify-end")}>
+          <button onClick={handleMonthsMinus}>-</button>
+          <button className="flex-shrink w-full md:w-auto" onClick={handlePay}>Pay {months} month{months > 1 ? 's' : ''} ({isCheckedAll() || countChecked() == 0 ? 'All' : countChecked()})</button>
+          <button onClick={handleMonthsPlus}>+</button>
+        </div>
       </div>}
       <div className={classNames(styles.rules, "md:mt-10 mt-5")}>
         <h1>Compounding Rules</h1>
         <p>You can only compound in the same tier.</p>
         <p>You can only compound across tiers in god mode.</p>
         <p>To unlock god mode, you need at least 1 node from all the available tiers.</p>
-
         <hr className="my-10" />
+        <div className={classNames(styles.pay)}>
+          <div>
+            <h1>Presale</h1>
+            <p>Our company would like to presale to our honest customers.</p>
+            <p>You can download whitelist accounts by clicking WHITELIST button and find yourself.</p>
+          </div>
+          <div className="flex flex-wrap gap-4 mt-4">
+            <button onClick={handleDownloadWhitelist} className="w-full md:w-auto">Download Whitelist</button>
+          </div>
+        </div>
+        {/* <hr className="my-10" />
         <div className={classNames(styles.pay)}>
           <div>
             <h1>Pay maintenance fee every month</h1>
@@ -420,7 +508,7 @@ export default function Home() {
             <button onClick={() => handlePay(1)}>Pay 1 Month</button>
             <button onClick={() => handlePay(2)}>Pay 2 Months</button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div >
   )

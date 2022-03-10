@@ -57,8 +57,8 @@ export default function Monitor() {
   const handleCheckAll = (e: any) => {
     const chk = e.target.checked
     if (chk) {
-      if (listMode == 'list') {
-        const checked = nodes.map(node => node.id)
+      if (listMode == 'node') {
+        const checked = nodes.map(node => String(node.id))
         setChecked([...checked])
       } else if (listMode == 'account') {
         const checked = Object.keys(accounts)
@@ -233,7 +233,7 @@ export default function Monitor() {
                   <th>Min Past</th>
                   <th>Avg Past</th>
                   <th>
-                    <input type="checkbox" onChange={handleCheckAll} checked={checked.length == nodes.length} />
+                    <input type="checkbox" onChange={handleCheckAll} checked={checked.length == Object.values(accounts).length} />
                   </th>
                 </tr>
               }

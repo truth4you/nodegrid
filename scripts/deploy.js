@@ -43,6 +43,7 @@ async function main() {
     addrOperator = addr4.address
     await(await Token.approve(Router.address, ethers.utils.parseEther("100000000"))).wait()
     await(await Router.addLiquidityETH(Token.address, ethers.utils.parseEther("1000") ,"0","0", owner.address, parseInt(new Date().getTime()/1000)+100 ,{ value: ethers.utils.parseEther("1000") })).wait()
+    await(await NodeGrid.addWhitelist([addr1.address,addr2.address,addr3.address])).wait()   
   }
 
   await (await NodeGrid.setNFTAddress(NFT.address)).wait()

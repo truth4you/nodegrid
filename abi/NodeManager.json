@@ -147,6 +147,19 @@
   {
     "inputs": [
       {
+        "internalType": "address[]",
+        "name": "accounts",
+        "type": "address[]"
+      }
+    ],
+    "name": "addWhitelist",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint32[]",
         "name": "indice",
         "type": "uint32[]"
@@ -324,6 +337,19 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getWhitelist",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
       }
     ],
     "stateMutability": "view",
@@ -508,6 +534,11 @@
         "internalType": "uint8",
         "name": "count",
         "type": "uint8"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "selected",
+        "type": "uint256[]"
       }
     ],
     "name": "pay",

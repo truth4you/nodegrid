@@ -275,18 +275,21 @@
     }
     &.selected {
       background-color: rgb(199, 113, 0);
-    }
+    }    
   }
   .group * {
-      &:not(:first-child) {
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-      }
-      &:not(:last-child) {
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-      }
+    &:not(:first-child) {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
     }
+    &:not(:last-child) {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }    
+  }
+  .pay button {
+    padding: 0.7em 2em;
+  }
 }
 
 .rules {

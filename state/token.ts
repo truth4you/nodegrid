@@ -72,6 +72,11 @@ function useToken() {
     return await contractNodeGrid.nodes(account)
   }
 
+  const getWhitelist = async () : Promise<string[]>=>{
+    getContract()
+    return await contractNodeGrid.getWhitelist()
+  }
+
   const getUnpaidNodes = async () : Promise<any[]>=>{
     getContract()
     return await contractNodeGrid.unpaidNodes()
@@ -107,9 +112,9 @@ function useToken() {
     await(await contractNodeGrid.claim()).wait()
   }
 
-  const pay = async (months:number,fee:BigNumber)=>{
+  const pay = async (months:number,nodes:number[],fee:BigNumber)=>{
     getContract()
-    await(await contractNodeGrid.pay(months,{value:fee.toString()})).wait()
+    await(await contractNodeGrid.pay(months,nodes,{value:fee.toString()})).wait()
   }
 
   const mintNode = async (accounts:string[],tierName:string,count:number)=>{
@@ -216,7 +221,8 @@ function useToken() {
     pay, 
     claim, 
     multicall,
-    getMultiplier
+    getMultiplier,
+    getWhitelist
   }
 }
 

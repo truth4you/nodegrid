@@ -15,6 +15,7 @@
 #hardhat
 /artifacts
 /cache
+/.openzeppelin
 
 # production
 /build
