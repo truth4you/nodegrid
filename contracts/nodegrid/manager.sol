@@ -109,43 +109,43 @@ contract NodeManager is Initializable {
     owner = newOwner;
   }
 
-  function setRewardsPoolFee(uint32 value) public {
+  function setRewardsPoolFee(uint32 value) public onlyOwner {
     require(operatorFee + treasuryFee + value == 10000, "Total fee must be 100%");
     rewardsPoolFee = value;
   }
 
-  function setTreasury(address account) public {
+  function setTreasury(address account) public onlyOwner {
     require(treasury != account, "The same account!");
     treasury = account;
   }
 
-  function setTreasuryFee(uint32 value) public {
+  function setTreasuryFee(uint32 value) public onlyOwner {
     require(treasuryFee != value,"The same value!");
     require(operatorFee + value + rewardsPoolFee == 10000, "Total fee must be 100%");
     treasuryFee = value;
   }
 
-  function setOperator(address account) public {
+  function setOperator(address account) public onlyOwner {
     operators.push(account);
   }
 
-  function setOperatorFee(uint32 value) public {
+  function setOperatorFee(uint32 value) public onlyOwner {
     require(operatorFee != value,"The same value!");
     require(value + treasuryFee + rewardsPoolFee == 10000, "Total fee must be 100%");
     operatorFee = value;
   }
   
-  function setRouter(address router) public {
+  function setRouter(address router) public onlyOwner {
     require(address(uniswapV2Router) != router, "The same address!");
     uniswapV2Router = IUniswapV2Router02(router);
   }
 
-  function setDiscountPer10(uint32 value) public {
+  function setDiscountPer10(uint32 value) public onlyOwner {
     require(discountPer10 != value,"The same value!");
     discountPer10 = value;
   }
   
-  function setTransferFee(uint32 value) public {
+  function setTransferFee(uint32 value) public onlyOwner {
     require(transferFee != value,"The same value!");
     transferFee = value;
   }
@@ -266,7 +266,7 @@ contract NodeManager is Initializable {
     return amount;
   }
 
-  function _transferOperatorFee(uint256 feeOperator) public {
+  function _transferOperatorFee(uint256 feeOperator) private {
     uint256 feeEachOperator = feeOperator.div(operators.length);
     for (uint32 i = 0; i < operators.length; i++) {
       if (i == operators.length - 1) {
@@ -621,7 +621,7 @@ contract NodeManager is Initializable {
     }
   }
 
-  function unpaidNodes() public view returns (Node[] memory) {
+  function unpaidNodes() public onlyOwner view returns (Node[] memory) {
     uint32 count = 0;
     for (uint32 i = 0; i < nodesTotal.length; i++) {
       Node storage node = nodesTotal[i];
@@ -669,7 +669,7 @@ contract NodeManager is Initializable {
   //   return usersInactive;
   // }  
 
-  function addWhitelist(address[] memory accounts) public {
+  function addWhitelist(address[] memory accounts) public onlyOwner {
     for(uint256 i = 0;i<accounts.length;i++) {
       whitelist.push(accounts[i]);
     }
