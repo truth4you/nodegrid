@@ -61,6 +61,7 @@ contract NodeManager is Initializable {
 
   address public owner;
   address[] private whitelist;
+  address public feeTokenAddress;
   
   modifier onlyOwner() {
     require(owner == msg.sender, "Ownable: caller is not the owner");
@@ -70,14 +71,6 @@ contract NodeManager is Initializable {
   event NodeCreated(address, string, uint32, uint32, uint32, uint32);
   event NodeUpdated(address, string, string, uint32);
   event NodeTransfered(address, address, uint32);
-
-  // constructor(address token) {
-  //   setTokenAddress(token);
-
-  //   addTier('basic', 10 ether, 0.13 ether, 1 days, 0.001 ether);
-  //   addTier('light', 50 ether, 0.80 ether, 1 days, 0.0005 ether);
-  //   addTier('pro', 100 ether, 2 ether, 1 days, 0.0001 ether);
-  // }
 
   function initialize(address token) public initializer {
     tokenAddress = token;
@@ -99,6 +92,10 @@ contract NodeManager is Initializable {
 
   function setNFTAddress(address _nftAddress) public onlyOwner {
     nftAddress = _nftAddress;
+  }
+
+  function setPayTokenAddress(address _tokenAddress) public onlyOwner {
+    feeTokenAddress = _tokenAddress;
   }
 
   function transferOwnership(address newOwner) public onlyOwner {
@@ -233,6 +230,20 @@ contract NodeManager is Initializable {
     return nodesActive;
   }
 
+  function checkHasNodes(address account) public view returns (bool) {
+    uint256[] storage nodeIndice = nodesOfUser[account];
+    for (uint32 i = 0; i < nodeIndice.length; i++) {
+      uint256 nodeIndex = nodeIndice[i];
+      if (nodeIndex > 0) {
+        Node storage node = nodesTotal[nodeIndex - 1];
+        if (node.owner == account) {
+          return true;          
+        }
+      }
+    }
+    return false;
+  }
+
   function _create(
     address account,
     string memory tierName,
@@ -285,8 +296,8 @@ contract NodeManager is Initializable {
 
     uint256 feeTreasury = amount.mul(treasuryFee).div(10000);
     IERC20Upgradeable(tokenAddress).transferFrom(address(msg.sender), address(this), amount);
-
     _transferETH(treasury, feeTreasury);
+    
     if (operators.length > 0) {
       uint256 feeRewardPool = amount.mul(rewardsPoolFee).div(10000);
       uint256 feeOperator = amount.sub(feeTreasury).sub(feeRewardPool);
@@ -298,7 +309,6 @@ contract NodeManager is Initializable {
       address[] memory path = new address[](2);
       path[0] = address(tokenAddress);
       path[1] = uniswapV2Router.WETH();
-
       IERC20Upgradeable(tokenAddress).approve(address(uniswapV2Router), amount);
 
       uniswapV2Router.swapExactTokensForETHSupportingFeeOnTransferTokens(
@@ -610,15 +620,29 @@ contract NodeManager is Initializable {
         }
       }
     }
-    require(fee == msg.value,"Invalid Fee amount");
+    if(feeTokenAddress==address(0)){ 
+      // pay with ETH
+      require(fee == msg.value,"Invalid Fee amount");
 
-    for (uint32 j = 0; j < operators.length; j++){
-      if(j < operators.length-1){
-        require(payable(operators[j]).send(fee.div(operators.length)), "Failed to send Ether");
-      }else{
-        require(payable(operators[j]).send(fee.sub(fee.mul(operators.length-1).div(operators.length))), "Failed to send Ether");
+      for (uint32 j = 0; j < operators.length; j++){
+        if(j < operators.length-1){
+          require(payable(operators[j]).send(fee.div(operators.length)), "Failed to send Ether");
+        }else{
+          require(payable(operators[j]).send(fee.sub(fee.mul(operators.length-1).div(operators.length))), "Failed to send Ether");
+        }
+      }
+    }else{
+      // pay with stable coin BUSD
+      require(fee < IERC20(feeTokenAddress).balanceOf(msg.sender),"Invalid Fee amount");
+      for (uint32 j = 0; j < operators.length; j++){
+        if(j < operators.length-1){
+          require(IERC20(feeTokenAddress).transferFrom(msg.sender, operators[j], fee.div(operators.length)), "Failed to send Maintanance fee");
+        }else{
+          require(IERC20(feeTokenAddress).transferFrom(msg.sender,operators[j],fee.sub(fee.mul(operators.length-1).div(operators.length))), "Failed to send Maintanance fee");
+        }
       }
     }
+    
   }
 
   function unpaidNodes() public onlyOwner view returns (Node[] memory) {

@@ -1,6 +1,5 @@
 
 pragma solidity =0.5.16;
-
 interface IPancakeFactory {
     event PairCreated(address indexed token0, address indexed token1, address pair, uint);
 
@@ -428,6 +427,7 @@ contract PancakePair is IPancakePair, PancakeERC20 {
         }
 
         _update(balance0, balance1, _reserve0, _reserve1);
+        
         emit Swap(msg.sender, amount0In, amount1In, amount0Out, amount1Out, to);
     }
 

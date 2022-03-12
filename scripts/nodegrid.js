@@ -26,14 +26,21 @@ describe("NodeGrid", ()=>{
       console.log("factory", FactoryContract.address)
       console.log(await(FactoryContract.INIT_CODE_PAIR_HASH()))
       // Router deploy
+      const path = './contracts/Uniswap/Router.sol'
+        const content = fs.readFileSync(path)
+        fs.writeFileSync(path,content.toString('utf8').replace(/[\da-f]{64}/mi,String(await FactoryContract.INIT_CODE_PAIR_HASH()).slice(2)))
       Router = await ethers.getContractFactory("PancakeRouter");
       RouterContract = await Router.deploy(FactoryContract.address, WETH.address);
       console.log("Router", RouterContract.address)
 
-      const tokenFactory = await ethers.getContractFactory("TokenV2");
+      const tokenFactory = await ethers.getContractFactory("Token");
       Token = await upgrades.deployProxy(tokenFactory)
       await Token.deployed();
       console.log("Token",Token.address)
+
+      const BEP20TokenFactory = await ethers.getContractFactory("BEP20Token");
+      BEP20Token = await BEP20TokenFactory.deploy()
+      console.log("BEP20Token",BEP20Token.address)
 
       const nodegirdFactory = await ethers.getContractFactory("NodeManager");
       NodeGrid = await upgrades.deployProxy(nodegirdFactory,[Token.address]);
@@ -44,6 +51,9 @@ describe("NodeGrid", ()=>{
 
       await (await NodeGrid.setTreasury(addrs[3].address)).wait();
       await (await NodeGrid.setOperator(addrs[4].address)).wait();
+      await (await NodeGrid.setPayTokenAddress(BEP20Token.address)).wait();
+      await(await Token.setNodeManagerAddress(NodeGrid.address)).wait()
+      
       // // expect(await NodeGrid.owner()).to.equal(owner.address)
 
     })
@@ -51,7 +61,9 @@ describe("NodeGrid", ()=>{
     it("Add Liquidity", async ()=>{
       
       await(await Token.approve(RouterContract.address, ethers.utils.parseEther("100000000"))).wait()
-      await(await RouterContract.addLiquidityETH(Token.address, "1000000000000000000000" ,"0","0", owner.address, parseInt(new Date().getTime()/1000)+100 ,{ value: "1000000000000000000" })).wait()
+      await(await RouterContract.addLiquidityETH(Token.address, ethers.utils.parseEther("100000") ,"0","0", owner.address, parseInt(new Date().getTime()/1000)+100 ,{ value: ethers.utils.parseEther("1000") })).wait()
+      await(await Token.updateuniswapV2Router(RouterContract.address)).wait()
+      await(await Token.transfer(NodeGrid.address, ethers.utils.parseEther("100000"))).wait()
     })
 
     
@@ -75,7 +87,7 @@ describe("NodeGrid", ()=>{
     
   })
 
-  describe(" NFTDeploy", () => {
+  describe("NFTDeploy", () => {
     it("Deploy", async () => {
         [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
             
@@ -90,12 +102,14 @@ describe("NodeGrid", ()=>{
      
     it("send NFT1", async () => {
         setBlockTime("2022-03-05")
+        await(await NFT.mint('gold',100,{value:ethers.utils.parseEther("1")})).wait()
+        await(await NFT.mint('silver',100,{value:ethers.utils.parseEther("0.8")})).wait()
         await(await NFT.setApprovalForAll(addr1.address, true)).wait()
         await(await NFT.safeTransferFrom(owner.address, addr1.address, 0, 1,[])).wait()
     })
     it("send NFT2", async () => {
         setBlockTime("2022-03-08")
-        // await(await NFT.connect(addr1).safeTransferFrom(addr1.address, addr2.address, 0, 1,[])).wait()
+        await(await NFT.connect(addr1).safeTransferFrom(addr1.address, addr2.address, 0, 1,[])).wait()
         await(await NFT.setApprovalForAll(addrs[3].address, true)).wait()
         // await(await NFT.safeTransferFrom(owner.address, addrs[3].address, 2, 1,[])).wait()
     })
@@ -163,11 +177,11 @@ describe("NodeGrid", ()=>{
   })
 
   describe("Node Create", () => {
-    it("send tokens", async()=>{
-      await (await Token.transfer(addr1.address, "1000000000000000000000000")).wait()
-      expect(await Token.balanceOf(addr1.address)).to.equal("1000000000000000000000000")
-      await (await Token.transfer(addr2.address, "1000000000000000000000000")).wait()
-      expect(await Token.balanceOf(addr2.address)).to.equal("1000000000000000000000000")
+    
+    it("buy tokens", async()=>{
+      // console.log(await(Token.uniswapV2Router()))
+      await(await RouterContract.connect(addr1).swapExactETHForTokens(0,[await(RouterContract.WETH()),Token.address],addr1.address,parseInt(new Date('2022-03-13').getTime()/1000)+100,{value:ethers.utils.parseEther("10")} )).wait()
+      await(await RouterContract.connect(addr2).swapExactETHForTokens(0,[await(RouterContract.WETH()),Token.address],addr2.address,parseInt(new Date('2022-03-13').getTime()/1000)+100,{value:ethers.utils.parseEther("10")} )).wait()
     })
     it("approve", async ()=>{
       await (await Token.connect(addr1).approve(NodeGrid.address,"1000000000000000000000000")).wait()
@@ -175,11 +189,19 @@ describe("NodeGrid", ()=>{
       await (await Token.connect(addr2).approve(NodeGrid.address,"1000000000000000000000000")).wait()
       expect(await Token.allowance(addr2.address,NodeGrid.address)).to.equal("1000000000000000000000000")
     })
+    it("Sell token from Router" ,async ()=>{
+      const amount = await Token.balanceOf(addr1.address)
+      console.log(amount)
+      await(await Token.connect(addr1).approve(RouterContract.address,amount)).wait()
+      await(await RouterContract.connect(addr1).swapExactTokensForETHSupportingFeeOnTransferTokens(amount,0,[Token.address,await(RouterContract.WETH())],addr1.address,parseInt(new Date("2022-04-01").getTime()/1000+1000) )).wait()
+  })
+    
     it("create basic 5 for addr1", async ()=>{
       await setBlockTime("2022-04-01")
       await (await NodeGrid.connect(addr1).create("basic","Node1 - BASIC",5)).wait()
       expect(await NodeGrid.countTotal()).to.equal(5)
     })
+    
     it("create light 2 for addr1", async ()=>{
       await setBlockTime("2022-04-05")
       await (await NodeGrid.connect(addr1).create("light","Node1 - LIGHT",2)).wait()
@@ -301,7 +323,13 @@ describe("NodeGrid", ()=>{
       // await (await NodeGrid.connect(addr1).pay(2)).wait()
       console.log((await NodeGrid.unpaidNodes()).length)
     })
+    it("pay nodes", async()=>{
+      await (await BEP20Token.transfer(addr1.address, ethers.utils.parseEther('1000')))
+      await (await BEP20Token.connect(addr1).approve(NodeGrid.address, ethers.utils.parseEther('1000') ))
+      await (await NodeGrid.connect(addr1).pay(2,[1,2],{value: ethers.utils.parseEther('0')})).wait()
+    })
   })
+  
 
 
 })

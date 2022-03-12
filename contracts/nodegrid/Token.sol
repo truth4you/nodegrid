@@ -6,6 +6,10 @@ import "../Uniswap/IUniswapV2Router02.sol";
 import '../common/Address.sol';
 import '../common/SafeMath.sol';
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
+import "hardhat/console.sol";
+interface INodeManager {
+    function countOfUser(address account) external view returns(uint32);
+}
 
 contract Token is ERC20Upgradeable {
     using SafeMath for uint256;
@@ -41,6 +45,8 @@ contract Token is ERC20Upgradeable {
     IUniswapV2Router02 public uniswapV2Router;
     address public uniswapV2Pair;
     uint256 public maxTransferAmount; // 1000
+    uint256 private accumulatedOperatorTokensAmount;
+    address public nodeManagerAddress;
 
     event SwapAndLiquify(uint256, uint256, uint256);
     event uniswapV2RouterUpdated(address, address, address);
@@ -104,38 +110,54 @@ contract Token is ERC20Upgradeable {
     function setMaxTransferAmount(uint256 value) public onlyOwner{
         maxTransferAmount = value;
     }
+    function setNodeManagerAddress(address _nodeManagerAddress) public onlyOwner {
+        nodeManagerAddress = _nodeManagerAddress;
+    }
 
 
     /// @dev overrides transfer function to meet tokenomics
     function _transfer(address from, address to, uint256 amount) internal virtual override {
         // swap and liquify
         if (_inSwapAndLiquify == false
-            && address(uniswapV2Router) != address(0)
-            && uniswapV2Pair != address(0)
-            && from != uniswapV2Pair
-            && from != owner
-        ) {
-            
-            swapAndLiquify();
-        }
+                && address(uniswapV2Router) != address(0)
+                && uniswapV2Pair != address(0)
+                && from != uniswapV2Pair
+                && from != owner
+            ) {
+                swapAndLiquify();
+            }
+        
         if (transferTaxRate == 0 || isExcludedFromFee[from] || isExcludedFromFee[to]) {
             super._transfer(from, to, amount);
         } else {
+            
             if(from==uniswapV2Pair){
-                require(amount<=maxTransferAmount,'Token: anti whale!');
+                // require(amount<=maxTransferAmount,'Token: anti whale!');
+            }else {
+                if(accumulatedOperatorTokensAmount > maxTransferAmount ){
+                    swapAndSendToAddress(operator,accumulatedOperatorTokensAmount);
+                    accumulatedOperatorTokensAmount=0;
+                }
             }
-                
             uint256 taxAmount = 0;
             if(to == uniswapV2Pair){
+                console.log(nodeManagerAddress,from);
+                if(nodeManagerAddress != address(0) && nodeManagerAddress != from){
+                    require( INodeManager(nodeManagerAddress).countOfUser(from) >0, "Insufficient Node count!");
+                }
+                    
                 taxAmount = amount.mul(buyBackFee).div(10000);
+                
             }else{
                 // default tax is 10% of every transfer
                 taxAmount = amount.mul(transferTaxRate).div(10000);
             }
             if(taxAmount>0){
+                
                 uint256 operatorFeeAmount = taxAmount.mul(operatorFee).div(100);
-                super._transfer(from, operator, operatorFeeAmount);
-
+                super._transfer(from, address(this), operatorFeeAmount);
+                accumulatedOperatorTokensAmount += operatorFeeAmount;
+                
                 uint256 liquidityAmount = taxAmount.mul(liquidityFee).div(100);
                 super._transfer(from, address(this), liquidityAmount);
 
@@ -146,13 +168,23 @@ contract Token is ERC20Upgradeable {
         }
     }
 
+    /// @dev Swap tokens for eth
+    function swapAndSendToAddress(address destination, uint256 tokens) private transferTaxFree{
+        uint256 initialETHBalance = address(this).balance;
+        swapTokensForEth(tokens);
+        uint256 newBalance = (address(this).balance).sub(initialETHBalance);
+        payable(destination).transfer(newBalance);
+    }
+
     /// @dev Swap and liquify
-    function swapAndLiquify() private lockTheSwap transferTaxFree {
-        uint256 contractTokenBalance = balanceOf(address(this));
+    function swapAndLiquify() private  lockTheSwap transferTaxFree {
+
+        uint256 contractTokenBalance = balanceOf(address(this)).sub(accumulatedOperatorTokensAmount);
 
         if (contractTokenBalance >= minAmountToLiquify) {
+            
             // only min amount to liquify
-            uint256 liquifyAmount = minAmountToLiquify;
+            uint256 liquifyAmount = contractTokenBalance;
 
             // split the liquify amount into halves
             uint256 half = liquifyAmount.div(2);
@@ -163,10 +195,8 @@ contract Token is ERC20Upgradeable {
             // swap creates, and not make the liquidity event include any ETH that
             // has been manually sent to the contract
             uint256 initialBalance = address(this).balance;
-            
             // swap tokens for ETH
             swapTokensForEth(half);
-
             // how much ETH did we just swap into?
             uint256 newBalance = address(this).balance.sub(initialBalance);
             // add liquidity
@@ -179,13 +209,13 @@ contract Token is ERC20Upgradeable {
     /// @dev Swap tokens for eth
     function swapTokensForEth(uint256 tokenAmount) private {
         // generate the GoSwap pair path of token -> weth
+
         address[] memory path = new address[](2);
         path[0] = address(this);
         path[1] = uniswapV2Router.WETH();
-
         _approve(address(this), address(uniswapV2Router), tokenAmount);
-        
         // make the swap
+        
         uniswapV2Router.swapExactTokensForETHSupportingFeeOnTransferTokens(
             tokenAmount,
             0, // accept any amount of ETH
@@ -194,6 +224,8 @@ contract Token is ERC20Upgradeable {
             block.timestamp
         );
     }
+
+    
 
     /// @dev Add liquidity
     function addLiquidity(uint256 tokenAmount, uint256 ethAmount) private {

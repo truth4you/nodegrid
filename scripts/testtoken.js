@@ -43,18 +43,22 @@ describe("Token", ()=>{
 
   })
 
-  describe(" Transfer", () => {
-    it("transfer from owner to others", async () => {
-        // await(await Token.transfer(addr1.address, ethers.utils.parseEther("100000"))).wait()
+  describe("Transfer", () => {
+    it("buy token from Route", async () => {
+        await(await Router.connect(addr1).swapExactETHForTokens(0,[await(Router.WETH()),Token.address],addr1.address,parseInt(new Date().getTime()/1000)+100,{value:ethers.utils.parseEther("100")} )).wait()
+        // await(await Router.connect(addr1).swapExactETHForTokens(0,[await(Router.WETH()),Token.address],addr1.address,parseInt(new Date().getTime()/1000)+100,{value:ethers.utils.parseEther("10")} )).wait()
+        
+        
     })
     it("transfer other to other", async () => {
+        await(await Token.connect(addr1).transfer(addr2.address, ethers.utils.parseEther("1500"))).wait()
         // await(await Token.connect(addr1).transfer(addr2.address, ethers.utils.parseEther("50000"))).wait()
     })
     // it("transfer other to other", async () => {
     //     await(await Token.connect(addr1).transfer(addr2.address, ethers.utils.parseEther("50000"))).wait()
     // })
     it("buy token from Router" ,async ()=>{
-        await(await Router.connect(addr1).swapExactETHForTokens(0,[await(Router.WETH()),Token.address],addr1.address,parseInt(new Date().getTime()/1000)+100,{value:ethers.utils.parseEther("1")} )).wait()
+        await(await Router.connect(addr1).swapExactETHForTokens(0,[await(Router.WETH()),Token.address],addr1.address,parseInt(new Date().getTime()/1000)+100,{value:ethers.utils.parseEther("10")} )).wait()
     })
     it("Sell token from Router" ,async ()=>{
         const amount = await Token.balanceOf(addr1.address)

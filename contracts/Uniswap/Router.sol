@@ -1,6 +1,6 @@
 
 pragma solidity >=0.6.0;
-import 'hardhat/console.sol';
+
 // helper methods for interacting with ERC20 tokens and sending ETH that do not consistently return true/false
 library TransferHelper {
     function safeApprove(address token, address to, uint value) internal {
@@ -290,7 +290,7 @@ library PancakeLibrary {
                 hex'ff',
                 factory,
                 keccak256(abi.encodePacked(token0, token1)),
-                hex'e33ba5d978c7938ffc7ad910977b16fb210ed0039186d960f0637e1d36ee936a' // init code hash
+                hex'0a814179a48a45cbb14fdb552c77e03d4b930c1fbfe3b3a2d5c6bf96fc3c2d55' // init code hash
             ))));
     }
 
