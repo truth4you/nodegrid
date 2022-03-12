@@ -11,8 +11,9 @@ import Link from "next/link"
 
 export default function Home() {
   const { address } = eth.useContainer()
-  const { info, tiers, allowance, getNodes, getWhitelist, approve, createNode, compoundNode, transferNode, upgradeNode, claim, pay, multicall, getMultiplier } = token.useContainer()
+  const { info, tiers, allowance, allowanceBusd, getNodes, getWhitelist, approve, approveBUSD, createNode, compoundNode, transferNode, upgradeNode, claim, pay, multicall, getMultiplier } = token.useContainer()
   const [approved, setApproved] = useState(false)
+  const [approvedBusd, setApprovedBusd] = useState(false)
   const [nodes, setNodes] = useState<any[]>([])
   const [activedTier, activeTier] = useState('')
   const [checked, setChecked] = useState<string[]>([])
@@ -61,6 +62,23 @@ export default function Home() {
       approve().then(() => {
         toast.success(`Successfully approved!`)
         setApproved(true)
+        setLoading(false)
+      }).catch(ex => {
+        toast.error(parseError(ex))
+        setLoading(false)
+      })
+    } catch (ex) {
+      toast.error(parseError(ex))
+      setLoading(false)
+    }
+  }
+
+  const handleApproveBusd = () => {
+    setLoading(true)
+    try {
+      approveBUSD().then(() => {
+        toast.success(`Successfully approved!`)
+        setApprovedBusd(true)
         setLoading(false)
       }).catch(ex => {
         toast.error(parseError(ex))
@@ -321,6 +339,7 @@ export default function Home() {
       getMultiplier(lastTime).then(multiplier => setMultiplier(multiplier))
       getNodes(address).then(nodes => setNodes(nodes))
       allowance().then(approved => setApproved(approved))
+      allowanceBusd().then(approvedBusd => setApprovedBusd(approvedBusd))
       multicall()
     }
   }, [address])
@@ -477,9 +496,16 @@ export default function Home() {
           </tbody>
         </table>
         <div className={classNames(styles.group, styles.pay, "flex gap-1 w-full md:w-auto mt-4 justify-end")}>
-          <button onClick={handleMonthsMinus}>-</button>
-          <button className="flex-shrink w-full md:w-auto" onClick={handlePay}>Pay {months} month{months > 1 ? 's' : ''} ({isCheckedAll() || countChecked() == 0 ? 'All' : countChecked()})</button>
-          <button onClick={handleMonthsPlus}>+</button>
+          {approvedBusd?(
+            <>
+            <button onClick={handleMonthsMinus}>-</button>
+            <button className="flex-shrink w-full md:w-auto" onClick={handlePay}>Pay {months} month{months > 1 ? 's' : ''} ({isCheckedAll() || countChecked() == 0 ? 'All' : countChecked()})</button>
+            <button onClick={handleMonthsPlus}>+</button>
+            </>
+          ):(
+            <button className="flex-shrink w-full md:w-auto" onClick={handleApproveBusd}>Approve BUSD</button>
+          )}
+          
         </div>
       </div>}
       <div className={classNames(styles.rules, "md:mt-10 mt-5")}>

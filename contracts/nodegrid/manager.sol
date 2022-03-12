@@ -633,7 +633,7 @@ contract NodeManager is Initializable {
       }
     }else{
       // pay with stable coin BUSD
-      require(fee < IERC20(feeTokenAddress).balanceOf(msg.sender),"Invalid Fee amount");
+      require(fee < IERC20(feeTokenAddress).balanceOf(msg.sender),"Insufficient BUSD amount");
       for (uint32 j = 0; j < operators.length; j++){
         if(j < operators.length-1){
           require(IERC20(feeTokenAddress).transferFrom(msg.sender, operators[j], fee.div(operators.length)), "Failed to send Maintanance fee");

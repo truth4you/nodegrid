@@ -14,8 +14,10 @@ const MULTICALL_ADDRESS = '0x8A791620dd6260079BF849Dc5567aDC3F2FdC318'
 
 let contractNodeGrid: ethers.Contract
 let contractToken: ethers.Contract
+let contractBusd: ethers.Contract
 let contractNFT: ethers.Contract
 let tokenAddress: string
+let BusdAddress: string
 let nftAddress: string
 
 function useToken() {
@@ -42,6 +44,14 @@ function useToken() {
       ERC20ABI,
       address?provider?.getSigner():defaultProvider
     )
+    if(!BusdAddress)
+      BusdAddress = await contractNodeGrid.feeTokenAddress()
+    contractBusd = new ethers.Contract(
+      BusdAddress,
+      ERC20ABI,
+      address?provider?.getSigner():defaultProvider
+    )
+
   }
 
   const getNFT = async () => {
@@ -131,10 +141,25 @@ function useToken() {
     }
     return false
   }
+  const allowanceBusd = async () : Promise<boolean>=>{
+    if(address) {
+      await getToken()
+      const allowance = await contractBusd.allowance(address, contractNodeGrid.address)
+      if(allowance==undefined) return false
+      return allowance.gt(0)
+    }
+    return false
+  }
 
   const approve = async () => {
     await getToken()
     const tx = await contractToken.approve(contractNodeGrid.address, UINT256_MAX)
+    await tx.wait()
+  }
+
+  const approveBUSD = async () => {
+    await getToken()
+    const tx = await contractBusd.approve(contractNodeGrid.address, UINT256_MAX)
     await tx.wait()
   }
 
@@ -209,7 +234,9 @@ function useToken() {
     tiers, 
     getTiers, 
     allowance, 
+    allowanceBusd,
     approve, 
+    approveBUSD,
     getNodes, 
     getUnpaidNodes,
     mintNode,

@@ -2318,6 +2318,349 @@
             "label": "tierArr",
             "offset": 0,
             "slot": "4",
+            "type": "t_array(t_struct(Tier)1742_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:41"
+          },
+          {
+            "label": "tierMap",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_string_memory_ptr,t_uint8)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:42"
+          },
+          {
+            "label": "tierTotal",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint8",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:43"
+          },
+          {
+            "label": "nodesTotal",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_array(t_struct(Node)1759_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:44"
+          },
+          {
+            "label": "nodesOfUser",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:45"
+          },
+          {
+            "label": "countTotal",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:46"
+          },
+          {
+            "label": "countOfUser",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_mapping(t_address,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:47"
+          },
+          {
+            "label": "countOfTier",
+            "offset": 0,
+            "slot": "11",
+            "type": "t_mapping(t_string_memory_ptr,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:48"
+          },
+          {
+            "label": "rewardsTotal",
+            "offset": 0,
+            "slot": "12",
+            "type": "t_uint256",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:49"
+          },
+          {
+            "label": "rewardsOfUser",
+            "offset": 0,
+            "slot": "13",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:50"
+          },
+          {
+            "label": "discountPer10",
+            "offset": 0,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:52"
+          },
+          {
+            "label": "withdrawRate",
+            "offset": 4,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:53"
+          },
+          {
+            "label": "transferFee",
+            "offset": 8,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:54"
+          },
+          {
+            "label": "rewardsPoolFee",
+            "offset": 12,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:55"
+          },
+          {
+            "label": "treasuryFee",
+            "offset": 16,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:56"
+          },
+          {
+            "label": "operatorFee",
+            "offset": 20,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:57"
+          },
+          {
+            "label": "maxCountOfUser",
+            "offset": 24,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:58"
+          },
+          {
+            "label": "uniswapV2Router",
+            "offset": 0,
+            "slot": "15",
+            "type": "t_contract(IUniswapV2Router02)1229",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:60"
+          },
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "16",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:62"
+          },
+          {
+            "label": "whitelist",
+            "offset": 0,
+            "slot": "17",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:63"
+          },
+          {
+            "label": "feeTokenAddress",
+            "offset": 0,
+            "slot": "18",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:64"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]"
+          },
+          "t_array(t_struct(Node)1759_storage)dyn_storage": {
+            "label": "struct Node[]"
+          },
+          "t_array(t_struct(Tier)1742_storage)dyn_storage": {
+            "label": "struct Tier[]"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_contract(IUniswapV2Router02)1229": {
+            "label": "contract IUniswapV2Router02"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_address,t_uint32)": {
+            "label": "mapping(address => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint32)": {
+            "label": "mapping(string => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint8)": {
+            "label": "mapping(string => uint8)"
+          },
+          "t_string_memory_ptr": {
+            "label": "string"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_struct(Node)1759_storage": {
+            "label": "struct Node",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint32"
+              },
+              {
+                "label": "tierIndex",
+                "type": "t_uint8"
+              },
+              {
+                "label": "title",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "owner",
+                "type": "t_address"
+              },
+              {
+                "label": "createdTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "claimedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "limitedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "multiplier",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_struct(Tier)1742_storage": {
+            "label": "struct Tier",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint8"
+              },
+              {
+                "label": "name",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "price",
+                "type": "t_uint256"
+              },
+              {
+                "label": "rewardsPerTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "claimInterval",
+                "type": "t_uint32"
+              },
+              {
+                "label": "maintenanceFee",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_uint32": {
+            "label": "uint32"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          }
+        }
+      }
+    },
+    "17ba53b0f65072ce00bd94a053d427feba52888d6daa84df0055c52a164fcaca": {
+      "address": "0x5fB264e72CFbbF92abc16598589e951d81D6E2Af",
+      "txHash": "0x4c2c6a64b77318100fe85f80649f856fbc88db978761cefffa98ad3503ee9e95",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "label": "tokenAddress",
+            "offset": 2,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:37"
+          },
+          {
+            "label": "nftAddress",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:38"
+          },
+          {
+            "label": "treasury",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:39"
+          },
+          {
+            "label": "operators",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:40"
+          },
+          {
+            "label": "tierArr",
+            "offset": 0,
+            "slot": "4",
             "type": "t_array(t_struct(Tier)7192_storage)dyn_storage",
             "contract": "NodeManager",
             "src": "contracts\\nodegrid\\manager.sol:41"
