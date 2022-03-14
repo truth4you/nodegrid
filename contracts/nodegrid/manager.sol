@@ -10,7 +10,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 import "./IBoostNFT.sol";
-import "hardhat/console.sol";
+
 
 struct Tier {
   uint8 id;
@@ -62,6 +62,7 @@ contract NodeManager is Initializable {
   address public owner;
   address[] private whitelist;
   address public feeTokenAddress;
+  bool public canNodeTransfer;
   
   modifier onlyOwner() {
     require(owner == msg.sender, "Ownable: caller is not the owner");
@@ -145,6 +146,10 @@ contract NodeManager is Initializable {
   function setTransferFee(uint32 value) public onlyOwner {
     require(transferFee != value,"The same value!");
     transferFee = value;
+  }
+
+  function setCanNodeTransfer(bool value) public onlyOwner {
+    canNodeTransfer = value;
   }
   
   function tiers() public view returns (Tier[] memory) {
@@ -484,6 +489,7 @@ contract NodeManager is Initializable {
     uint32 count,
     address recipient
   ) public {
+    require(canNodeTransfer==true,'Node transfer unavailable!');
     uint8 tierIndex = tierMap[tierName];
     require(tierIndex > 0, 'Invalid tier to transfer.');
     Tier storage tier = tierArr[tierIndex - 1];

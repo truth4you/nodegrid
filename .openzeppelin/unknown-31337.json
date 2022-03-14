@@ -2,7 +2,7 @@
   "manifestVersion": "3.2",
   "admin": {
     "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
-    "txHash": "0x395ecec14c224f4695a85e29c3b6391adf8d00e0534f0e65e4104c36c919ba5c"
+    "txHash": "0xe09a752d7f86ba1500b40d0626ded67d82c07b2fd0329968b4aa3951ec31a349"
   },
   "proxies": [
     {
@@ -52,12 +52,12 @@
     },
     {
       "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      "txHash": "0xe00660e0ffc622edd3054d306e6cc75bec2c5f012c0d13ec59c464adcb36b671",
+      "txHash": "0x3df5d41c43d72064a788bcbc39147982e082b4ba14361a7851532ff2eba2219c",
       "kind": "transparent"
     },
     {
       "address": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
-      "txHash": "0x8bae727bbe0f35c16082369a02823b6be9510d7786813024aa84b1be9301e631",
+      "txHash": "0x4f5df02ec9d194f63294728a340059a27482bdc870e886f7c90bea45b98376c5",
       "kind": "transparent"
     }
   ],
@@ -1067,9 +1067,9 @@
         }
       }
     },
-    "619a9a87c24fab036edb6057a0d21568651f0fb94009c13922e20416c02d3496": {
+    "6cdeda090c4defa92943624bd2de395a78d84e06a6bb935cd9c3f0e42c92c4c3": {
       "address": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
-      "txHash": "0x3edb19a7d1ad006489ac2f63eba795653c0642428ee63790e03fe8a531ac26c3",
+      "txHash": "0x6ae8c620b412f971d0f74936e59bef0145f364bf2d9abb77e611eb356e714327",
       "layout": {
         "storage": [
           {
@@ -1124,7 +1124,7 @@
             "label": "tierArr",
             "offset": 0,
             "slot": "4",
-            "type": "t_array(t_struct(Tier)7192_storage)dyn_storage",
+            "type": "t_array(t_struct(Tier)7184_storage)dyn_storage",
             "contract": "NodeManager",
             "src": "contracts\\nodegrid\\manager.sol:41"
           },
@@ -1148,7 +1148,7 @@
             "label": "nodesTotal",
             "offset": 0,
             "slot": "7",
-            "type": "t_array(t_struct(Node)7209_storage)dyn_storage",
+            "type": "t_array(t_struct(Node)7201_storage)dyn_storage",
             "contract": "NodeManager",
             "src": "contracts\\nodegrid\\manager.sol:44"
           },
@@ -1287,6 +1287,14 @@
             "type": "t_address",
             "contract": "NodeManager",
             "src": "contracts\\nodegrid\\manager.sol:64"
+          },
+          {
+            "label": "canNodeTransfer",
+            "offset": 20,
+            "slot": "18",
+            "type": "t_bool",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\manager.sol:65"
           }
         ],
         "types": {
@@ -1296,10 +1304,10 @@
           "t_array(t_address)dyn_storage": {
             "label": "address[]"
           },
-          "t_array(t_struct(Node)7209_storage)dyn_storage": {
+          "t_array(t_struct(Node)7201_storage)dyn_storage": {
             "label": "struct Node[]"
           },
-          "t_array(t_struct(Tier)7192_storage)dyn_storage": {
+          "t_array(t_struct(Tier)7184_storage)dyn_storage": {
             "label": "struct Tier[]"
           },
           "t_array(t_uint256)dyn_storage": {
@@ -1332,7 +1340,7 @@
           "t_string_storage": {
             "label": "string"
           },
-          "t_struct(Node)7209_storage": {
+          "t_struct(Node)7201_storage": {
             "label": "struct Node",
             "members": [
               {
@@ -1369,7 +1377,7 @@
               }
             ]
           },
-          "t_struct(Tier)7192_storage": {
+          "t_struct(Tier)7184_storage": {
             "label": "struct Tier",
             "members": [
               {
@@ -1410,9 +1418,9 @@
         }
       }
     },
-    "7cea5a883b6a34a32a11e0f4d4993c28e06ea0408e6f7055a417fa68664acad8": {
+    "88a102c100c881d895af9e53c517b5d630cc8f1dae7fbc4b8ab9c1c72bd08f54": {
       "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0x2ddbea6c818c2334eaa4518bc056b51ccae5f12fe8dd6b4d6dba9dab28703823",
+      "txHash": "0x9f4f01684a84002d94883b67c35e4fea203b42db13865eeb91bda84e5fc00d74",
       "layout": {
         "storage": [
           {
@@ -1493,7 +1501,7 @@
             "slot": "101",
             "type": "t_bool",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:33"
+            "src": "contracts\\nodegrid\\Token.sol:34"
           },
           {
             "label": "transferTaxRate",
@@ -1501,7 +1509,7 @@
             "slot": "101",
             "type": "t_uint32",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:34"
+            "src": "contracts\\nodegrid\\Token.sol:35"
           },
           {
             "label": "buyBackFee",
@@ -1509,7 +1517,7 @@
             "slot": "101",
             "type": "t_uint32",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:35"
+            "src": "contracts\\nodegrid\\Token.sol:36"
           },
           {
             "label": "operatorFee",
@@ -1517,7 +1525,7 @@
             "slot": "101",
             "type": "t_uint32",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:36"
+            "src": "contracts\\nodegrid\\Token.sol:37"
           },
           {
             "label": "liquidityFee",
@@ -1525,7 +1533,7 @@
             "slot": "101",
             "type": "t_uint32",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:37"
+            "src": "contracts\\nodegrid\\Token.sol:38"
           },
           {
             "label": "minAmountToLiquify",
@@ -1533,7 +1541,7 @@
             "slot": "102",
             "type": "t_uint256",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:39"
+            "src": "contracts\\nodegrid\\Token.sol:40"
           },
           {
             "label": "owner",
@@ -1541,7 +1549,7 @@
             "slot": "103",
             "type": "t_address",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:41"
+            "src": "contracts\\nodegrid\\Token.sol:42"
           },
           {
             "label": "operator",
@@ -1549,7 +1557,7 @@
             "slot": "104",
             "type": "t_address",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:42"
+            "src": "contracts\\nodegrid\\Token.sol:43"
           },
           {
             "label": "isExcludedFromFee",
@@ -1557,7 +1565,7 @@
             "slot": "105",
             "type": "t_mapping(t_address,t_bool)",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:43"
+            "src": "contracts\\nodegrid\\Token.sol:44"
           },
           {
             "label": "uniswapV2Router",
@@ -1565,7 +1573,7 @@
             "slot": "106",
             "type": "t_contract(IUniswapV2Router02)3480",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:45"
+            "src": "contracts\\nodegrid\\Token.sol:46"
           },
           {
             "label": "uniswapV2Pair",
@@ -1573,7 +1581,7 @@
             "slot": "107",
             "type": "t_address",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:46"
+            "src": "contracts\\nodegrid\\Token.sol:47"
           },
           {
             "label": "maxTransferAmount",
@@ -1581,7 +1589,7 @@
             "slot": "108",
             "type": "t_uint256",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:47"
+            "src": "contracts\\nodegrid\\Token.sol:48"
           },
           {
             "label": "accumulatedOperatorTokensAmount",
@@ -1589,7 +1597,7 @@
             "slot": "109",
             "type": "t_uint256",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:48"
+            "src": "contracts\\nodegrid\\Token.sol:49"
           },
           {
             "label": "nodeManagerAddress",
@@ -1597,7 +1605,7 @@
             "slot": "110",
             "type": "t_address",
             "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:49"
+            "src": "contracts\\nodegrid\\Token.sol:50"
           }
         ],
         "types": {

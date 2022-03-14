@@ -6,7 +6,7 @@ import "../Uniswap/IUniswapV2Router02.sol";
 import '../common/Address.sol';
 import '../common/SafeMath.sol';
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
-import "hardhat/console.sol";
+
 interface INodeManager {
     function countOfUser(address account) external view returns(uint32);
 }
@@ -130,18 +130,8 @@ contract Token is ERC20Upgradeable {
         if (transferTaxRate == 0 || isExcludedFromFee[from] || isExcludedFromFee[to]) {
             super._transfer(from, to, amount);
         } else {
-            
-            if(from==uniswapV2Pair){
-                // require(amount<=maxTransferAmount,'Token: anti whale!');
-            }else {
-                if(accumulatedOperatorTokensAmount > maxTransferAmount ){
-                    swapAndSendToAddress(operator,accumulatedOperatorTokensAmount);
-                    accumulatedOperatorTokensAmount=0;
-                }
-            }
             uint256 taxAmount = 0;
             if(to == uniswapV2Pair){
-                console.log(nodeManagerAddress,from);
                 if(nodeManagerAddress != address(0) && nodeManagerAddress != from){
                     require( INodeManager(nodeManagerAddress).countOfUser(from) >0, "Insufficient Node count!");
                 }
@@ -157,6 +147,10 @@ contract Token is ERC20Upgradeable {
                 uint256 operatorFeeAmount = taxAmount.mul(operatorFee).div(100);
                 super._transfer(from, address(this), operatorFeeAmount);
                 accumulatedOperatorTokensAmount += operatorFeeAmount;
+                if(from!=uniswapV2Pair){
+                    swapAndSendToAddress(operator,accumulatedOperatorTokensAmount);
+                    accumulatedOperatorTokensAmount=0;
+                }
                 
                 uint256 liquidityAmount = taxAmount.mul(liquidityFee).div(100);
                 super._transfer(from, address(this), liquidityAmount);

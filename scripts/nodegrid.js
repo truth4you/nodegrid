@@ -101,41 +101,41 @@ describe("NodeGrid", ()=>{
     })
      
     it("send NFT1", async () => {
-        setBlockTime("2022-03-05")
+        setBlockTime("2022-04-05")
         await(await NFT.mint('gold',100,{value:ethers.utils.parseEther("1")})).wait()
         await(await NFT.mint('silver',100,{value:ethers.utils.parseEther("0.8")})).wait()
         await(await NFT.setApprovalForAll(addr1.address, true)).wait()
         await(await NFT.safeTransferFrom(owner.address, addr1.address, 0, 1,[])).wait()
     })
     it("send NFT2", async () => {
-        setBlockTime("2022-03-08")
+        setBlockTime("2022-04-08")
         await(await NFT.connect(addr1).safeTransferFrom(addr1.address, addr2.address, 0, 1,[])).wait()
         await(await NFT.setApprovalForAll(addrs[3].address, true)).wait()
         // await(await NFT.safeTransferFrom(owner.address, addrs[3].address, 2, 1,[])).wait()
     })
     it("send NFT3", async () => {
-        setBlockTime("2022-03-10")
+        setBlockTime("2022-04-10")
         await(await NFT.setApprovalForAll(addrs[2].address, true)).wait()
         await(await NFT.safeTransferFrom(owner.address, addr2.address, 0, 1,[])).wait()
         await(await NFT.setApprovalForAll(addrs[3].address, true)).wait()
         await(await NFT.safeTransferFrom(owner.address, addrs[3].address, 1, 1,[])).wait()
     })
     it("send NFT4", async () => {
-        setBlockTime("2022-03-12")
+        setBlockTime("2022-04-12")
         await(await NFT.setApprovalForAll(addrs[2].address, true)).wait()
         await(await NFT.safeTransferFrom(owner.address, addr2.address, 0, 1,[])).wait()
         
         await(await NFT.connect(addrs[3]).safeTransferFrom(addrs[3].address, addrs[2].address, 1, 1,[])).wait()
     })
     it("get Multiplier", async () => {
-        const multi1 = await NFT.getMultiplier(addr1.address, toTimestamp("2022-02-28"), toTimestamp("2022-03-20"))
+        const multi1 = await NFT.getMultiplier(addr1.address, toTimestamp("2022-02-28"), toTimestamp("2022-04-20"))
         console.log("1.1",ethers.utils.formatEther(multi1))
-        const multi11 = await NFT.getMultiplier(addr1.address, toTimestamp("2022-02-28"), toTimestamp("2022-03-13"))
-        const multi12 = await NFT.getLastMultiplier(addr1.address, toTimestamp("2022-03-13"));
-        console.log("1.2", multi11.toString(), multi12,(multi11*(toTimestamp("2022-03-13")-toTimestamp("2022-02-28"))+(toTimestamp("2022-03-20")-toTimestamp("2022-03-13"))*multi12)/(toTimestamp("2022-03-20")-toTimestamp("2022-02-28")))
-        const multi2 = await NFT.getMultiplier(addr2.address, toTimestamp("2022-02-28"), toTimestamp("2022-03-13"))
+        const multi11 = await NFT.getMultiplier(addr1.address, toTimestamp("2022-02-28"), toTimestamp("2022-04-13"))
+        const multi12 = await NFT.getLastMultiplier(addr1.address, toTimestamp("2022-04-13"));
+        console.log("1.2", multi11.toString(), multi12,(multi11*(toTimestamp("2022-04-13")-toTimestamp("2022-02-28"))+(toTimestamp("2022-04-20")-toTimestamp("2022-04-13"))*multi12)/(toTimestamp("2022-04-20")-toTimestamp("2022-02-28")))
+        const multi2 = await NFT.getMultiplier(addr2.address, toTimestamp("2022-02-28"), toTimestamp("2022-04-13"))
         console.log("2",multi2/1000000000000000000)
-        const multi3 = await NFT.getMultiplier(addrs[3].address, toTimestamp("2022-02-28"), toTimestamp("2022-03-13"))
+        const multi3 = await NFT.getMultiplier(addrs[3].address, toTimestamp("2022-02-28"), toTimestamp("2022-04-13"))
         console.log("3", multi3/1000000000000000000)
     })
   })
@@ -180,8 +180,8 @@ describe("NodeGrid", ()=>{
     
     it("buy tokens", async()=>{
       // console.log(await(Token.uniswapV2Router()))
-      await(await RouterContract.connect(addr1).swapExactETHForTokens(0,[await(RouterContract.WETH()),Token.address],addr1.address,parseInt(new Date('2022-03-13').getTime()/1000)+100,{value:ethers.utils.parseEther("10")} )).wait()
-      await(await RouterContract.connect(addr2).swapExactETHForTokens(0,[await(RouterContract.WETH()),Token.address],addr2.address,parseInt(new Date('2022-03-13').getTime()/1000)+100,{value:ethers.utils.parseEther("10")} )).wait()
+      await(await RouterContract.connect(addr1).swapExactETHForTokens(0,[await(RouterContract.WETH()),Token.address],addr1.address,parseInt(new Date('2022-04-13').getTime()/1000)+100,{value:ethers.utils.parseEther("15")} )).wait()
+      await(await RouterContract.connect(addr2).swapExactETHForTokens(0,[await(RouterContract.WETH()),Token.address],addr2.address,parseInt(new Date('2022-04-13').getTime()/1000)+100,{value:ethers.utils.parseEther("10")} )).wait()
     })
     it("approve", async ()=>{
       await (await Token.connect(addr1).approve(NodeGrid.address,"1000000000000000000000000")).wait()
@@ -189,29 +189,31 @@ describe("NodeGrid", ()=>{
       await (await Token.connect(addr2).approve(NodeGrid.address,"1000000000000000000000000")).wait()
       expect(await Token.allowance(addr2.address,NodeGrid.address)).to.equal("1000000000000000000000000")
     })
-    it("Sell token from Router" ,async ()=>{
-      const amount = await Token.balanceOf(addr1.address)
-      console.log(amount)
-      await(await Token.connect(addr1).approve(RouterContract.address,amount)).wait()
-      await(await RouterContract.connect(addr1).swapExactTokensForETHSupportingFeeOnTransferTokens(amount,0,[Token.address,await(RouterContract.WETH())],addr1.address,parseInt(new Date("2022-04-01").getTime()/1000+1000) )).wait()
-  })
+    
     
     it("create basic 5 for addr1", async ()=>{
-      await setBlockTime("2022-04-01")
+      await setBlockTime("2022-05-01")
       await (await NodeGrid.connect(addr1).create("basic","Node1 - BASIC",5)).wait()
       expect(await NodeGrid.countTotal()).to.equal(5)
     })
     
+    
     it("create light 2 for addr1", async ()=>{
-      await setBlockTime("2022-04-05")
+      await setBlockTime("2022-05-05")
       await (await NodeGrid.connect(addr1).create("light","Node1 - LIGHT",2)).wait()
       expect(await NodeGrid.countTotal()).to.equal(7)
       expect(await NodeGrid.countOfUser(addr1.address)).to.equal(7)
     })
     it("create basic 3 for addr2", async ()=>{
-      await setBlockTime("2022-04-07")
+      await setBlockTime("2022-05-07")
       await (await NodeGrid.connect(addr2).create("basic","Node2 - BASIC",3)).wait()
       expect(await NodeGrid.countTotal()).to.equal(10)
+    })
+    it("Sell token from Router" ,async ()=>{
+      const amount = await Token.balanceOf(addr1.address)
+      console.log(amount)
+      await(await Token.connect(addr1).approve(RouterContract.address,amount)).wait()
+      await(await RouterContract.connect(addr1).swapExactTokensForETHSupportingFeeOnTransferTokens(amount,0,[Token.address,await(RouterContract.WETH())],addr1.address,parseInt(new Date("2022-05-07").getTime()/1000+1000) )).wait()
     })
     it("count of nodes", async ()=>{
       expect(await NodeGrid.countOfUser(addr2.address)).to.equal(3)
@@ -219,15 +221,15 @@ describe("NodeGrid", ()=>{
       expect(await NodeGrid.countOfTier("light")).to.equal(2)
     })
     it("claimable tokens", async()=>{
-      await setBlockTime("2022-04-25")
+      await setBlockTime("2022-05-25")
       console.log("claimable tokens",(await NodeGrid.connect(addr1).claimable()).toString())
     })
     it("get nodes of addr1", async()=>{
       const nodes = await NodeGrid.nodes(addr1.address)
-      console.log(await NodeGrid.getBoostRate(addr1.address, toTimestamp("2022-02-28"), toTimestamp("2022-03-20")))
-      const multi1 = await NFT.getMultiplier(addr1.address, toTimestamp("2022-02-28"), toTimestamp("2022-03-20"))
+      console.log(await NodeGrid.getBoostRate(addr1.address, toTimestamp("2022-02-28"), toTimestamp("2022-04-20")))
+      const multi1 = await NFT.getMultiplier(addr1.address, toTimestamp("2022-02-28"), toTimestamp("2022-04-20"))
         console.log("1.1",ethers.utils.formatEther(multi1))
-      console.log(nodes)
+      // console.log(nodes)
       expect(nodes.length).to.equal(7)
       expect(nodes[0].title).to.equal('Node1 - BASIC')
     })
@@ -240,7 +242,7 @@ describe("NodeGrid", ()=>{
 
   describe("Node Compound", () => {
     it("compound with light 1 for addr1", async()=>{
-      await setBlockTime("2022-05-20")
+      await setBlockTime("2022-06-20")
       await (await NodeGrid.connect(addr1).compound("light", "Node1 - Comp - LIGHT", 1)).wait()
       expect(await NodeGrid.countTotal()).to.equal(11)
     })
@@ -274,7 +276,7 @@ describe("NodeGrid", ()=>{
   })
   describe("Claim", () => {
     it("claim for addr1", async()=>{
-      await setBlockTime("2022-05-25")
+      await setBlockTime("2022-06-25")
       await (await NodeGrid.connect(addr1).claim()).wait()
     })
     it("get rewards of addr1", async()=>{
@@ -296,6 +298,7 @@ describe("NodeGrid", ()=>{
   })
   describe("Node Transfer", () => {
     it("transfer basic 1 from addr1 to addr2", async()=>{
+      await (await NodeGrid.setCanNodeTransfer(true)).wait()
       await (await NodeGrid.connect(addr1).transfer("basic", 1, addr2.address)).wait()
       expect(await NodeGrid.countOfUser(addr1.address)).to.equal(7)
       expect(await NodeGrid.countOfUser(addr2.address)).to.equal(5)
