@@ -6,6 +6,7 @@ import "../Uniswap/IUniswapV2Router02.sol";
 import '../common/Address.sol';
 import '../common/SafeMath.sol';
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
+import "hardhat/console.sol";
 
 interface INodeManager {
     function countOfUser(address account) external view returns(uint32);
@@ -131,34 +132,32 @@ contract Token is ERC20Upgradeable {
             super._transfer(from, to, amount);
         } else {
             uint256 taxAmount = 0;
-            if(to == uniswapV2Pair){
+            if(msg.sender==address(uniswapV2Router) && to==address(uniswapV2Pair)) {
                 if(nodeManagerAddress != address(0) && nodeManagerAddress != from){
-                    require( INodeManager(nodeManagerAddress).countOfUser(from) >0, "Insufficient Node count!");
-                }
-                    
+                    require(INodeManager(nodeManagerAddress).countOfUser(from) > 0, "Insufficient Node count!");
+                }                    
                 taxAmount = amount.mul(buyBackFee).div(10000);
-                
-            }else{
+            } else {
                 // default tax is 10% of every transfer
                 taxAmount = amount.mul(transferTaxRate).div(10000);
             }
-            if(taxAmount>0){
-                
+            if(taxAmount>0) {
                 uint256 operatorFeeAmount = taxAmount.mul(operatorFee).div(100);
                 super._transfer(from, address(this), operatorFeeAmount);
                 accumulatedOperatorTokensAmount += operatorFeeAmount;
-                if(from!=uniswapV2Pair){
+                if(msg.sender==address(uniswapV2Router) && from!=address(uniswapV2Pair)) {
                     swapAndSendToAddress(operator,accumulatedOperatorTokensAmount);
+                    console.log("Error-6!");
                     accumulatedOperatorTokensAmount=0;
                 }
-                
                 uint256 liquidityAmount = taxAmount.mul(liquidityFee).div(100);
+                console.log("Error-7!");
                 super._transfer(from, address(this), liquidityAmount);
-
+                console.log("Error-8!");
                 super._transfer(from, to, amount.sub(operatorFeeAmount.add(liquidityAmount)));
-            }else
+                console.log("Error-9!");
+            } else
                 super._transfer(from, to, amount);
-            
         }
     }
 

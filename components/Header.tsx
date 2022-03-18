@@ -18,7 +18,9 @@ export default function Header() {
   return (
     <header>
       <div className="flex flex-wrap items-center justify-between pt-4">
+      <Link href={'/'} passHref>
         <Image src={"/header-logo.png"} alt="logo" width={137} height={86} />
+        </Link>
         <button
           className={cn("flex items-center block px-3 py-2 text-white border rounded md:hidden")}
           onClick={() => setMobileMenuIsOpen(!mobileMenuIsOpen)}
@@ -34,13 +36,17 @@ export default function Header() {
         </button>
         <ul className="md:flex flex-col md:flex-row md:items-center md:justify-center w-full md:w-auto hidden md:block">
           {[
-            { title: "Home", route: "/dashboard" },
-            { title: "App", route: "/" },
+            { title: "Home", route: "/" },
+            { title: "Team", route: "/team" },
+            { title: "Whitepaper", route: "https://nodegrid.gitbook.io/whitepaper/", target: "_blank" },
+            { title: "Chart", route: "https://dextools.com/app", target: "_blank" },
+            { title: "Buy", route: "https://exchange.pancakeswap.finance/#/swap", target: "_blank" },
+            { title: "App", route: "/dashboard" },
             { title: "Monitor", route: "/monitor", owner: true },
-          ].filter(route => info.isOwner || !route.owner).map(({ route, title }) => (
+          ].filter(route => info.isOwner || !route.owner).map(({ route, title, target }) => (
             <li className="mt-3 md:mt-0 md:mr-6" key={title}>
               <Link href={route} passHref>
-                <a className={cn("text-white hover:text-green-600", pathname == route && styles.active)}>{title}</a>
+                <a className={cn("text-white hover:text-green-600", pathname == route && styles.active)} target={target}>{title}</a>
               </Link>
             </li>
           ))}
@@ -58,13 +64,17 @@ export default function Header() {
             className="items-center justify-center text-sm w-full h-screen flex flex-col -mt-12"
           >
             {[
-              { title: "Home", route: "/dashboard" },
-              { title: "App", route: "/" },
+              { title: "Home", route: "/" },
+              { title: "Team", route: "/team" },
+              { title: "Whitepaper", route: "https://nodegrid.gitbook.io/whitepaper/", target: "_blank" },
+              { title: "Chart", route: "https://dextools.com/app", target: "_blank" },
+              { title: "Buy", route: "https://exchange.pancakeswap.finance/#/swap", target: "_blank" },
+              { title: "App", route: "/dashboard" },
               { title: "Monitor", route: "/monitor", owner: true },
-            ].map(({ route, title }) => (
+            ].filter(route => info.isOwner || !route.owner).map(({ route, title, target }) => (
               <li className="mt-5" key={title}>
-                <Link href={route} passHref>
-                  <a className="block text-white">{title}</a>
+                <Link href={route} passHref >
+                  <a className="block text-white" target={target} onClick={() => setMobileMenuIsOpen(!mobileMenuIsOpen)}>{title}</a>
                 </Link>
               </li>
             ))}

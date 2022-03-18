@@ -32,6 +32,7 @@ async function main() {
 
   if (network.name === "localhost") {
     const WETH = await deploy("WETH")
+    const BUSD = await deploy("BEP20Token")
     const Factory = await deploy("PancakeFactory",WETH.address)
     const path = './contracts/Uniswap/Router.sol'
     const content = fs.readFileSync(path)
@@ -43,13 +44,16 @@ async function main() {
     addrOperator = addr4.address
     await(await Token.approve(Router.address, ethers.utils.parseEther("100000000"))).wait()
     await(await Router.addLiquidityETH(Token.address, ethers.utils.parseEther("1000") ,"0","0", owner.address, parseInt(new Date().getTime()/1000)+100 ,{ value: ethers.utils.parseEther("1000") })).wait()
+    await(await BUSD.approve(NodeGrid.address, ethers.utils.parseEther("100000000"))).wait()
     await(await NodeGrid.addWhitelist([addr1.address,addr2.address,addr3.address])).wait()   
+    await(await NodeGrid.setPayTokenAddress(BUSD.address)).wait()
+    await(await Token.setNodeManagerAddress(NodeGrid.address)).wait()
   }
 
   await (await NodeGrid.setNFTAddress(NFT.address)).wait()
   await (await NodeGrid.setTreasury(addrTreasury)).wait()
   await (await NodeGrid.setOperator(addrOperator)).wait()
-  await(await NodeGrid.setRouter(addrRouter)).wait()
+  await (await NodeGrid.setRouter(addrRouter)).wait()
 }
 
 main()
