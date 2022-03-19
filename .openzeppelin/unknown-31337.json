@@ -1,8 +1,8 @@
 {
   "manifestVersion": "3.2",
   "admin": {
-    "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-    "txHash": "0x76d5167484a00a8398f9c8acb4cfbbcd865e76dbf205d6863361ad7f6b5f42b6"
+    "address": "0x4A679253410272dd5232B3Ff7cF5dbB88f295319",
+    "txHash": "0x1d2e9071870104ffeae0b630f223a7cf363a687e5f847fab86d61f7d86d29c00"
   },
   "proxies": [
     {
@@ -28,11 +28,6 @@
     {
       "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
       "txHash": "0x72edf572b138757288903b66b6c1cfaba49a55116e28f167db8f8ddf8fedec2c",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
-      "txHash": "0x4f5df02ec9d194f63294728a340059a27482bdc870e886f7c90bea45b98376c5",
       "kind": "transparent"
     },
     {
@@ -76,23 +71,8 @@
       "kind": "transparent"
     },
     {
-      "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-      "txHash": "0x59b1b3b9e3605410a26437ce3c3582de1d85b90878c61246f371be69ca568f8d",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      "txHash": "0x2ec3d8eee6d50b56ed3bc8f50797358ad3369a809c0c44903869cbd9a111832e",
-      "kind": "transparent"
-    },
-    {
       "address": "0x322813Fd9A801c5507c9de605d63CEA4f2CE6c44",
       "txHash": "0x171c933a6161a2b3684401899919476d14785e691130fb0fd548b178212b322f",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x4A679253410272dd5232B3Ff7cF5dbB88f295319",
-      "txHash": "0xba2274ce8b7b1f65bdb86d347b2a1eb7c934a3ad5d44c6c38aa030d4404024e0",
       "kind": "transparent"
     },
     {
@@ -133,6 +113,71 @@
     {
       "address": "0xD5ac451B0c50B9476107823Af206eD814a2e2580",
       "txHash": "0x6765b4a1964a75abce52dc6674ba28d7f72175194e544efe739d7b5c95200c43",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x4A679253410272dd5232B3Ff7cF5dbB88f295319",
+      "txHash": "0x8ca8326849bcf16d6c611b94b8cd50f2c3fc80b48b1a9d678a1b59964001f72c",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+      "txHash": "0xf43dd82bef62e96c6ccb97dcc812537c97fd5f2de1201bc1d63c4128702ff106",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x809d550fca64d94Bd9F66E60752A544199cfAC3D",
+      "txHash": "0xb08c8a71e68337ee98fa4150e94fc2868665ae8eeddfce313bdd620cd68750a7",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x1291Be112d480055DaFd8a610b7d1e203891C274",
+      "txHash": "0xcbf7afa077b8f239e0bfb5e8fa3f955a35888b2a97b894fc676f2dc543209e2f",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x922D6956C99E12DFeB3224DEA977D0939758A1Fe",
+      "txHash": "0x0c1237ed89f080d7801ea543924614080f471973481d0ae57343b7549c23b488",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x1fA02b2d6A771842690194Cf62D91bdd92BfE28d",
+      "txHash": "0x90a7e88ddea7af59ff9d8fab76f768432d60f4975c2b52615b72ec27bea483d8",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "txHash": "0x9c60e32782acc937ca86b271496e3d5dfa4a4f1784360122df7813ed3ded7962",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+      "txHash": "0x0d9e95839358b0363114d6ebb854d9dd8dbfcb2ba3e7bb06343969744689732c",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
+      "txHash": "0xf5034894da723d34c131a28ceb16ed7668b5ec95ac741ecd7487930d8b960723",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
+      "txHash": "0xb74070017c542adbdaa36cc25f4b657dc5084042440801be3a5f7b9ab3ee91bc",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x67d269191c92Caf3cD7723F116c85e6E9bf55933",
+      "txHash": "0xd9fb2c07248bcd9be4bad795bec414349935a57c22dc8daf24eb4f1b2c326d6b",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x4c5859f0F772848b2D91F1D83E2Fe57935348029",
+      "txHash": "0xb909961d31cd77021dbc4c990e67a0df964ac879110d0c6fb58246d50515d2f5",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x5f3f1dBD7B74C6B46e8c44f98792A1dAf8d69154",
+      "txHash": "0x8568eb15f2bd548c36104b4e5dcc1b14816832e630a351e2002a0a5594c5b6e4",
       "kind": "transparent"
     }
   ],
@@ -803,811 +848,6 @@
           },
           "t_uint8": {
             "label": "uint8"
-          }
-        }
-      }
-    },
-    "6cdeda090c4defa92943624bd2de395a78d84e06a6bb935cd9c3f0e42c92c4c3": {
-      "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
-      "txHash": "0x51a36e6f5a87e0b21c8d4af0d34c0e57e510ab799a5e651b42ac0a174f1c2afe",
-      "layout": {
-        "storage": [
-          {
-            "label": "_initialized",
-            "offset": 0,
-            "slot": "0",
-            "type": "t_bool",
-            "contract": "Initializable",
-            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
-          },
-          {
-            "label": "_initializing",
-            "offset": 1,
-            "slot": "0",
-            "type": "t_bool",
-            "contract": "Initializable",
-            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
-          },
-          {
-            "label": "tokenAddress",
-            "offset": 2,
-            "slot": "0",
-            "type": "t_address",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:37"
-          },
-          {
-            "label": "nftAddress",
-            "offset": 0,
-            "slot": "1",
-            "type": "t_address",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:38"
-          },
-          {
-            "label": "treasury",
-            "offset": 0,
-            "slot": "2",
-            "type": "t_address",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:39"
-          },
-          {
-            "label": "operators",
-            "offset": 0,
-            "slot": "3",
-            "type": "t_array(t_address)dyn_storage",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:40"
-          },
-          {
-            "label": "tierArr",
-            "offset": 0,
-            "slot": "4",
-            "type": "t_array(t_struct(Tier)7177_storage)dyn_storage",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:41"
-          },
-          {
-            "label": "tierMap",
-            "offset": 0,
-            "slot": "5",
-            "type": "t_mapping(t_string_memory_ptr,t_uint8)",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:42"
-          },
-          {
-            "label": "tierTotal",
-            "offset": 0,
-            "slot": "6",
-            "type": "t_uint8",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:43"
-          },
-          {
-            "label": "nodesTotal",
-            "offset": 0,
-            "slot": "7",
-            "type": "t_array(t_struct(Node)7194_storage)dyn_storage",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:44"
-          },
-          {
-            "label": "nodesOfUser",
-            "offset": 0,
-            "slot": "8",
-            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:45"
-          },
-          {
-            "label": "countTotal",
-            "offset": 0,
-            "slot": "9",
-            "type": "t_uint32",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:46"
-          },
-          {
-            "label": "countOfUser",
-            "offset": 0,
-            "slot": "10",
-            "type": "t_mapping(t_address,t_uint32)",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:47"
-          },
-          {
-            "label": "countOfTier",
-            "offset": 0,
-            "slot": "11",
-            "type": "t_mapping(t_string_memory_ptr,t_uint32)",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:48"
-          },
-          {
-            "label": "rewardsTotal",
-            "offset": 0,
-            "slot": "12",
-            "type": "t_uint256",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:49"
-          },
-          {
-            "label": "rewardsOfUser",
-            "offset": 0,
-            "slot": "13",
-            "type": "t_mapping(t_address,t_uint256)",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:50"
-          },
-          {
-            "label": "discountPer10",
-            "offset": 0,
-            "slot": "14",
-            "type": "t_uint32",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:52"
-          },
-          {
-            "label": "withdrawRate",
-            "offset": 4,
-            "slot": "14",
-            "type": "t_uint32",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:53"
-          },
-          {
-            "label": "transferFee",
-            "offset": 8,
-            "slot": "14",
-            "type": "t_uint32",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:54"
-          },
-          {
-            "label": "rewardsPoolFee",
-            "offset": 12,
-            "slot": "14",
-            "type": "t_uint32",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:55"
-          },
-          {
-            "label": "treasuryFee",
-            "offset": 16,
-            "slot": "14",
-            "type": "t_uint32",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:56"
-          },
-          {
-            "label": "operatorFee",
-            "offset": 20,
-            "slot": "14",
-            "type": "t_uint32",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:57"
-          },
-          {
-            "label": "maxCountOfUser",
-            "offset": 24,
-            "slot": "14",
-            "type": "t_uint32",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:58"
-          },
-          {
-            "label": "uniswapV2Router",
-            "offset": 0,
-            "slot": "15",
-            "type": "t_contract(IUniswapV2Router02)3480",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:60"
-          },
-          {
-            "label": "owner",
-            "offset": 0,
-            "slot": "16",
-            "type": "t_address",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:62"
-          },
-          {
-            "label": "whitelist",
-            "offset": 0,
-            "slot": "17",
-            "type": "t_array(t_address)dyn_storage",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:63"
-          },
-          {
-            "label": "feeTokenAddress",
-            "offset": 0,
-            "slot": "18",
-            "type": "t_address",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:64"
-          },
-          {
-            "label": "canNodeTransfer",
-            "offset": 20,
-            "slot": "18",
-            "type": "t_bool",
-            "contract": "NodeManager",
-            "src": "contracts\\nodegrid\\manager.sol:65"
-          }
-        ],
-        "types": {
-          "t_address": {
-            "label": "address"
-          },
-          "t_array(t_address)dyn_storage": {
-            "label": "address[]"
-          },
-          "t_array(t_struct(Node)7194_storage)dyn_storage": {
-            "label": "struct Node[]"
-          },
-          "t_array(t_struct(Tier)7177_storage)dyn_storage": {
-            "label": "struct Tier[]"
-          },
-          "t_array(t_uint256)dyn_storage": {
-            "label": "uint256[]"
-          },
-          "t_bool": {
-            "label": "bool"
-          },
-          "t_contract(IUniswapV2Router02)3480": {
-            "label": "contract IUniswapV2Router02"
-          },
-          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
-            "label": "mapping(address => uint256[])"
-          },
-          "t_mapping(t_address,t_uint256)": {
-            "label": "mapping(address => uint256)"
-          },
-          "t_mapping(t_address,t_uint32)": {
-            "label": "mapping(address => uint32)"
-          },
-          "t_mapping(t_string_memory_ptr,t_uint32)": {
-            "label": "mapping(string => uint32)"
-          },
-          "t_mapping(t_string_memory_ptr,t_uint8)": {
-            "label": "mapping(string => uint8)"
-          },
-          "t_string_memory_ptr": {
-            "label": "string"
-          },
-          "t_string_storage": {
-            "label": "string"
-          },
-          "t_struct(Node)7194_storage": {
-            "label": "struct Node",
-            "members": [
-              {
-                "label": "id",
-                "type": "t_uint32"
-              },
-              {
-                "label": "tierIndex",
-                "type": "t_uint8"
-              },
-              {
-                "label": "title",
-                "type": "t_string_storage"
-              },
-              {
-                "label": "owner",
-                "type": "t_address"
-              },
-              {
-                "label": "createdTime",
-                "type": "t_uint32"
-              },
-              {
-                "label": "claimedTime",
-                "type": "t_uint32"
-              },
-              {
-                "label": "limitedTime",
-                "type": "t_uint32"
-              },
-              {
-                "label": "multiplier",
-                "type": "t_uint256"
-              }
-            ]
-          },
-          "t_struct(Tier)7177_storage": {
-            "label": "struct Tier",
-            "members": [
-              {
-                "label": "id",
-                "type": "t_uint8"
-              },
-              {
-                "label": "name",
-                "type": "t_string_storage"
-              },
-              {
-                "label": "price",
-                "type": "t_uint256"
-              },
-              {
-                "label": "rewardsPerTime",
-                "type": "t_uint256"
-              },
-              {
-                "label": "claimInterval",
-                "type": "t_uint32"
-              },
-              {
-                "label": "maintenanceFee",
-                "type": "t_uint256"
-              }
-            ]
-          },
-          "t_uint256": {
-            "label": "uint256"
-          },
-          "t_uint32": {
-            "label": "uint32"
-          },
-          "t_uint8": {
-            "label": "uint8"
-          }
-        }
-      }
-    },
-    "88a102c100c881d895af9e53c517b5d630cc8f1dae7fbc4b8ab9c1c72bd08f54": {
-      "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0x9f4f01684a84002d94883b67c35e4fea203b42db13865eeb91bda84e5fc00d74",
-      "layout": {
-        "storage": [
-          {
-            "label": "_initialized",
-            "offset": 0,
-            "slot": "0",
-            "type": "t_bool",
-            "contract": "Initializable",
-            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
-          },
-          {
-            "label": "_initializing",
-            "offset": 1,
-            "slot": "0",
-            "type": "t_bool",
-            "contract": "Initializable",
-            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
-          },
-          {
-            "label": "__gap",
-            "offset": 0,
-            "slot": "1",
-            "type": "t_array(t_uint256)50_storage",
-            "contract": "ContextUpgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:36"
-          },
-          {
-            "label": "_balances",
-            "offset": 0,
-            "slot": "51",
-            "type": "t_mapping(t_address,t_uint256)",
-            "contract": "ERC20Upgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:37"
-          },
-          {
-            "label": "_allowances",
-            "offset": 0,
-            "slot": "52",
-            "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
-            "contract": "ERC20Upgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:39"
-          },
-          {
-            "label": "_totalSupply",
-            "offset": 0,
-            "slot": "53",
-            "type": "t_uint256",
-            "contract": "ERC20Upgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:41"
-          },
-          {
-            "label": "_name",
-            "offset": 0,
-            "slot": "54",
-            "type": "t_string_storage",
-            "contract": "ERC20Upgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:43"
-          },
-          {
-            "label": "_symbol",
-            "offset": 0,
-            "slot": "55",
-            "type": "t_string_storage",
-            "contract": "ERC20Upgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:44"
-          },
-          {
-            "label": "__gap",
-            "offset": 0,
-            "slot": "56",
-            "type": "t_array(t_uint256)45_storage",
-            "contract": "ERC20Upgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:394"
-          },
-          {
-            "label": "_inSwapAndLiquify",
-            "offset": 0,
-            "slot": "101",
-            "type": "t_bool",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:34"
-          },
-          {
-            "label": "transferTaxRate",
-            "offset": 1,
-            "slot": "101",
-            "type": "t_uint32",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:35"
-          },
-          {
-            "label": "buyBackFee",
-            "offset": 5,
-            "slot": "101",
-            "type": "t_uint32",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:36"
-          },
-          {
-            "label": "operatorFee",
-            "offset": 9,
-            "slot": "101",
-            "type": "t_uint32",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:37"
-          },
-          {
-            "label": "liquidityFee",
-            "offset": 13,
-            "slot": "101",
-            "type": "t_uint32",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:38"
-          },
-          {
-            "label": "minAmountToLiquify",
-            "offset": 0,
-            "slot": "102",
-            "type": "t_uint256",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:40"
-          },
-          {
-            "label": "owner",
-            "offset": 0,
-            "slot": "103",
-            "type": "t_address",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:42"
-          },
-          {
-            "label": "operator",
-            "offset": 0,
-            "slot": "104",
-            "type": "t_address",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:43"
-          },
-          {
-            "label": "isExcludedFromFee",
-            "offset": 0,
-            "slot": "105",
-            "type": "t_mapping(t_address,t_bool)",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:44"
-          },
-          {
-            "label": "uniswapV2Router",
-            "offset": 0,
-            "slot": "106",
-            "type": "t_contract(IUniswapV2Router02)3480",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:46"
-          },
-          {
-            "label": "uniswapV2Pair",
-            "offset": 0,
-            "slot": "107",
-            "type": "t_address",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:47"
-          },
-          {
-            "label": "maxTransferAmount",
-            "offset": 0,
-            "slot": "108",
-            "type": "t_uint256",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:48"
-          },
-          {
-            "label": "accumulatedOperatorTokensAmount",
-            "offset": 0,
-            "slot": "109",
-            "type": "t_uint256",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:49"
-          },
-          {
-            "label": "nodeManagerAddress",
-            "offset": 0,
-            "slot": "110",
-            "type": "t_address",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:50"
-          }
-        ],
-        "types": {
-          "t_address": {
-            "label": "address"
-          },
-          "t_array(t_uint256)45_storage": {
-            "label": "uint256[45]"
-          },
-          "t_array(t_uint256)50_storage": {
-            "label": "uint256[50]"
-          },
-          "t_bool": {
-            "label": "bool"
-          },
-          "t_contract(IUniswapV2Router02)3480": {
-            "label": "contract IUniswapV2Router02"
-          },
-          "t_mapping(t_address,t_bool)": {
-            "label": "mapping(address => bool)"
-          },
-          "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
-            "label": "mapping(address => mapping(address => uint256))"
-          },
-          "t_mapping(t_address,t_uint256)": {
-            "label": "mapping(address => uint256)"
-          },
-          "t_string_storage": {
-            "label": "string"
-          },
-          "t_uint256": {
-            "label": "uint256"
-          },
-          "t_uint32": {
-            "label": "uint32"
-          }
-        }
-      }
-    },
-    "19d35725d225c7ceff5f6117405fdd7123912c77de3a1e2736726a0c1be5f05d": {
-      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      "txHash": "0x1ad1e204394d85cc203ff130aa9c4332d19f03d522e6c02f7608bc71a7bed826",
-      "layout": {
-        "storage": [
-          {
-            "label": "_initialized",
-            "offset": 0,
-            "slot": "0",
-            "type": "t_bool",
-            "contract": "Initializable",
-            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
-          },
-          {
-            "label": "_initializing",
-            "offset": 1,
-            "slot": "0",
-            "type": "t_bool",
-            "contract": "Initializable",
-            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
-          },
-          {
-            "label": "__gap",
-            "offset": 0,
-            "slot": "1",
-            "type": "t_array(t_uint256)50_storage",
-            "contract": "ContextUpgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:36"
-          },
-          {
-            "label": "_balances",
-            "offset": 0,
-            "slot": "51",
-            "type": "t_mapping(t_address,t_uint256)",
-            "contract": "ERC20Upgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:37"
-          },
-          {
-            "label": "_allowances",
-            "offset": 0,
-            "slot": "52",
-            "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
-            "contract": "ERC20Upgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:39"
-          },
-          {
-            "label": "_totalSupply",
-            "offset": 0,
-            "slot": "53",
-            "type": "t_uint256",
-            "contract": "ERC20Upgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:41"
-          },
-          {
-            "label": "_name",
-            "offset": 0,
-            "slot": "54",
-            "type": "t_string_storage",
-            "contract": "ERC20Upgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:43"
-          },
-          {
-            "label": "_symbol",
-            "offset": 0,
-            "slot": "55",
-            "type": "t_string_storage",
-            "contract": "ERC20Upgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:44"
-          },
-          {
-            "label": "__gap",
-            "offset": 0,
-            "slot": "56",
-            "type": "t_array(t_uint256)45_storage",
-            "contract": "ERC20Upgradeable",
-            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:394"
-          },
-          {
-            "label": "_inSwapAndLiquify",
-            "offset": 0,
-            "slot": "101",
-            "type": "t_bool",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:33"
-          },
-          {
-            "label": "transferTaxRate",
-            "offset": 1,
-            "slot": "101",
-            "type": "t_uint32",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:34"
-          },
-          {
-            "label": "buyBackFee",
-            "offset": 5,
-            "slot": "101",
-            "type": "t_uint32",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:35"
-          },
-          {
-            "label": "operatorFee",
-            "offset": 9,
-            "slot": "101",
-            "type": "t_uint32",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:36"
-          },
-          {
-            "label": "liquidityFee",
-            "offset": 13,
-            "slot": "101",
-            "type": "t_uint32",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:37"
-          },
-          {
-            "label": "minAmountToLiquify",
-            "offset": 0,
-            "slot": "102",
-            "type": "t_uint256",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:39"
-          },
-          {
-            "label": "owner",
-            "offset": 0,
-            "slot": "103",
-            "type": "t_address",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:41"
-          },
-          {
-            "label": "operator",
-            "offset": 0,
-            "slot": "104",
-            "type": "t_address",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:42"
-          },
-          {
-            "label": "isExcludedFromFee",
-            "offset": 0,
-            "slot": "105",
-            "type": "t_mapping(t_address,t_bool)",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:43"
-          },
-          {
-            "label": "uniswapV2Router",
-            "offset": 0,
-            "slot": "106",
-            "type": "t_contract(IUniswapV2Router02)3480",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:45"
-          },
-          {
-            "label": "uniswapV2Pair",
-            "offset": 0,
-            "slot": "107",
-            "type": "t_address",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:46"
-          },
-          {
-            "label": "maxTransferAmount",
-            "offset": 0,
-            "slot": "108",
-            "type": "t_uint256",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:47"
-          },
-          {
-            "label": "accumulatedOperatorTokensAmount",
-            "offset": 0,
-            "slot": "109",
-            "type": "t_uint256",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:48"
-          },
-          {
-            "label": "nodeManagerAddress",
-            "offset": 0,
-            "slot": "110",
-            "type": "t_address",
-            "contract": "Token",
-            "src": "contracts\\nodegrid\\Token.sol:49"
-          }
-        ],
-        "types": {
-          "t_address": {
-            "label": "address"
-          },
-          "t_array(t_uint256)45_storage": {
-            "label": "uint256[45]"
-          },
-          "t_array(t_uint256)50_storage": {
-            "label": "uint256[50]"
-          },
-          "t_bool": {
-            "label": "bool"
-          },
-          "t_contract(IUniswapV2Router02)3480": {
-            "label": "contract IUniswapV2Router02"
-          },
-          "t_mapping(t_address,t_bool)": {
-            "label": "mapping(address => bool)"
-          },
-          "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
-            "label": "mapping(address => mapping(address => uint256))"
-          },
-          "t_mapping(t_address,t_uint256)": {
-            "label": "mapping(address => uint256)"
-          },
-          "t_string_storage": {
-            "label": "string"
-          },
-          "t_uint256": {
-            "label": "uint256"
-          },
-          "t_uint32": {
-            "label": "uint32"
           }
         }
       }
@@ -2520,9 +1760,9 @@
         }
       }
     },
-    "2949b16a0a93aff9eb4d6ece8aa4efddf0ee203216fbacde7edf6404c7517c9a": {
-      "address": "0x18E317A7D70d8fBf8e6E893616b52390EbBdb629",
-      "txHash": "0x1a0947adf63b4b43c8cef0df2dd473d5f8d2dbf0b75ee5bb4d4a0503d06acc07",
+    "1a08969a1d2e96f0567080b703df368aa138e1180c7d48fd65b124252e8ab098": {
+      "address": "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f",
+      "txHash": "0xffffbf83e7d78215a0ed4ea71ddbd372c7f277ea81c231edebae3f315c03e32c",
       "layout": {
         "storage": [
           {
@@ -2673,7 +1913,7 @@
             "label": "uniswapV2Router",
             "offset": 0,
             "slot": "106",
-            "type": "t_contract(IUniswapV2Router02)3480",
+            "type": "t_contract(IUniswapV2Router02)3505",
             "contract": "Token",
             "src": "contracts\\nodegrid\\Token.sol:46"
           },
@@ -2723,7 +1963,7 @@
           "t_bool": {
             "label": "bool"
           },
-          "t_contract(IUniswapV2Router02)3480": {
+          "t_contract(IUniswapV2Router02)3505": {
             "label": "contract IUniswapV2Router02"
           },
           "t_mapping(t_address,t_bool)": {
@@ -2743,6 +1983,357 @@
           },
           "t_uint32": {
             "label": "uint32"
+          }
+        }
+      }
+    },
+    "6cdeda090c4defa92943624bd2de395a78d84e06a6bb935cd9c3f0e42c92c4c3": {
+      "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+      "txHash": "0x11af901680aaa1c7df3221b84963578179872e8d09e38f2e6d38c6547e2aff55",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "label": "tokenAddress",
+            "offset": 2,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:37"
+          },
+          {
+            "label": "nftAddress",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:38"
+          },
+          {
+            "label": "treasury",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:39"
+          },
+          {
+            "label": "operators",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:40"
+          },
+          {
+            "label": "tierArr",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_array(t_struct(Tier)5742_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:41"
+          },
+          {
+            "label": "tierMap",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_string_memory_ptr,t_uint8)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:42"
+          },
+          {
+            "label": "tierTotal",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint8",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:43"
+          },
+          {
+            "label": "nodesTotal",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_array(t_struct(Node)5759_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:44"
+          },
+          {
+            "label": "nodesOfUser",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:45"
+          },
+          {
+            "label": "countTotal",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:46"
+          },
+          {
+            "label": "countOfUser",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_mapping(t_address,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:47"
+          },
+          {
+            "label": "countOfTier",
+            "offset": 0,
+            "slot": "11",
+            "type": "t_mapping(t_string_memory_ptr,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:48"
+          },
+          {
+            "label": "rewardsTotal",
+            "offset": 0,
+            "slot": "12",
+            "type": "t_uint256",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:49"
+          },
+          {
+            "label": "rewardsOfUser",
+            "offset": 0,
+            "slot": "13",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:50"
+          },
+          {
+            "label": "discountPer10",
+            "offset": 0,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:52"
+          },
+          {
+            "label": "withdrawRate",
+            "offset": 4,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:53"
+          },
+          {
+            "label": "transferFee",
+            "offset": 8,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:54"
+          },
+          {
+            "label": "rewardsPoolFee",
+            "offset": 12,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:55"
+          },
+          {
+            "label": "treasuryFee",
+            "offset": 16,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:56"
+          },
+          {
+            "label": "operatorFee",
+            "offset": 20,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:57"
+          },
+          {
+            "label": "maxCountOfUser",
+            "offset": 24,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:58"
+          },
+          {
+            "label": "uniswapV2Router",
+            "offset": 0,
+            "slot": "15",
+            "type": "t_contract(IUniswapV2Router02)3505",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:60"
+          },
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "16",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:62"
+          },
+          {
+            "label": "whitelist",
+            "offset": 0,
+            "slot": "17",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:63"
+          },
+          {
+            "label": "feeTokenAddress",
+            "offset": 0,
+            "slot": "18",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:64"
+          },
+          {
+            "label": "canNodeTransfer",
+            "offset": 20,
+            "slot": "18",
+            "type": "t_bool",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:65"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]"
+          },
+          "t_array(t_struct(Node)5759_storage)dyn_storage": {
+            "label": "struct Node[]"
+          },
+          "t_array(t_struct(Tier)5742_storage)dyn_storage": {
+            "label": "struct Tier[]"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_contract(IUniswapV2Router02)3505": {
+            "label": "contract IUniswapV2Router02"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_address,t_uint32)": {
+            "label": "mapping(address => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint32)": {
+            "label": "mapping(string => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint8)": {
+            "label": "mapping(string => uint8)"
+          },
+          "t_string_memory_ptr": {
+            "label": "string"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_struct(Node)5759_storage": {
+            "label": "struct Node",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint32"
+              },
+              {
+                "label": "tierIndex",
+                "type": "t_uint8"
+              },
+              {
+                "label": "title",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "owner",
+                "type": "t_address"
+              },
+              {
+                "label": "createdTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "claimedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "limitedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "multiplier",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_struct(Tier)5742_storage": {
+            "label": "struct Tier",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint8"
+              },
+              {
+                "label": "name",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "price",
+                "type": "t_uint256"
+              },
+              {
+                "label": "rewardsPerTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "claimInterval",
+                "type": "t_uint32"
+              },
+              {
+                "label": "maintenanceFee",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_uint32": {
+            "label": "uint32"
+          },
+          "t_uint8": {
+            "label": "uint8"
           }
         }
       }

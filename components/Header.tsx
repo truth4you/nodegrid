@@ -18,8 +18,8 @@ export default function Header() {
   return (
     <header>
       <div className="flex flex-wrap items-center justify-between pt-4">
-      <Link href={'/'} passHref>
-        <Image src={"/header-logo.png"} alt="logo" width={137} height={86} />
+        <Link href={'/'} passHref>
+          <Image src={"/header-logo.png"} alt="logo" width={137} height={86} />
         </Link>
         <button
           className={cn("flex items-center block px-3 py-2 text-white border rounded md:hidden")}
@@ -42,8 +42,13 @@ export default function Header() {
             { title: "Chart", route: "https://dextools.com/app", target: "_blank" },
             { title: "Buy", route: "https://exchange.pancakeswap.finance/#/swap", target: "_blank" },
             { title: "App", route: "/dashboard" },
-            { title: "Monitor", route: "/monitor", owner: true },
-          ].filter(route => info.isOwner || !route.owner).map(({ route, title, target }) => (
+            { title: "Presale", route: "/presale", presale: true },
+            { title: "Admin", route: "/monitor", owner: true },
+          ].filter(route => {
+            if (route.owner) return info.isOwner
+            if (route.presale) return info.isPresaleAllowed || info.isOwner
+            return true
+          }).map(({ route, title, target }) => (
             <li className="mt-3 md:mt-0 md:mr-6" key={title}>
               <Link href={route} passHref>
                 <a className={cn("text-white hover:text-green-600", pathname == route && styles.active)} target={target}>{title}</a>
@@ -70,7 +75,8 @@ export default function Header() {
               { title: "Chart", route: "https://dextools.com/app", target: "_blank" },
               { title: "Buy", route: "https://exchange.pancakeswap.finance/#/swap", target: "_blank" },
               { title: "App", route: "/dashboard" },
-              { title: "Monitor", route: "/monitor", owner: true },
+              { title: "Presale", route: "/presale" },
+              { title: "Admin", route: "/monitor", owner: true },
             ].filter(route => info.isOwner || !route.owner).map(({ route, title, target }) => (
               <li className="mt-5" key={title}>
                 <Link href={route} passHref >
@@ -79,10 +85,10 @@ export default function Header() {
               </li>
             ))}
             <div className={styles.header__actions}>
-            {!address ?
-            <button className={styles.button} onClick={unlock}>Connect</button>
-            :
-            <button className={styles.button} onClick={lock}>Disconnect</button>}
+              {!address ?
+                <button className={styles.button} onClick={unlock}>Connect</button>
+                :
+                <button className={styles.button} onClick={lock}>Disconnect</button>}
             </div>
           </ul>
         </div>

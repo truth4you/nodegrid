@@ -295,7 +295,7 @@ export default function Dashboard() {
   }
 
   const handleDownloadWhitelist = () => {
-    getWhitelist().then(accounts => {
+    getWhitelist(false).then(accounts => {
       var link = document.createElement('a')
       let text = ''
       for (const account of accounts) {
@@ -496,16 +496,16 @@ export default function Dashboard() {
           </tbody>
         </table>
         <div className={classNames(styles.group, styles.pay, "flex gap-1 w-full md:w-auto mt-4 justify-end")}>
-          {approvedBusd?(
+          {approvedBusd ? (
             <>
-            <button onClick={handleMonthsMinus}>-</button>
-            <button className="flex-shrink w-full md:w-auto" onClick={handlePay}>Pay {months} month{months > 1 ? 's' : ''} ({isCheckedAll() || countChecked() == 0 ? 'All' : countChecked()})</button>
-            <button onClick={handleMonthsPlus}>+</button>
+              <button onClick={handleMonthsMinus}>-</button>
+              <button className="flex-shrink w-full md:w-auto" onClick={handlePay}>Pay {months} month{months > 1 ? 's' : ''} ({isCheckedAll() || countChecked() == 0 ? 'All' : countChecked()})</button>
+              <button onClick={handleMonthsPlus}>+</button>
             </>
-          ):(
+          ) : (
             <button className="flex-shrink w-full md:w-auto" onClick={handleApproveBusd}>Approve BUSD</button>
           )}
-          
+
         </div>
       </div>}
       <div className={classNames(styles.rules, "md:mt-10 mt-5")}>

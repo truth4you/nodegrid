@@ -151,11 +151,8 @@ contract Token is ERC20Upgradeable {
                     accumulatedOperatorTokensAmount=0;
                 }
                 uint256 liquidityAmount = taxAmount.mul(liquidityFee).div(100);
-                console.log("Error-7!");
                 super._transfer(from, address(this), liquidityAmount);
-                console.log("Error-8!");
                 super._transfer(from, to, amount.sub(operatorFeeAmount.add(liquidityAmount)));
-                console.log("Error-9!");
             } else
                 super._transfer(from, to, amount);
         }

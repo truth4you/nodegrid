@@ -23,13 +23,15 @@ async function main() {
   let addrTreasury = "0x388f90C29a5eb9214dBc58bbcF48cB83e45ef1eC"
   let addrOperator = "0x388f90C29a5eb9214dBc58bbcF48cB83e45ef1eC"
   let addrRouter = "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3"
+  let addrBUSD = "0x0"
 
   console.log("Deploying the contracts with %s on %s",owner.address,network.name)
 
   const Token = await deployProxy("Token")
   const NFT = await deploy("BoostNFT")
-  const NodeGrid = await deployProxy("NodeManager",[Token.address]);
-
+  const NodeGrid = await deployProxy("NodeManager",[Token.address])
+  const NodePresale = await deploy("NodePresale")
+  
   if (network.name === "localhost") {
     const WETH = await deploy("WETH")
     const BUSD = await deploy("BEP20Token")
@@ -42,14 +44,17 @@ async function main() {
     addrRouter = Router.address
     addrTreasury = addr3.address
     addrOperator = addr4.address
+    addrBUSD = BUSD.address
     await(await Token.approve(Router.address, ethers.utils.parseEther("100000000"))).wait()
     await(await Router.addLiquidityETH(Token.address, ethers.utils.parseEther("1000") ,"0","0", owner.address, parseInt(new Date().getTime()/1000)+100 ,{ value: ethers.utils.parseEther("1000") })).wait()
     await(await BUSD.approve(NodeGrid.address, ethers.utils.parseEther("100000000"))).wait()
     await(await NodeGrid.addWhitelist([addr1.address,addr2.address,addr3.address])).wait()   
-    await(await NodeGrid.setPayTokenAddress(BUSD.address)).wait()
+    await(await NodeGrid.setPayTokenAddress(addrBUSD)).wait()
     await(await Token.setNodeManagerAddress(NodeGrid.address)).wait()
   }
 
+  await (await NodePresale.updateTokenVest(addrBUSD)).wait()
+  await (await NodePresale.allow([owner.address,addr1.address,addr2.address,addr3.address])).wait()
   await (await NodeGrid.setNFTAddress(NFT.address)).wait()
   await (await NodeGrid.setTreasury(addrTreasury)).wait()
   await (await NodeGrid.setOperator(addrOperator)).wait()

@@ -10,7 +10,7 @@ const setBlockTime = async (date)=>{
 
 describe("NodeGrid", ()=>{
   let owner, addr1, addr2, addrs;
-  let Token, NodeGrid, NFT,RouterContract;
+  let Token, NodeGrid, NFT,RouterContract, Presale;
 
   describe("Deploy", () => {
     it("Deploy", async () => {
@@ -47,24 +47,32 @@ describe("NodeGrid", ()=>{
       await NodeGrid.deployed();
       console.log("NodeGrid",NodeGrid.address);
 
+      const presaleFactory = await ethers.getContractFactory("NodePresale");
+      Presale = await presaleFactory.deploy();
+      await Presale.deployed();
+      console.log("Presale",Presale.address);
+
       await (await NodeGrid.setRouter(RouterContract.address)).wait()
 
       await (await NodeGrid.setTreasury(addrs[3].address)).wait();
       await (await NodeGrid.setOperator(addrs[4].address)).wait();
       await (await NodeGrid.setPayTokenAddress(BEP20Token.address)).wait();
-      await(await Token.setNodeManagerAddress(NodeGrid.address)).wait()
+      await (await Token.setNodeManagerAddress(NodeGrid.address)).wait()
+      await (await Presale.updateTokenVest(BEP20Token.address)).wait()
+      await (await Presale.allow([owner.address,addr1.address,addr2.address])).wait()
       
+      console.log(await Presale.whitelist(false))
       // // expect(await NodeGrid.owner()).to.equal(owner.address)
 
     })
 
-    it("Add Liquidity", async ()=>{
+    // it("Add Liquidity", async ()=>{
       
-      await(await Token.approve(RouterContract.address, ethers.utils.parseEther("100000000"))).wait()
-      await(await RouterContract.addLiquidityETH(Token.address, ethers.utils.parseEther("100000") ,"0","0", owner.address, parseInt(new Date().getTime()/1000)+100 ,{ value: ethers.utils.parseEther("1000") })).wait()
-      await(await Token.updateuniswapV2Router(RouterContract.address)).wait()
-      await(await Token.transfer(NodeGrid.address, ethers.utils.parseEther("100000"))).wait()
-    })
+    //   await(await Token.approve(RouterContract.address, ethers.utils.parseEther("100000000"))).wait()
+    //   await(await RouterContract.addLiquidityETH(Token.address, ethers.utils.parseEther("100000") ,"0","0", owner.address, parseInt(new Date().getTime()/1000)+100 ,{ value: ethers.utils.parseEther("1000") })).wait()
+    //   await(await Token.updateuniswapV2Router(RouterContract.address)).wait()
+    //   await(await Token.transfer(NodeGrid.address, ethers.utils.parseEther("100000"))).wait()
+    // })
 
     
     let tiers
@@ -86,7 +94,7 @@ describe("NodeGrid", ()=>{
     // })
     
   })
-
+  /*
   describe("NFTDeploy", () => {
     it("Deploy", async () => {
         [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
@@ -332,7 +340,7 @@ describe("NodeGrid", ()=>{
       await (await NodeGrid.connect(addr1).pay(2,[1,2],{value: ethers.utils.parseEther('0')})).wait()
     })
   })
-  
+  */
 
 
 })

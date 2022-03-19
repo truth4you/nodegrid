@@ -1,0 +1,42 @@
+.welcome {
+  color: white;
+  h1 {
+    color: var(--color-primary);
+    font-size: xx-large;
+    padding-bottom: 1em;
+  }
+}
+
+.whitelist {
+  border: 1px solid var(--color-primary);
+  border-radius: 1em;
+  padding: 3em 2em;
+  color: white;
+  h1 {
+    color: var(--color-primary);
+    font-size: xx-large;
+    padding-bottom: 1em;
+    line-height: 33px;
+  }
+  p {
+    line-height: 2em;
+  }
+  button {
+    font-weight: bold;
+    font-family: 'Manrope';
+    background: #44F1A680;
+    padding: 0.8em 2em;
+    color: white;
+    border-radius: 2em;
+    &:not([disabled]):hover {
+      background: #44F1A6;
+      color: black;
+    }
+    &:not(.approved)[disabled] {
+      opacity: 0.3;
+    }
+    &.approved {
+      background-color: rgb(199, 113, 0);
+    }
+  }
+}
