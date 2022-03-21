@@ -13,7 +13,7 @@ const NftABI = require("abi/BoostNFT.json")
 // const MulticallABI = require("abi/Multicall.json")
 const UINT256_MAX = '1000000000000000000000000000000000000000000000000000000000000000'
 const MULTICALL_ADDRESS = '0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e'
-const NODEPRESALE_ADDRESS = '0x0165878A594ca255338adfa4d48449f69242Eb8F'
+const NODEPRESALE_ADDRESS = '0xFD159C1c635F24587D3CC53fcAC6b7b0359836cc'
 
 let contractNodeGrid: ethers.Contract
 let contractToken: ethers.Contract
