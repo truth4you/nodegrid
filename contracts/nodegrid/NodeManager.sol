@@ -1,7 +1,5 @@
 //SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
-import "../Uniswap/IUniswapV2Factory.sol";
-import "../Uniswap/IUniswapV2Pair.sol";
 import "../Uniswap/IUniswapV2Router02.sol";
 import '../common/Address.sol';
 import '../common/SafeMath.sol';
@@ -64,6 +62,8 @@ contract NodeManager is Initializable {
   address public feeTokenAddress;
   bool public canNodeTransfer;
   
+  uint32 public upgradeFee; //5%
+  
   modifier onlyOwner() {
     require(owner == msg.sender, "Ownable: caller is not the owner");
     _;
@@ -77,18 +77,18 @@ contract NodeManager is Initializable {
     tokenAddress = token;
     owner = msg.sender;
 
-    addTier('basic', 10 ether, 0.13 ether, 1 days, 0.001 ether);
-    addTier('light', 50 ether, 0.80 ether, 1 days, 0.0005 ether);
-    addTier('pro', 100 ether, 2 ether, 1 days, 0.0001 ether);
+    // addTier('basic', 10 ether, 0.13 ether, 1 days, 0.001 ether);
+    // addTier('light', 50 ether, 0.80 ether, 1 days, 0.0005 ether);
+    // addTier('pro', 100 ether, 2 ether, 1 days, 0.0001 ether);
 
-    discountPer10 = 10; // 0.1%
-    withdrawRate = 0; // 0.00%
+    // discountPer10 = 10; // 0.1%
+    // withdrawRate = 0; // 0.00%
     transferFee = 0; // 0%
     rewardsPoolFee = 7000; // 70%
-    treasuryFee = 2000; // 70%
-    operatorFee = 1000; // 70%
+    treasuryFee = 2000; // 20%
+    operatorFee = 1000; // 10%
+    upgradeFee = 500; //5%
     maxCountOfUser = 100; // 0-Infinite
-    
   }
 
   function setNFTAddress(address _nftAddress) public onlyOwner {
@@ -138,14 +138,19 @@ contract NodeManager is Initializable {
     uniswapV2Router = IUniswapV2Router02(router);
   }
 
-  function setDiscountPer10(uint32 value) public onlyOwner {
-    require(discountPer10 != value,"The same value!");
-    discountPer10 = value;
-  }
+  // function setDiscountPer10(uint32 value) public onlyOwner {
+  //   require(discountPer10 != value,"The same value!");
+  //   discountPer10 = value;
+  // }
   
   function setTransferFee(uint32 value) public onlyOwner {
     require(transferFee != value,"The same value!");
     transferFee = value;
+  }
+
+  function setUpgradeFee(uint32 value) public onlyOwner {
+    require(upgradeFee != value,"The same value!");
+    upgradeFee = value;
   }
 
   function setCanNodeTransfer(bool value) public onlyOwner {
@@ -278,7 +283,7 @@ contract NodeManager is Initializable {
     countOfTier[tierName] += count;
     countTotal += count;
     uint256 amount = tier.price.mul(count);
-    if (count >= 10) amount = amount.mul(10000 - discountPer10).div(10000);
+    // if (count >= 10) amount = amount.mul(10000 - discountPer10).div(10000);
     return amount;
   }
 
@@ -442,7 +447,7 @@ contract NodeManager is Initializable {
     string memory tierNameFrom,
     string memory tierNameTo,
     uint32 count
-  ) public {
+  ) public payable {
     uint8 tierIndexFrom = tierMap[tierNameFrom];
     uint8 tierIndexTo = tierMap[tierNameTo];
     require(tierIndexFrom > 0, 'Invalid tier to upgrade from.');
@@ -452,36 +457,75 @@ contract NodeManager is Initializable {
     require(tierTo.price > tierFrom.price, 'Unable to downgrade.');
     uint256[] storage nodeIndice = nodesOfUser[msg.sender];
     uint32 countUpgrade = 0;
+    uint32 countNeeded = uint32(uint256(count).mul(tierTo.price).div(tierFrom.price));
     uint256 claimableAmount = 0;
     for (uint32 i = 0; i < nodeIndice.length; i++) {
       uint256 nodeIndex = nodeIndice[i];
       if (nodeIndex > 0) {
         Node storage node = nodesTotal[nodeIndex - 1];
         if (node.owner == msg.sender && tierIndexFrom - 1 == node.tierIndex) {
-          node.tierIndex = tierIndexTo - 1;
+          // node.tierIndex = tierIndexTo - 1;
           uint256 multiplier = getBoostRate(msg.sender, node.claimedTime, block.timestamp);
           uint256 claimed = uint256(block.timestamp - node.claimedTime)
             .mul(tierFrom.rewardsPerTime)
             .div(tierFrom.claimInterval);
           claimableAmount = claimed.mul(multiplier).div(10**18).add(claimableAmount);
           node.claimedTime = uint32(block.timestamp);
+          node.owner = address(0);
           countUpgrade++;
-          if (countUpgrade == count) break;
+          if (countUpgrade == countNeeded) break;
         }
       }
     }
-    require(countUpgrade == count, 'Not enough nodes to upgrade.');
-    countOfTier[tierNameFrom] -= count;
-    countOfTier[tierNameTo] += count;
     if (claimableAmount > 0) {
       rewardsOfUser[msg.sender] = rewardsOfUser[msg.sender].add(claimableAmount);
       rewardsTotal = rewardsTotal.add(claimableAmount);
       IERC20Upgradeable(tokenAddress).transfer(address(msg.sender), claimableAmount);
     }
-    uint256 price = tierTo.price.sub(tierFrom.price).mul(count);
-    if (count >= 10) price = price.mul(10000 - discountPer10).div(10000);
-    _transferFee(price);
+    countOfUser[msg.sender] -= countUpgrade;
+    countOfTier[tierNameFrom] -= countUpgrade;
+    countTotal -= countUpgrade;
+    // countOfTier[tierNameTo] += count;
+    _create(msg.sender, tierNameTo, '', count);
+    if(countUpgrade<countNeeded) {
+      uint256 price = tierFrom.price.mul(countNeeded-countUpgrade);
+      // if (count >= 10) price = price.mul(10000 - discountPer10).div(10000);
+      _transferFee(price);
+    }
+    if(address(uniswapV2Router)!=address(0)) {
+      uint256 amountUpgradeFee = getUpgradeFee(tierNameTo, count);
+      require(amountUpgradeFee<=msg.value, "Insufficient ETH for upgrade fee");
+      amountUpgradeFee = msg.value;
+      uint256 feeEachOperator = amountUpgradeFee.div(operators.length);
+      for (uint32 i = 0; i < operators.length; i++) {
+        if (i == operators.length - 1) {
+          payable(operators[i]).transfer(amountUpgradeFee);
+        } else {
+          payable(operators[i]).transfer(feeEachOperator);
+          amountUpgradeFee = amountUpgradeFee.sub(feeEachOperator);
+        }
+      }
+    }
+    // require(countUpgrade == count, 'Not enough nodes to upgrade.');
+    // countOfTier[tierNameFrom] -= count;
+    // countOfTier[tierNameTo] += count;
+    // uint256 price = tierTo.price.sub(tierFrom.price).mul(count);
+    // if (count >= 10) price = price.mul(10000 - discountPer10).div(10000);
+    // _transferFee(price);
     emit NodeUpdated(msg.sender, tierNameFrom, tierNameTo, count);
+  }
+
+  function getUpgradeFee(string memory tierNameTo, uint32 count) public view returns (uint256) {
+    if(address(uniswapV2Router)==address(0)) return 0;
+    uint8 tierIndexTo = tierMap[tierNameTo];
+    require(tierIndexTo > 0, 'Invalid tier to upgrade to.');
+    Tier storage tierTo = tierArr[tierIndexTo - 1];
+    uint256 amountToken = tierTo.price.mul(count).mul(upgradeFee).div(10000);
+    address[] memory path = new address[](2);
+    path[0] = address(tokenAddress);
+    path[1] = uniswapV2Router.WETH();
+    uint256[] memory amountsOut = uniswapV2Router.getAmountsOut(amountToken, path);
+    return amountsOut[1];
   }
 
   function transfer(
@@ -524,7 +568,7 @@ contract NodeManager is Initializable {
       rewardsTotal = rewardsTotal.add(claimableAmount);
     }
     uint256 fee = tier.price.mul(count).mul(transferFee).div(10000);
-    if (count >= 10) fee = fee.mul(10000 - discountPer10).div(10000);
+    // if (count >= 10) fee = fee.mul(10000 - discountPer10).div(10000);
     if (fee > claimableAmount)
       IERC20Upgradeable(tokenAddress).transferFrom(
         address(msg.sender),
@@ -699,17 +743,17 @@ contract NodeManager is Initializable {
   //   return usersInactive;
   // }  
 
-  function addWhitelist(address[] memory accounts) public onlyOwner {
-    for(uint256 i = 0;i<accounts.length;i++) {
-      whitelist.push(accounts[i]);
-    }
-  }
+  // function addWhitelist(address[] memory accounts) public onlyOwner {
+  //   for(uint256 i = 0;i<accounts.length;i++) {
+  //     whitelist.push(accounts[i]);
+  //   }
+  // }
 
-  function getWhitelist() public view returns (address[] memory) {
-    address[] memory accounts = new address[](whitelist.length);
-    for(uint256 i = 0;i<whitelist.length;i++) {
-      accounts[i] = whitelist[i];
-    }
-    return accounts;
-  }
+  // function getWhitelist() public view returns (address[] memory) {
+  //   address[] memory accounts = new address[](whitelist.length);
+  //   for(uint256 i = 0;i<whitelist.length;i++) {
+  //     accounts[i] = whitelist[i];
+  //   }
+  //   return accounts;
+  // }
 }

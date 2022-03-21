@@ -48,10 +48,14 @@ async function main() {
     await(await Token.approve(Router.address, ethers.utils.parseEther("100000000"))).wait()
     await(await Router.addLiquidityETH(Token.address, ethers.utils.parseEther("1000") ,"0","0", owner.address, parseInt(new Date().getTime()/1000)+100 ,{ value: ethers.utils.parseEther("1000") })).wait()
     await(await BUSD.approve(NodeGrid.address, ethers.utils.parseEther("100000000"))).wait()
-    await(await NodeGrid.addWhitelist([addr1.address,addr2.address,addr3.address])).wait()   
+    // await(await NodeGrid.addWhitelist([addr1.address,addr2.address,addr3.address])).wait()   
     await(await NodeGrid.setPayTokenAddress(addrBUSD)).wait()
     await(await Token.setNodeManagerAddress(NodeGrid.address)).wait()
   }
+
+  await (await NodeGrid.addTier('basic', ethers.utils.parseEther("10"), ethers.utils.parseEther("0.13"), 86400, ethers.utils.parseEther("0.001"))).wait()
+  await (await NodeGrid.addTier('light', ethers.utils.parseEther("50"), ethers.utils.parseEther("0.8"), 86400, ethers.utils.parseEther("0.005"))).wait()
+  await (await NodeGrid.addTier('pro', ethers.utils.parseEther("100"), ethers.utils.parseEther("2"), 86400, ethers.utils.parseEther("0.0001"))).wait()
 
   await (await NodePresale.updateTokenVest(addrBUSD)).wait()
   await (await NodePresale.allow([owner.address,addr1.address,addr2.address,addr3.address])).wait()

@@ -13,7 +13,7 @@ const NftABI = require("abi/BoostNFT.json")
 // const MulticallABI = require("abi/Multicall.json")
 const UINT256_MAX = '1000000000000000000000000000000000000000000000000000000000000000'
 const MULTICALL_ADDRESS = '0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e'
-const NODEPRESALE_ADDRESS = '0xFD159C1c635F24587D3CC53fcAC6b7b0359836cc'
+const NODEPRESALE_ADDRESS = '0x0165878A594ca255338adfa4d48449f69242Eb8F'
 
 let contractNodeGrid: ethers.Contract
 let contractToken: ethers.Contract
@@ -101,12 +101,12 @@ function useToken() {
     return await contractPresale.whitelist(supplied)
   }
 
-  const startPresale = async (timeEnd?:Date) : Promise<any[]>=>{
+  const startPresale = async (timeEnd?:Date) => {
     getPresale()
-    return await(await contractPresale.start(timeEnd ? Math.floor(timeEnd.getTime() / 1000) : 0)).wait()
+    await(await contractPresale.start(timeEnd ? Math.floor(timeEnd.getTime() / 1000) : 0)).wait()
   }
 
-  const vestPresale = async () : Promise<any[]>=>{
+  const vestPresale = async () => {
     getPresale()
     let isETH = false
     if(!info.presaleTokenSymbol) {
@@ -120,7 +120,12 @@ function useToken() {
         value = await contractPresale.minVest()
       return await(await contractPresale.vest({value:value})).wait()
     }
-    return await(await contractPresale.vest()).wait()
+    await(await contractPresale.vest()).wait()
+  }
+
+  const getUpgradeFee = async (tierTo:string, count:number) : Promise<any>=>{
+    getManager()
+    return await contractNodeGrid.getUpgradeFee(tierTo,count)
   }
 
   const getUnpaidNodes = async () : Promise<any[]>=>{
@@ -128,14 +133,14 @@ function useToken() {
     return await contractNodeGrid.unpaidNodes()
   }
 
-  const createNode = async (tier:string, count:number) : Promise<any[]>=>{
+  const createNode = async (tier:string, count:number)=>{
     getManager()
-    return await(await contractNodeGrid.create(tier, '', count)).wait()
+    await(await contractNodeGrid.create(tier, '', count)).wait()
   }
 
-  const compoundNode = async (tier:string, count:number) : Promise<any[]>=>{
+  const compoundNode = async (tier:string, count:number)=>{
     getManager()
-    return await(await contractNodeGrid.compound(tier, '', count)).wait()
+    await(await contractNodeGrid.compound(tier, '', count)).wait()
   }
 
   const transferNode = async (tier:string, count:number, account:string)=>{
@@ -145,7 +150,8 @@ function useToken() {
 
   const upgradeNode = async (tierFrom:string, tierTo:string, count:number)=>{
     getManager()
-    await(await contractNodeGrid.upgrade(tierFrom, tierTo, count)).wait()
+    const fee = await getUpgradeFee(tierTo, count)
+    await(await contractNodeGrid.upgrade(tierFrom, tierTo, count, {value:fee})).wait()
   }
 
   const burnNode = async (nodes:number[])=>{
@@ -243,7 +249,7 @@ function useToken() {
     calls.push(NodeGrid.tiers())
     calls.push(NodeGrid.countTotal())
     calls.push(NodeGrid.rewardsTotal())
-    calls.push(NodeGrid.discountPer10())
+    // calls.push(NodeGrid.discountPer10())
     calls.push(NodeGrid.transferFee())
     calls.push(NodeGrid.rewardsPoolFee())
     calls.push(NodeGrid.operatorFee())
@@ -280,7 +286,7 @@ function useToken() {
     setTiers(ret[index++])
     info.countTotal = ret[index++]
     info.rewardsTotal = ret[index++]
-    info.discountPer10 = ret[index++]
+    // info.discountPer10 = ret[index++]
     info.transferFee = ret[index++]
     info.rewardsPoolFee = ret[index++]
     info.operatorFee = ret[index++]

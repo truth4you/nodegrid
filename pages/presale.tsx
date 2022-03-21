@@ -115,7 +115,7 @@ export default function Monitor() {
         <p>Total number of buyers : <strong>{info.presaleTotalSupply?.toNumber()} / {info.presaleMaxSupply?.toNumber()}</strong></p>
         {info.presaleStarted && info.presaleEndTime > Math.floor(new Date().getTime() / 1000) && <p>Ends in <strong>{timeLimit}</strong></p>}
         <div className="flex flex-wrap gap-4 mt-4 justify-end">
-          {info.isPresaleAllowed && !info.isPresaleSupplied && info.presaleStarted &&
+          {info.isPresaleAllowed && info.isPresaleSupplied && info.presaleStarted &&
             (info.approvedVest ?
               <button onClick={handleVest} className="w-full md:w-auto">Send {formatEther(info.presaleMinCost ?? 0)} {info.presaleTokenSymbol ?? 'BUSD'}</button> :
               <button onClick={handleApprove} className="w-full md:w-auto">Approve {info.presaleTokenSymbol ?? 'BUSD'}</button>)

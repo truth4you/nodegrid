@@ -1,8 +1,8 @@
 {
   "manifestVersion": "3.2",
   "admin": {
-    "address": "0x4A679253410272dd5232B3Ff7cF5dbB88f295319",
-    "txHash": "0x1d2e9071870104ffeae0b630f223a7cf363a687e5f847fab86d61f7d86d29c00"
+    "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    "txHash": "0x8e6328442c4b245563fb6fb5a7675cefc9d5982335acc92fcc99b5fe21399849"
   },
   "proxies": [
     {
@@ -11,38 +11,13 @@
       "kind": "transparent"
     },
     {
-      "address": "0x4826533B4897376654Bb4d4AD88B7faFD0C98528",
-      "txHash": "0x682f92ccea77a8cd05e7c1487f6b6513cdd889ce1b3bbc491b6933a40e691997",
-      "kind": "transparent"
-    },
-    {
       "address": "0xc351628EB244ec633d5f21fBD6621e1a683B1181",
       "txHash": "0x632611fce1eb8d946534045a3b2f7167920b8da166ccbc8a21bf6d5c306a4caa",
       "kind": "transparent"
     },
     {
-      "address": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
-      "txHash": "0x996734318864eada9415a4fa3dff71acf77bda7fa157b2dc7acce862b317667a",
-      "kind": "transparent"
-    },
-    {
-      "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0x72edf572b138757288903b66b6c1cfaba49a55116e28f167db8f8ddf8fedec2c",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
-      "txHash": "0x9eba9892f4864d688311a7c710b6a2116f39f82c926cd5b4b30f863cd078fa02",
-      "kind": "transparent"
-    },
-    {
       "address": "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
       "txHash": "0xb9147391e04c5ad4f33dc69affdcfa1d16dc4de31ffbbbf2c20c5787443c75ea",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB",
-      "txHash": "0x0f2d9d198a6e7780057302f5e30335abfcc290f7dc66f8482e921f89ce075f59",
       "kind": "transparent"
     },
     {
@@ -56,18 +31,8 @@
       "kind": "transparent"
     },
     {
-      "address": "0x95401dc811bb5740090279Ba06cfA8fcF6113778",
-      "txHash": "0x862354fd3952ddc7268323512bdb0a5686314e0f342974917bb51e912f4865d7",
-      "kind": "transparent"
-    },
-    {
       "address": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
       "txHash": "0x53da4043408539b977be0d59572b812430107dc9535d573397e5a835b9e4fd0b",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x2bdCC0de6bE1f7D2ee689a0342D76F52E8EFABa3",
-      "txHash": "0x6ea9a41166be0de3421b08899ecd8fdd0ce008c8c7ce1c8ced33ba87f668b288",
       "kind": "transparent"
     },
     {
@@ -83,16 +48,6 @@
     {
       "address": "0x9d4454B023096f34B160D6B654540c56A1F81688",
       "txHash": "0x7a4310dbe60cf59d3c58102921ba30b1fa3e70b8123264a0482e10a34873685b",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x162A433068F51e18b7d13932F27e66a3f99E6890",
-      "txHash": "0x1ab00b6373d3dca4ab41bf28e6bd03e59e140ec19be66787eb4aac39c7c30436",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x5081a39b8A5f0E35a8D959395a630b68B74Dd30f",
-      "txHash": "0x373e0a66f7d20ee28f05f96339fada7984c7e0973d69ff834132093d93430f0a",
       "kind": "transparent"
     },
     {
@@ -121,11 +76,6 @@
       "kind": "transparent"
     },
     {
-      "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-      "txHash": "0xf43dd82bef62e96c6ccb97dcc812537c97fd5f2de1201bc1d63c4128702ff106",
-      "kind": "transparent"
-    },
-    {
       "address": "0x809d550fca64d94Bd9F66E60752A544199cfAC3D",
       "txHash": "0xb08c8a71e68337ee98fa4150e94fc2868665ae8eeddfce313bdd620cd68750a7",
       "kind": "transparent"
@@ -146,28 +96,8 @@
       "kind": "transparent"
     },
     {
-      "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-      "txHash": "0x9c60e32782acc937ca86b271496e3d5dfa4a4f1784360122df7813ed3ded7962",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      "txHash": "0x0d9e95839358b0363114d6ebb854d9dd8dbfcb2ba3e7bb06343969744689732c",
-      "kind": "transparent"
-    },
-    {
       "address": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
       "txHash": "0xf5034894da723d34c131a28ceb16ed7668b5ec95ac741ecd7487930d8b960723",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
-      "txHash": "0xb74070017c542adbdaa36cc25f4b657dc5084042440801be3a5f7b9ab3ee91bc",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x67d269191c92Caf3cD7723F116c85e6E9bf55933",
-      "txHash": "0xd9fb2c07248bcd9be4bad795bec414349935a57c22dc8daf24eb4f1b2c326d6b",
       "kind": "transparent"
     },
     {
@@ -178,6 +108,171 @@
     {
       "address": "0x5f3f1dBD7B74C6B46e8c44f98792A1dAf8d69154",
       "txHash": "0x8568eb15f2bd548c36104b4e5dcc1b14816832e630a351e2002a0a5594c5b6e4",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+      "txHash": "0xc060eedbccb4d3c1390965dbefbda1f2574548f6caf7006527d26c00c57609c2",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "txHash": "0xc7e6f84772eae99555993777b3a656c24aac323ff04dbe10c3445066f563b525",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+      "txHash": "0xdd419322197f9caf66396da8b44638b9d5799be5cbe9e8db0ad57d0c3005328d",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
+      "txHash": "0xfd729a8ff7849ca27812aecd7a8f3473d88f7b93b6786fe0a2030e5b4f3af37f",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x9E545E3C0baAB3E08CdfD552C960A1050f373042",
+      "txHash": "0xff4836fee1d75831316b02f1dbebf3e009cd8f83699226e97f77115421c8086b",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x1613beB3B2C4f22Ee086B2b38C1476A3cE7f78E8",
+      "txHash": "0x7c6818f771cbaaab72a0dc844eb44ad34b7e31aa118cd632aeb331a3dc723979",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x95401dc811bb5740090279Ba06cfA8fcF6113778",
+      "txHash": "0x0e79c127e8938b4c71dbd9447e81539b64c07b2a27ba1c7d4bb7d865b008db40",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x7bc06c482DEAd17c0e297aFbC32f6e63d3846650",
+      "txHash": "0x33854349a941dac404b460e507433152838858aa3881df859f2e9d4170c903d4",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x1429859428C0aBc9C2C47C8Ee9FBaf82cFA0F20f",
+      "txHash": "0x49268105b30a69556b7dee1613646b7f47c90eebe307a23dd238b7513be7b8af",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x162A433068F51e18b7d13932F27e66a3f99E6890",
+      "txHash": "0x6231402dec83d2e06aa29ea6989c4f55e505f2e664c3caa0b7ce24cc2f2a54fb",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x5081a39b8A5f0E35a8D959395a630b68B74Dd30f",
+      "txHash": "0x4f6c72b42d2643178fe9a6cff4a20c838da9ad50f5688755f8bc65b4103f8fd4",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xdbC43Ba45381e02825b14322cDdd15eC4B3164E6",
+      "txHash": "0xb231b595fa48cb180fe206234d64ecdc5330e6fba5205238d92894a97201d839",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x4C4a2f8c81640e47606d3fd77B353E87Ba015584",
+      "txHash": "0x928c242fadd6b5468c2a21cd0444323676d8649cc49f1d518ab0db92d845185b",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xD8a5a9b31c3C0232E196d518E89Fd8bF83AcAd43",
+      "txHash": "0xb64fd8cf6c3b40a3be7348f390859566e8616c00f7ce53b992ee9c4b2104c40a",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x7A9Ec1d04904907De0ED7b6839CcdD59c3716AC9",
+      "txHash": "0x3b0f7e9437af732ff750ba5e13afb63349fb7b724ba87252455823b3885e2daf",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x4631BCAbD6dF18D94796344963cB60d44a4136b6",
+      "txHash": "0x4df420eeef8cc1b971096ec26a8dc1952b34e65af80a6acce8b1fbd1dfef906f",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xA4899D35897033b927acFCf422bc745916139776",
+      "txHash": "0xa22fadd7e9b6e8054fee22ec3ab9bf255e72833ea5a6bd043c6eecfcb3451d7d",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f",
+      "txHash": "0x249ec0801003bb4a8a8b8d09d09189c058a0454b1ea7990885b6ea0c7d346e83",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x998abeb3E57409262aE5b751f60747921B33613E",
+      "txHash": "0x0c443d68be688707a1b660e0e26d3fcc1a65d9ca9cabf8127e129e5ec0ccf9d5",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x4826533B4897376654Bb4d4AD88B7faFD0C98528",
+      "txHash": "0xc09f11b0ecdd410e5df088cf29901c345e62134919d21559a00897567cc8ce9d",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
+      "txHash": "0x38f09d61f803be3707726267805fc830aad6f47c352f57eae2c7f4caac3c0435",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
+      "txHash": "0xc84f7a6749de398792e9a4b836ea640f89cce340b5e354267cc0357470a84cda",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xb7278A61aa25c888815aFC32Ad3cC52fF24fE575",
+      "txHash": "0x1546b43a6ee44c0857975703657bf15f1da3f8e387d7ce55de90ca15a578e9e6",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x2bdCC0de6bE1f7D2ee689a0342D76F52E8EFABa3",
+      "txHash": "0xc9ed1c6523630f5893c9be18e34a3a25db6f3d1410c94c60c1ffe6641bad151a",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
+      "txHash": "0xe8fa820397613142907f5e06d486b04009936c47939f9f66bfa864106157c25e",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+      "txHash": "0x6c36f1eef8156f646ac7b8dcf2d3f9fd19712140d8b868224b344ae64ce9bf95",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690",
+      "txHash": "0x5626ebac0e193a68949e250996c434f3d71463589f0d0b2455cefcc1079c7827",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "txHash": "0x0e7d1423cee08d6af654ea75538b8cee70f7bebda8a326e2060a56e153987793",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+      "txHash": "0x35db8a38e22949bd80a31fcb2ce47cf28a8bdabd0cad51250750339072daa30b",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x67d269191c92Caf3cD7723F116c85e6E9bf55933",
+      "txHash": "0x02746d28edb357f506f171a2e43a260474d911905adfc306f110bbe3734acfb3",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB",
+      "txHash": "0x44014457f8212090201fbf9629b3424352d8bc9fad6327dfab55699a3785f0bf",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x7969c5eD335650692Bc04293B07F5BF2e7A673C0",
+      "txHash": "0xd8b0536ef1f152a5d4c1fb7474398b5fbfa7f754cf236163133cb77a201a5cd4",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xFD471836031dc5108809D173A067e8486B9047A3",
+      "txHash": "0x254cb9bfb333239fcce05fb963debf85dc102c44f2db5f77f4427113c4022206",
       "kind": "transparent"
     }
   ],
@@ -2298,6 +2393,1972 @@
             ]
           },
           "t_struct(Tier)5742_storage": {
+            "label": "struct Tier",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint8"
+              },
+              {
+                "label": "name",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "price",
+                "type": "t_uint256"
+              },
+              {
+                "label": "rewardsPerTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "claimInterval",
+                "type": "t_uint32"
+              },
+              {
+                "label": "maintenanceFee",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_uint32": {
+            "label": "uint32"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          }
+        }
+      }
+    },
+    "3d1303574bf31ecb8b8dafc048411194076ebaf238fc5073febed53f14d1750b": {
+      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "txHash": "0x591b612acefb08bfa5d447713446f125552d2e6994d8f0250e49f3f939a09ca9",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "_balances",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "ERC20Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:37"
+          },
+          {
+            "label": "_allowances",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+            "contract": "ERC20Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:39"
+          },
+          {
+            "label": "_totalSupply",
+            "offset": 0,
+            "slot": "53",
+            "type": "t_uint256",
+            "contract": "ERC20Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:41"
+          },
+          {
+            "label": "_name",
+            "offset": 0,
+            "slot": "54",
+            "type": "t_string_storage",
+            "contract": "ERC20Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:43"
+          },
+          {
+            "label": "_symbol",
+            "offset": 0,
+            "slot": "55",
+            "type": "t_string_storage",
+            "contract": "ERC20Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:44"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "56",
+            "type": "t_array(t_uint256)45_storage",
+            "contract": "ERC20Upgradeable",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC20\\ERC20Upgradeable.sol:394"
+          },
+          {
+            "label": "_inSwapAndLiquify",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_bool",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:36"
+          },
+          {
+            "label": "transferTaxRate",
+            "offset": 1,
+            "slot": "101",
+            "type": "t_uint32",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:37"
+          },
+          {
+            "label": "buyBackFee",
+            "offset": 5,
+            "slot": "101",
+            "type": "t_uint32",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:38"
+          },
+          {
+            "label": "operatorFee",
+            "offset": 9,
+            "slot": "101",
+            "type": "t_uint32",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:39"
+          },
+          {
+            "label": "liquidityFee",
+            "offset": 13,
+            "slot": "101",
+            "type": "t_uint32",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:40"
+          },
+          {
+            "label": "minAmountToLiquify",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_uint256",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:42"
+          },
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "103",
+            "type": "t_address",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:44"
+          },
+          {
+            "label": "operator",
+            "offset": 0,
+            "slot": "104",
+            "type": "t_address",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:45"
+          },
+          {
+            "label": "isExcludedFromFee",
+            "offset": 0,
+            "slot": "105",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:46"
+          },
+          {
+            "label": "uniswapV2Router",
+            "offset": 0,
+            "slot": "106",
+            "type": "t_contract(IUniswapV2Router02)3505",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:48"
+          },
+          {
+            "label": "uniswapV2Pair",
+            "offset": 0,
+            "slot": "107",
+            "type": "t_address",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:49"
+          },
+          {
+            "label": "maxTransferAmount",
+            "offset": 0,
+            "slot": "108",
+            "type": "t_uint256",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:50"
+          },
+          {
+            "label": "accumulatedOperatorTokensAmount",
+            "offset": 0,
+            "slot": "109",
+            "type": "t_uint256",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:51"
+          },
+          {
+            "label": "nodeManagerAddress",
+            "offset": 0,
+            "slot": "110",
+            "type": "t_address",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:52"
+          },
+          {
+            "label": "checkNodeBeforeSell",
+            "offset": 20,
+            "slot": "110",
+            "type": "t_bool",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:53"
+          },
+          {
+            "label": "sellBackFee",
+            "offset": 21,
+            "slot": "110",
+            "type": "t_uint32",
+            "contract": "Token",
+            "src": "contracts\\nodegrid\\Token.sol:54"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_uint256)45_storage": {
+            "label": "uint256[45]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_contract(IUniswapV2Router02)3505": {
+            "label": "contract IUniswapV2Router02"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(address => mapping(address => uint256))"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_uint32": {
+            "label": "uint32"
+          }
+        }
+      }
+    },
+    "440eb76abd355bc739618cddeec0ec8cc629cb894f4bf6d199735547102d2329": {
+      "address": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
+      "txHash": "0x7257f50311347f9f0a6b9309f0509399f5912b6ccb1600c3482c9e2185cb85e5",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "label": "tokenAddress",
+            "offset": 2,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:37"
+          },
+          {
+            "label": "nftAddress",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:38"
+          },
+          {
+            "label": "treasury",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:39"
+          },
+          {
+            "label": "operators",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:40"
+          },
+          {
+            "label": "tierArr",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_array(t_struct(Tier)5742_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:41"
+          },
+          {
+            "label": "tierMap",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_string_memory_ptr,t_uint8)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:42"
+          },
+          {
+            "label": "tierTotal",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint8",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:43"
+          },
+          {
+            "label": "nodesTotal",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_array(t_struct(Node)5759_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:44"
+          },
+          {
+            "label": "nodesOfUser",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:45"
+          },
+          {
+            "label": "countTotal",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:46"
+          },
+          {
+            "label": "countOfUser",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_mapping(t_address,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:47"
+          },
+          {
+            "label": "countOfTier",
+            "offset": 0,
+            "slot": "11",
+            "type": "t_mapping(t_string_memory_ptr,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:48"
+          },
+          {
+            "label": "rewardsTotal",
+            "offset": 0,
+            "slot": "12",
+            "type": "t_uint256",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:49"
+          },
+          {
+            "label": "rewardsOfUser",
+            "offset": 0,
+            "slot": "13",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:50"
+          },
+          {
+            "label": "discountPer10",
+            "offset": 0,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:52"
+          },
+          {
+            "label": "withdrawRate",
+            "offset": 4,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:53"
+          },
+          {
+            "label": "transferFee",
+            "offset": 8,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:54"
+          },
+          {
+            "label": "rewardsPoolFee",
+            "offset": 12,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:55"
+          },
+          {
+            "label": "treasuryFee",
+            "offset": 16,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:56"
+          },
+          {
+            "label": "operatorFee",
+            "offset": 20,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:57"
+          },
+          {
+            "label": "maxCountOfUser",
+            "offset": 24,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:58"
+          },
+          {
+            "label": "uniswapV2Router",
+            "offset": 0,
+            "slot": "15",
+            "type": "t_contract(IUniswapV2Router02)3505",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:60"
+          },
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "16",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:62"
+          },
+          {
+            "label": "whitelist",
+            "offset": 0,
+            "slot": "17",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:63"
+          },
+          {
+            "label": "feeTokenAddress",
+            "offset": 0,
+            "slot": "18",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:64"
+          },
+          {
+            "label": "canNodeTransfer",
+            "offset": 20,
+            "slot": "18",
+            "type": "t_bool",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:65"
+          },
+          {
+            "label": "upgradeFee",
+            "offset": 21,
+            "slot": "18",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:67"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]"
+          },
+          "t_array(t_struct(Node)5759_storage)dyn_storage": {
+            "label": "struct Node[]"
+          },
+          "t_array(t_struct(Tier)5742_storage)dyn_storage": {
+            "label": "struct Tier[]"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_contract(IUniswapV2Router02)3505": {
+            "label": "contract IUniswapV2Router02"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_address,t_uint32)": {
+            "label": "mapping(address => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint32)": {
+            "label": "mapping(string => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint8)": {
+            "label": "mapping(string => uint8)"
+          },
+          "t_string_memory_ptr": {
+            "label": "string"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_struct(Node)5759_storage": {
+            "label": "struct Node",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint32"
+              },
+              {
+                "label": "tierIndex",
+                "type": "t_uint8"
+              },
+              {
+                "label": "title",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "owner",
+                "type": "t_address"
+              },
+              {
+                "label": "createdTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "claimedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "limitedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "multiplier",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_struct(Tier)5742_storage": {
+            "label": "struct Tier",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint8"
+              },
+              {
+                "label": "name",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "price",
+                "type": "t_uint256"
+              },
+              {
+                "label": "rewardsPerTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "claimInterval",
+                "type": "t_uint32"
+              },
+              {
+                "label": "maintenanceFee",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_uint32": {
+            "label": "uint32"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          }
+        }
+      }
+    },
+    "a192521fb3ef7a5a8aa70c466800712e1756ef4d3c7ec9d888e6825dc7023574": {
+      "address": "0xf5059a5D33d5853360D16C683c16e67980206f36",
+      "txHash": "0xf5d6966e17e78202d685afc162799d810aca396a5410533ecd6fa8d2b7a25ce9",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "label": "tokenAddress",
+            "offset": 2,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:37"
+          },
+          {
+            "label": "nftAddress",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:38"
+          },
+          {
+            "label": "treasury",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:39"
+          },
+          {
+            "label": "operators",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:40"
+          },
+          {
+            "label": "tierArr",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_array(t_struct(Tier)5742_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:41"
+          },
+          {
+            "label": "tierMap",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_string_memory_ptr,t_uint8)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:42"
+          },
+          {
+            "label": "tierTotal",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint8",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:43"
+          },
+          {
+            "label": "nodesTotal",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_array(t_struct(Node)5759_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:44"
+          },
+          {
+            "label": "nodesOfUser",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:45"
+          },
+          {
+            "label": "countTotal",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:46"
+          },
+          {
+            "label": "countOfUser",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_mapping(t_address,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:47"
+          },
+          {
+            "label": "countOfTier",
+            "offset": 0,
+            "slot": "11",
+            "type": "t_mapping(t_string_memory_ptr,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:48"
+          },
+          {
+            "label": "rewardsTotal",
+            "offset": 0,
+            "slot": "12",
+            "type": "t_uint256",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:49"
+          },
+          {
+            "label": "rewardsOfUser",
+            "offset": 0,
+            "slot": "13",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:50"
+          },
+          {
+            "label": "discountPer10",
+            "offset": 0,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:52"
+          },
+          {
+            "label": "withdrawRate",
+            "offset": 4,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:53"
+          },
+          {
+            "label": "transferFee",
+            "offset": 8,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:54"
+          },
+          {
+            "label": "rewardsPoolFee",
+            "offset": 12,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:55"
+          },
+          {
+            "label": "treasuryFee",
+            "offset": 16,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:56"
+          },
+          {
+            "label": "operatorFee",
+            "offset": 20,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:57"
+          },
+          {
+            "label": "maxCountOfUser",
+            "offset": 24,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:58"
+          },
+          {
+            "label": "uniswapV2Router",
+            "offset": 0,
+            "slot": "15",
+            "type": "t_contract(IUniswapV2Router02)3505",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:60"
+          },
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "16",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:62"
+          },
+          {
+            "label": "whitelist",
+            "offset": 0,
+            "slot": "17",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:63"
+          },
+          {
+            "label": "feeTokenAddress",
+            "offset": 0,
+            "slot": "18",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:64"
+          },
+          {
+            "label": "canNodeTransfer",
+            "offset": 20,
+            "slot": "18",
+            "type": "t_bool",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:65"
+          },
+          {
+            "label": "upgradeFee",
+            "offset": 21,
+            "slot": "18",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:67"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]"
+          },
+          "t_array(t_struct(Node)5759_storage)dyn_storage": {
+            "label": "struct Node[]"
+          },
+          "t_array(t_struct(Tier)5742_storage)dyn_storage": {
+            "label": "struct Tier[]"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_contract(IUniswapV2Router02)3505": {
+            "label": "contract IUniswapV2Router02"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_address,t_uint32)": {
+            "label": "mapping(address => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint32)": {
+            "label": "mapping(string => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint8)": {
+            "label": "mapping(string => uint8)"
+          },
+          "t_string_memory_ptr": {
+            "label": "string"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_struct(Node)5759_storage": {
+            "label": "struct Node",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint32"
+              },
+              {
+                "label": "tierIndex",
+                "type": "t_uint8"
+              },
+              {
+                "label": "title",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "owner",
+                "type": "t_address"
+              },
+              {
+                "label": "createdTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "claimedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "limitedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "multiplier",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_struct(Tier)5742_storage": {
+            "label": "struct Tier",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint8"
+              },
+              {
+                "label": "name",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "price",
+                "type": "t_uint256"
+              },
+              {
+                "label": "rewardsPerTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "claimInterval",
+                "type": "t_uint32"
+              },
+              {
+                "label": "maintenanceFee",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_uint32": {
+            "label": "uint32"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          }
+        }
+      }
+    },
+    "fcfd49759551b896a72af4353e418996ac59fe55f83d362dc2a668d05dfb102d": {
+      "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+      "txHash": "0xa39cd91fdd400677321aa1d2f09668fd3fa36c539e7b71be7c4cc679123ff5b3",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "label": "tokenAddress",
+            "offset": 2,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:35"
+          },
+          {
+            "label": "nftAddress",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:36"
+          },
+          {
+            "label": "treasury",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:37"
+          },
+          {
+            "label": "operators",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:38"
+          },
+          {
+            "label": "tierArr",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_array(t_struct(Tier)5740_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:39"
+          },
+          {
+            "label": "tierMap",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_string_memory_ptr,t_uint8)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:40"
+          },
+          {
+            "label": "tierTotal",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint8",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:41"
+          },
+          {
+            "label": "nodesTotal",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_array(t_struct(Node)5757_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:42"
+          },
+          {
+            "label": "nodesOfUser",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:43"
+          },
+          {
+            "label": "countTotal",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:44"
+          },
+          {
+            "label": "countOfUser",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_mapping(t_address,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:45"
+          },
+          {
+            "label": "countOfTier",
+            "offset": 0,
+            "slot": "11",
+            "type": "t_mapping(t_string_memory_ptr,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:46"
+          },
+          {
+            "label": "rewardsTotal",
+            "offset": 0,
+            "slot": "12",
+            "type": "t_uint256",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:47"
+          },
+          {
+            "label": "rewardsOfUser",
+            "offset": 0,
+            "slot": "13",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:48"
+          },
+          {
+            "label": "transferFee",
+            "offset": 0,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:52"
+          },
+          {
+            "label": "rewardsPoolFee",
+            "offset": 4,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:53"
+          },
+          {
+            "label": "treasuryFee",
+            "offset": 8,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:54"
+          },
+          {
+            "label": "operatorFee",
+            "offset": 12,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:55"
+          },
+          {
+            "label": "maxCountOfUser",
+            "offset": 16,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:56"
+          },
+          {
+            "label": "uniswapV2Router",
+            "offset": 0,
+            "slot": "15",
+            "type": "t_contract(IUniswapV2Router02)3505",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:58"
+          },
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "16",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:60"
+          },
+          {
+            "label": "feeTokenAddress",
+            "offset": 0,
+            "slot": "17",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:62"
+          },
+          {
+            "label": "canNodeTransfer",
+            "offset": 20,
+            "slot": "17",
+            "type": "t_bool",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:63"
+          },
+          {
+            "label": "upgradeFee",
+            "offset": 21,
+            "slot": "17",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:65"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]"
+          },
+          "t_array(t_struct(Node)5757_storage)dyn_storage": {
+            "label": "struct Node[]"
+          },
+          "t_array(t_struct(Tier)5740_storage)dyn_storage": {
+            "label": "struct Tier[]"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_contract(IUniswapV2Router02)3505": {
+            "label": "contract IUniswapV2Router02"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_address,t_uint32)": {
+            "label": "mapping(address => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint32)": {
+            "label": "mapping(string => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint8)": {
+            "label": "mapping(string => uint8)"
+          },
+          "t_string_memory_ptr": {
+            "label": "string"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_struct(Node)5757_storage": {
+            "label": "struct Node",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint32"
+              },
+              {
+                "label": "tierIndex",
+                "type": "t_uint8"
+              },
+              {
+                "label": "title",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "owner",
+                "type": "t_address"
+              },
+              {
+                "label": "createdTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "claimedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "limitedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "multiplier",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_struct(Tier)5740_storage": {
+            "label": "struct Tier",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint8"
+              },
+              {
+                "label": "name",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "price",
+                "type": "t_uint256"
+              },
+              {
+                "label": "rewardsPerTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "claimInterval",
+                "type": "t_uint32"
+              },
+              {
+                "label": "maintenanceFee",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_uint32": {
+            "label": "uint32"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          }
+        }
+      }
+    },
+    "671801e279cd2de324922807271b46bed1616d72d2a4a030153a8840d274c8e6": {
+      "address": "0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690",
+      "txHash": "0xc2b7d5a0adbe8b42b1a5468be23300bff9373ef480488d27ae9e2d23ddb4e596",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "label": "tokenAddress",
+            "offset": 2,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:35"
+          },
+          {
+            "label": "nftAddress",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:36"
+          },
+          {
+            "label": "treasury",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:37"
+          },
+          {
+            "label": "operators",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:38"
+          },
+          {
+            "label": "tierArr",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_array(t_struct(Tier)5740_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:39"
+          },
+          {
+            "label": "tierMap",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_string_memory_ptr,t_uint8)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:40"
+          },
+          {
+            "label": "tierTotal",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint8",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:41"
+          },
+          {
+            "label": "nodesTotal",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_array(t_struct(Node)5757_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:42"
+          },
+          {
+            "label": "nodesOfUser",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:43"
+          },
+          {
+            "label": "countTotal",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:44"
+          },
+          {
+            "label": "countOfUser",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_mapping(t_address,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:45"
+          },
+          {
+            "label": "countOfTier",
+            "offset": 0,
+            "slot": "11",
+            "type": "t_mapping(t_string_memory_ptr,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:46"
+          },
+          {
+            "label": "rewardsTotal",
+            "offset": 0,
+            "slot": "12",
+            "type": "t_uint256",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:47"
+          },
+          {
+            "label": "rewardsOfUser",
+            "offset": 0,
+            "slot": "13",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:48"
+          },
+          {
+            "label": "transferFee",
+            "offset": 0,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:52"
+          },
+          {
+            "label": "rewardsPoolFee",
+            "offset": 4,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:53"
+          },
+          {
+            "label": "treasuryFee",
+            "offset": 8,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:54"
+          },
+          {
+            "label": "operatorFee",
+            "offset": 12,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:55"
+          },
+          {
+            "label": "maxCountOfUser",
+            "offset": 16,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:56"
+          },
+          {
+            "label": "uniswapV2Router",
+            "offset": 0,
+            "slot": "15",
+            "type": "t_contract(IUniswapV2Router02)3505",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:58"
+          },
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "16",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:60"
+          },
+          {
+            "label": "feeTokenAddress",
+            "offset": 0,
+            "slot": "17",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:62"
+          },
+          {
+            "label": "canNodeTransfer",
+            "offset": 20,
+            "slot": "17",
+            "type": "t_bool",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:63"
+          },
+          {
+            "label": "upgradeFee",
+            "offset": 21,
+            "slot": "17",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:65"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]"
+          },
+          "t_array(t_struct(Node)5757_storage)dyn_storage": {
+            "label": "struct Node[]"
+          },
+          "t_array(t_struct(Tier)5740_storage)dyn_storage": {
+            "label": "struct Tier[]"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_contract(IUniswapV2Router02)3505": {
+            "label": "contract IUniswapV2Router02"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_address,t_uint32)": {
+            "label": "mapping(address => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint32)": {
+            "label": "mapping(string => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint8)": {
+            "label": "mapping(string => uint8)"
+          },
+          "t_string_memory_ptr": {
+            "label": "string"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_struct(Node)5757_storage": {
+            "label": "struct Node",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint32"
+              },
+              {
+                "label": "tierIndex",
+                "type": "t_uint8"
+              },
+              {
+                "label": "title",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "owner",
+                "type": "t_address"
+              },
+              {
+                "label": "createdTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "claimedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "limitedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "multiplier",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_struct(Tier)5740_storage": {
+            "label": "struct Tier",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint8"
+              },
+              {
+                "label": "name",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "price",
+                "type": "t_uint256"
+              },
+              {
+                "label": "rewardsPerTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "claimInterval",
+                "type": "t_uint32"
+              },
+              {
+                "label": "maintenanceFee",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_uint32": {
+            "label": "uint32"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          }
+        }
+      }
+    },
+    "a1a02a5fd79892253e94ab2b60bf6af612022f1a7a3156999af2881d15f4d9b9": {
+      "address": "0xc351628EB244ec633d5f21fBD6621e1a683B1181",
+      "txHash": "0x27c86798808532ab05ec6a7244bcccd6b7e018a69ac03e5b608870253facd63d",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "label": "tokenAddress",
+            "offset": 2,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:35"
+          },
+          {
+            "label": "nftAddress",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:36"
+          },
+          {
+            "label": "treasury",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:37"
+          },
+          {
+            "label": "operators",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:38"
+          },
+          {
+            "label": "tierArr",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_array(t_struct(Tier)5740_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:39"
+          },
+          {
+            "label": "tierMap",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_string_memory_ptr,t_uint8)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:40"
+          },
+          {
+            "label": "tierTotal",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint8",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:41"
+          },
+          {
+            "label": "nodesTotal",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_array(t_struct(Node)5757_storage)dyn_storage",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:42"
+          },
+          {
+            "label": "nodesOfUser",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:43"
+          },
+          {
+            "label": "countTotal",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:44"
+          },
+          {
+            "label": "countOfUser",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_mapping(t_address,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:45"
+          },
+          {
+            "label": "countOfTier",
+            "offset": 0,
+            "slot": "11",
+            "type": "t_mapping(t_string_memory_ptr,t_uint32)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:46"
+          },
+          {
+            "label": "rewardsTotal",
+            "offset": 0,
+            "slot": "12",
+            "type": "t_uint256",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:47"
+          },
+          {
+            "label": "rewardsOfUser",
+            "offset": 0,
+            "slot": "13",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:48"
+          },
+          {
+            "label": "transferFee",
+            "offset": 0,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:52"
+          },
+          {
+            "label": "rewardsPoolFee",
+            "offset": 4,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:53"
+          },
+          {
+            "label": "treasuryFee",
+            "offset": 8,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:54"
+          },
+          {
+            "label": "operatorFee",
+            "offset": 12,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:55"
+          },
+          {
+            "label": "maxCountOfUser",
+            "offset": 16,
+            "slot": "14",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:56"
+          },
+          {
+            "label": "uniswapV2Router",
+            "offset": 0,
+            "slot": "15",
+            "type": "t_contract(IUniswapV2Router02)3505",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:58"
+          },
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "16",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:60"
+          },
+          {
+            "label": "feeTokenAddress",
+            "offset": 0,
+            "slot": "17",
+            "type": "t_address",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:62"
+          },
+          {
+            "label": "canNodeTransfer",
+            "offset": 20,
+            "slot": "17",
+            "type": "t_bool",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:63"
+          },
+          {
+            "label": "upgradeFee",
+            "offset": 21,
+            "slot": "17",
+            "type": "t_uint32",
+            "contract": "NodeManager",
+            "src": "contracts\\nodegrid\\NodeManager.sol:65"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]"
+          },
+          "t_array(t_struct(Node)5757_storage)dyn_storage": {
+            "label": "struct Node[]"
+          },
+          "t_array(t_struct(Tier)5740_storage)dyn_storage": {
+            "label": "struct Tier[]"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_contract(IUniswapV2Router02)3505": {
+            "label": "contract IUniswapV2Router02"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_address,t_uint32)": {
+            "label": "mapping(address => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint32)": {
+            "label": "mapping(string => uint32)"
+          },
+          "t_mapping(t_string_memory_ptr,t_uint8)": {
+            "label": "mapping(string => uint8)"
+          },
+          "t_string_memory_ptr": {
+            "label": "string"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_struct(Node)5757_storage": {
+            "label": "struct Node",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint32"
+              },
+              {
+                "label": "tierIndex",
+                "type": "t_uint8"
+              },
+              {
+                "label": "title",
+                "type": "t_string_storage"
+              },
+              {
+                "label": "owner",
+                "type": "t_address"
+              },
+              {
+                "label": "createdTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "claimedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "limitedTime",
+                "type": "t_uint32"
+              },
+              {
+                "label": "multiplier",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_struct(Tier)5740_storage": {
             "label": "struct Tier",
             "members": [
               {

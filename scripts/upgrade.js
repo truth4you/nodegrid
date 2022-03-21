@@ -12,10 +12,10 @@ async function main() {
 
     console.log("Account balance:", (await owner.getBalance()).toString());
     
-    const TokenFactory = await ethers.getContractFactory("Token");
-    Token =  await upgrades.upgradeProxy("0x229653dad9Eb152DFF3477a1130aB81a67FB1D7C",TokenFactory)
-    await Token.deployed();
-    console.log("Token:", Token.address)
+    // const TokenFactory = await ethers.getContractFactory("Token");
+    // Token =  await upgrades.upgradeProxy("0x229653dad9Eb152DFF3477a1130aB81a67FB1D7C",TokenFactory)
+    // await Token.deployed();
+    // console.log("Token:", Token.address)
 
     // const NftFactory = await ethers.getContractFactory("BoostNFT")
     // NFT = await NftFactory.deploy()

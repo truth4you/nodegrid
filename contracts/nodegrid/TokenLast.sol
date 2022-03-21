@@ -5,15 +5,13 @@ import "../Uniswap/IUniswapV2Pair.sol";
 import "../Uniswap/IUniswapV2Router02.sol";
 import '../common/Address.sol';
 import '../common/SafeMath.sol';
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
-import "hardhat/console.sol";
 
 interface INodeManager {
     function countOfUser(address account) external view returns(uint32);
 }
 
-contract Token is ERC20Upgradeable {
+contract TokenLast is ERC20Upgradeable {
     using SafeMath for uint256;
     function initialize() public initializer {
         __ERC20_init("TEST TOKEN", "TTK");
@@ -22,13 +20,12 @@ contract Token is ERC20Upgradeable {
         operator = msg.sender;
         transferTaxRate = 1000;
         buyBackFee = 3000;
-        sellBackFee = 3000;
         operatorFee = 60;
         liquidityFee = 40;
         minAmountToLiquify = 10 * 1e18;
         maxTransferAmount = 1000 * 1e18;
-        checkNodeBeforeSell = true;
         setExcludedFromFee(msg.sender);
+        
     }
     // To receive BNB from uniswapV2Router when swapping
     receive() external payable {}
@@ -50,9 +47,7 @@ contract Token is ERC20Upgradeable {
     uint256 public maxTransferAmount; // 1000
     uint256 private accumulatedOperatorTokensAmount;
     address public nodeManagerAddress;
-    bool public checkNodeBeforeSell;
-    uint32 private sellBackFee;      // 3000 => 30%
-    
+
     event SwapAndLiquify(uint256, uint256, uint256);
     event uniswapV2RouterUpdated(address, address, address);
     event LiquidityAdded(uint256, uint256);
@@ -84,12 +79,8 @@ contract Token is ERC20Upgradeable {
         transferTaxRate = _transferTaxRate;
     }
 
-    function setBuyFee(uint32 value) public onlyOwner{
+    function setBuyBackFee(uint32 value) public onlyOwner{
         buyBackFee = value;
-    }
-
-    function setSellFee(uint32 value) public onlyOwner{
-        sellBackFee = value;
     }
 
     function setOperator(address account) public onlyOwner {
@@ -119,53 +110,55 @@ contract Token is ERC20Upgradeable {
     function setMaxTransferAmount(uint256 value) public onlyOwner{
         maxTransferAmount = value;
     }
-
     function setNodeManagerAddress(address _nodeManagerAddress) public onlyOwner {
         nodeManagerAddress = _nodeManagerAddress;
     }
 
-    function setCheckNodeBeforeSell(bool check) public onlyOwner {
-        checkNodeBeforeSell = check;
-    }
 
     /// @dev overrides transfer function to meet tokenomics
     function _transfer(address from, address to, uint256 amount) internal virtual override {
-        bool _isSwappable = address(uniswapV2Router)!=address(0) && uniswapV2Pair!=address(0);
-        bool _isBuying = _isSwappable && msg.sender==address(uniswapV2Pair) && from==address(uniswapV2Pair);
-        bool _isSelling = _isSwappable && msg.sender==address(uniswapV2Router) && to==address(uniswapV2Pair);  
+        // swap and liquify
+        if (_inSwapAndLiquify == false
+                && address(uniswapV2Router) != address(0)
+                && uniswapV2Pair != address(0)
+                && from != uniswapV2Pair
+                && from != owner
+            ) {
+                swapAndLiquify();
+            }
         
         if (transferTaxRate == 0 || isExcludedFromFee[from] || isExcludedFromFee[to]) {
             super._transfer(from, to, amount);
         } else {
             uint256 taxAmount = 0;
-            if(_isSelling && checkNodeBeforeSell && nodeManagerAddress!=from && nodeManagerAddress != address(0)) {
-                require(INodeManager(nodeManagerAddress).countOfUser(from) > 0, "Insufficient Node count!");
-            }                    
-            if(_isSelling && sellBackFee>0) {
-                taxAmount = amount.mul(sellBackFee).div(10000);
-            } else if(_isBuying && buyBackFee>0) {
+            if(to == uniswapV2Pair){
+                if(nodeManagerAddress != address(0) && nodeManagerAddress != from){
+                    require( INodeManager(nodeManagerAddress).countOfUser(from) >0, "Insufficient Node count!");
+                }
+                    
                 taxAmount = amount.mul(buyBackFee).div(10000);
-            } else {
+                
+            }else{
                 // default tax is 10% of every transfer
                 taxAmount = amount.mul(transferTaxRate).div(10000);
             }
-            if(taxAmount>0) {
+            if(taxAmount>0){
+                
                 uint256 operatorFeeAmount = taxAmount.mul(operatorFee).div(100);
                 super._transfer(from, address(this), operatorFeeAmount);
                 accumulatedOperatorTokensAmount += operatorFeeAmount;
-                if(_isSelling) {
+                if(from!=uniswapV2Pair){
                     swapAndSendToAddress(operator,accumulatedOperatorTokensAmount);
-                    accumulatedOperatorTokensAmount = 0;
+                    accumulatedOperatorTokensAmount=0;
                 }
+                
                 uint256 liquidityAmount = taxAmount.mul(liquidityFee).div(100);
                 super._transfer(from, address(this), liquidityAmount);
+
                 super._transfer(from, to, amount.sub(operatorFeeAmount.add(liquidityAmount)));
-            } else
+            }else
                 super._transfer(from, to, amount);
-        }
-        // swap and liquify
-        if (!_inSwapAndLiquify && _isSwappable && !_isSelling && !_isBuying && from != owner) {
-            swapAndLiquify();
+            
         }
     }
 
@@ -178,7 +171,7 @@ contract Token is ERC20Upgradeable {
     }
 
     /// @dev Swap and liquify
-    function swapAndLiquify() private lockTheSwap transferTaxFree {
+    function swapAndLiquify() private  lockTheSwap transferTaxFree {
 
         uint256 contractTokenBalance = balanceOf(address(this)).sub(accumulatedOperatorTokensAmount);
 
@@ -256,15 +249,5 @@ contract Token is ERC20Upgradeable {
         emit uniswapV2RouterUpdated(msg.sender, address(uniswapV2Router), uniswapV2Pair);
     }
 
-    function claimTokens(address teamWallet) public onlyOwner {
-        payable(teamWallet).transfer(address(this).balance);
-    }
     
-    function claimOtherTokens(address anyToken, address recipient) external onlyOwner() {
-        IERC20(anyToken).transfer(recipient, IERC20(anyToken).balanceOf(address(this)));
-    }
-    
-    function clearStuckBalance(address payable account) external onlyOwner() {
-        account.transfer(address(this).balance);
-    }
 }
