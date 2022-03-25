@@ -17,6 +17,7 @@ struct Tier {
   uint256 rewardsPerTime;
   uint32 claimInterval;
   uint256 maintenanceFee;
+  uint32 maxPurchase;
 }
 
 struct Node {
@@ -172,7 +173,8 @@ contract NodeManager is Initializable {
     uint256 price,
     uint256 rewardsPerTime,
     uint32 claimInterval,
-    uint256 maintenanceFee
+    uint256 maintenanceFee,
+    uint32 maxPurchase
   ) public onlyOwner {
     require(price > 0, "Tier's price has to be positive.");
     require(rewardsPerTime > 0, "Tier's rewards has to be positive.");
@@ -184,7 +186,8 @@ contract NodeManager is Initializable {
         price: price,
         rewardsPerTime: rewardsPerTime,
         claimInterval: claimInterval,
-        maintenanceFee: maintenanceFee
+        maintenanceFee: maintenanceFee,
+        maxPurchase: maxPurchase
       })
     );
     tierMap[name] = uint8(tierArr.length);
@@ -197,7 +200,8 @@ contract NodeManager is Initializable {
     uint256 price,
     uint256 rewardsPerTime,
     uint32 claimInterval,
-    uint256 maintenanceFee
+    uint256 maintenanceFee,
+    uint32 maxPurchase
   ) public onlyOwner {
     uint8 tierId = tierMap[tierName];
     require(tierId > 0, "Tier's name is incorrect.");
@@ -209,6 +213,7 @@ contract NodeManager is Initializable {
     tier.rewardsPerTime = rewardsPerTime;
     tier.claimInterval = claimInterval;
     tier.maintenanceFee = maintenanceFee;
+    tier.maxPurchase = maxPurchase;
     tierMap[name] = tierId;
     tierMap[tierName] = 0;
   }
@@ -254,6 +259,24 @@ contract NodeManager is Initializable {
     return false;
   }
 
+  function _checkMaxPurchase(address account, string memory tierName) private view returns (bool) {
+    uint8 tierId = tierMap[tierName];
+    Tier storage tier = tierArr[tierId - 1];
+    uint256[] storage nodeIndice = nodesOfUser[account];  
+    uint32 count = 0;
+    for (uint32 i = 0; i < nodeIndice.length; i++) {
+      uint256 nodeIndex = nodeIndice[i];
+      if (nodeIndex > 0) {
+        Node storage node = nodesTotal[nodeIndex - 1];
+        if (node.owner == account && node.tierIndex==tierId) {
+          count++;
+          if(tier.maxPurchase < count) return false;
+        }
+      }
+    }
+    return true;
+  }
+
   function _create(
     address account,
     string memory tierName,
@@ -261,6 +284,7 @@ contract NodeManager is Initializable {
     uint32 count
   ) private returns (uint256) {
     require(msg.sender==owner || countOfUser[account] < maxCountOfUser, 'Cannot create node more than MAX.');
+    require(_checkMaxPurchase(msg.sender, tierName), 'Cannot create node more than MAX');
     uint8 tierId = tierMap[tierName];
     Tier storage tier = tierArr[tierId - 1];
     for (uint32 i = 0; i < count; i++) {
@@ -536,6 +560,7 @@ contract NodeManager is Initializable {
     require(canNodeTransfer==true,'Node transfer unavailable!');
     uint8 tierIndex = tierMap[tierName];
     require(tierIndex > 0, 'Invalid tier to transfer.');
+    require(_checkMaxPurchase(recipient, tierName), 'Cannot transfer node, because recipient will get more than MAX');
     Tier storage tier = tierArr[tierIndex - 1];
     uint256[] storage nodeIndiceFrom = nodesOfUser[msg.sender];
     uint256[] storage nodeIndiceTo = nodesOfUser[recipient];

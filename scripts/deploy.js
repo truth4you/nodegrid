@@ -17,6 +17,11 @@ const deployProxy = async (contractName,args)=>{
   return contract
 }
 
+// await hre.run("verify:verify", {
+//   address: WETH.address,
+//   constructorArguments: [],
+// });
+
 async function main() {
   const [owner, addr1, addr2, addr3, addr4] = await ethers.getSigners();
 
