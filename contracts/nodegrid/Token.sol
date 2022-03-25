@@ -130,13 +130,13 @@ contract Token is ERC20Upgradeable {
 
     /// @dev overrides transfer function to meet tokenomics
     function _transfer(address from, address to, uint256 amount) internal virtual override {
-        bool _isSwappable = address(uniswapV2Router)!=address(0) && uniswapV2Pair!=address(0);
+        bool _isSwappable = address(uniswapV2Router)!=address(0) && uniswapV2Pair!=address(0) && !_inSwapAndLiquify;
         bool _isBuying = _isSwappable && msg.sender==address(uniswapV2Pair) && from==address(uniswapV2Pair);
         bool _isSelling = _isSwappable && msg.sender==address(uniswapV2Router) && to==address(uniswapV2Pair);  
-        
-        if (transferTaxRate == 0 || isExcludedFromFee[from] || isExcludedFromFee[to]) {
-            super._transfer(from, to, amount);
-        } else {
+
+        uint256 _amount = amount;
+                
+        if (transferTaxRate != 0 && !isExcludedFromFee[from] && !isExcludedFromFee[to]) {
             uint256 taxAmount = 0;
             if(_isSelling && checkNodeBeforeSell && nodeManagerAddress!=from && nodeManagerAddress != address(0)) {
                 require(INodeManager(nodeManagerAddress).countOfUser(from) > 0, "Insufficient Node count!");
@@ -159,14 +159,14 @@ contract Token is ERC20Upgradeable {
                 }
                 uint256 liquidityAmount = taxAmount.mul(liquidityFee).div(100);
                 super._transfer(from, address(this), liquidityAmount);
-                super._transfer(from, to, amount.sub(operatorFeeAmount.add(liquidityAmount)));
-            } else
-                super._transfer(from, to, amount);
+                _amount = amount.sub(operatorFeeAmount.add(liquidityAmount));
+            }                
         }
         // swap and liquify
-        if (!_inSwapAndLiquify && _isSwappable && !_isSelling && !_isBuying && from != owner) {
+        if (_isSwappable && /*!_isSelling &&*/ !_isBuying && from != owner) {
             swapAndLiquify();
         }
+        super._transfer(from, to, _amount);
     }
 
     /// @dev Swap tokens for eth
@@ -180,30 +180,32 @@ contract Token is ERC20Upgradeable {
     /// @dev Swap and liquify
     function swapAndLiquify() private lockTheSwap transferTaxFree {
 
-        uint256 contractTokenBalance = balanceOf(address(this)).sub(accumulatedOperatorTokensAmount);
+        uint256 contractTokenBalance = balanceOf(address(this));
+        if(contractTokenBalance >= accumulatedOperatorTokensAmount) {
+            contractTokenBalance = contractTokenBalance.sub(accumulatedOperatorTokensAmount);
+            if (contractTokenBalance >= minAmountToLiquify) {
+                
+                // only min amount to liquify
+                uint256 liquifyAmount = contractTokenBalance;
 
-        if (contractTokenBalance >= minAmountToLiquify) {
-            
-            // only min amount to liquify
-            uint256 liquifyAmount = contractTokenBalance;
+                // split the liquify amount into halves
+                uint256 half = liquifyAmount.div(2);
+                uint256 otherHalf = liquifyAmount.sub(half);
 
-            // split the liquify amount into halves
-            uint256 half = liquifyAmount.div(2);
-            uint256 otherHalf = liquifyAmount.sub(half);
-
-            // capture the contract's current ETH balance.
-            // this is so that we can capture exactly the amount of ETH that the
-            // swap creates, and not make the liquidity event include any ETH that
-            // has been manually sent to the contract
-            uint256 initialBalance = address(this).balance;
-            // swap tokens for ETH
-            swapTokensForEth(half);
-            // how much ETH did we just swap into?
-            uint256 newBalance = address(this).balance.sub(initialBalance);
-            // add liquidity
-            addLiquidity(otherHalf, newBalance);
-            
-            emit SwapAndLiquify(half, newBalance, otherHalf);
+                // capture the contract's current ETH balance.
+                // this is so that we can capture exactly the amount of ETH that the
+                // swap creates, and not make the liquidity event include any ETH that
+                // has been manually sent to the contract
+                uint256 initialBalance = address(this).balance;
+                // swap tokens for ETH
+                swapTokensForEth(half);
+                // how much ETH did we just swap into?
+                uint256 newBalance = address(this).balance.sub(initialBalance);
+                // add liquidity
+                addLiquidity(otherHalf, newBalance);
+                
+                emit SwapAndLiquify(half, newBalance, otherHalf);
+            }
         }
     }
 

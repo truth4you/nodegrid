@@ -27,11 +27,11 @@ const upgradeProxy = async (contractName, contractAddress)=>{
     return contract
 }
 const balance = async (state) => {
-    console.log(`Addr1 ETH (${state})`,ethers.utils.formatEther(await waffle.provider.getBalance(addr1.address)))
-    console.log(`Addr1 TTK (${state})`,ethers.utils.formatEther(await Token.balanceOf(addr1.address)))
-    console.log(`Addr4 TTK (${state})`,ethers.utils.formatEther(await Token.balanceOf(addrs[4].address)))
-    console.log(`Pair ETH (${state})`,ethers.utils.formatEther(await waffle.provider.getBalance(Pair)))
-    console.log(`Pair TTK (${state})`,ethers.utils.formatEther(await Token.balanceOf(Pair)))
+    // console.log(`Addr1 ETH (${state})`,ethers.utils.formatEther(await waffle.provider.getBalance(addr1.address)))
+    // console.log(`Addr1 TTK (${state})`,ethers.utils.formatEther(await Token.balanceOf(addr1.address)))
+    // console.log(`Addr4 TTK (${state})`,ethers.utils.formatEther(await Token.balanceOf(addrs[4].address)))
+    // console.log(`Pair ETH (${state})`,ethers.utils.formatEther(await waffle.provider.getBalance(Pair)))
+    // console.log(`Pair TTK (${state})`,ethers.utils.formatEther(await Token.balanceOf(Pair)))
 }
 
 describe("TokenTest", ()=>{
@@ -63,7 +63,6 @@ describe("TokenTest", ()=>{
         it("buy token from Route", async () => {
             await balance("state1")
             // await(await Token.setTransferTaxRate(0)).wait()
-            console.log(await Router.getAmountsOut(ethers.utils.parseEther("1"),[Token.address,await(Router.WETH())]))
             await(await Router.connect(addr1).swapExactETHForTokensSupportingFeeOnTransferTokens(0,[await(Router.WETH()),Token.address],addr1.address,parseInt(new Date().getTime()/1000)+100,{value:ethers.utils.parseEther("10")} )).wait()
             await balance("state2")
         })
@@ -77,11 +76,12 @@ describe("TokenTest", ()=>{
         // it("buy token from Router" ,async ()=>{
         //     await(await Router.connect(addr1).swapExactETHForTokens(0,[await(Router.WETH()),Token.address],addr1.address,parseInt(new Date().getTime()/1000)+100,{value:ethers.utils.parseEther("10")} )).wait()
         // })
-        it("Sell token from Router" ,async ()=>{
+        it("sell token from Router" ,async ()=>{
             await (await Token.setCheckNodeBeforeSell(true)).wait()
             const amount = await Token.balanceOf(addr1.address)
             await(await Token.connect(addr1).approve(Router.address,amount)).wait()
             await balance("before")
+            console.log(addr1.address)
             await(await Router.connect(addr1).swapExactTokensForETHSupportingFeeOnTransferTokens(amount,0,[Token.address,await(Router.WETH())],addr1.address,parseInt(new Date().getTime()/1000+1000) )).wait()
             await balance("after")
         })
