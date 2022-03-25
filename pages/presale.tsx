@@ -11,6 +11,8 @@ export default function Monitor() {
   const { address } = eth.useContainer()
   const { info, startPresale, vestPresale, getWhitelist, approvePresale, multicall } = token.useContainer()
   const [loading, setLoading] = useState(false)
+  const [checkAddress, setAddressCheck] =  useState('')
+  const [IsEligible, setEligibility] = useState(false)
   const [timeLimit, setTimeLimit] = useState('0 days 00:00:00')
 
   const textarea = useRef<HTMLDivElement>(null)
@@ -26,6 +28,13 @@ export default function Monitor() {
     return ex
   }
 
+  const handleInputAddress = (e: any) => {
+    const text = e.target.value
+    if (text == '0' || text == '0x' || /^0x[0-9a-f]{0,40}$/i.test(text)) {
+      setAddressCheck(text)
+    }
+  }
+
   const handleDownloadWhitelist = () => {
     getWhitelist(false).then(accounts => {
       var link = document.createElement('a')
@@ -36,6 +45,19 @@ export default function Monitor() {
       link.href = 'data:text/plain;charset=UTF-8,' + escape(text)
       link.download = `whitelist.csv`
       link.click()
+    })
+  }
+  const handleCheckWhitelist = () => {
+    if(checkAddress=='')
+    toast.error('Please enter wallet address')
+    setEligibility(false)
+    getWhitelist(false).then(accounts => {
+      
+      for (const account of accounts) {
+       if(account == checkAddress)
+        setEligibility(true)
+      }
+      
     })
   }
 
@@ -93,7 +115,7 @@ export default function Monitor() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      const seconds = Math.floor(info.presaleEndTime.toNumber() - new Date().getTime() / 1000)
+      const seconds = Math.floor(info.presaleEndTime?.toNumber() - new Date().getTime() / 1000)
       const days = Math.floor(seconds / 86400)
       const hours = Math.floor((seconds % 86400) / 3600)
       const mins = Math.floor((seconds % 3600) / 60)
@@ -110,9 +132,24 @@ export default function Monitor() {
         <p>You can use this app to pre-purchase NodeGrid Nodes, with only {formatEther(info.presaleMinCost ?? 0)} {info.presaleTokenSymbol ?? 'BUSD'}.</p>
       </div>
       <div className={classNames(styles.whitelist, "md:mt-10 mt-5")}>
-        <h1>Presale</h1>
-        <p>Total number of whitelist : <strong>{info.presaleTotalPlan?.toNumber()} / {info.presaleMaxPlan?.toNumber()}</strong></p>
-        <p>Total number of buyers : <strong>{info.presaleTotalSupply?.toNumber()} / {info.presaleMaxSupply?.toNumber()}</strong></p>
+        <h3>NodeGrid will be hosting a Whitelist on April 1st, 2022, at 17:00 UTC. Please use the application to check your eligibility. More information regarding the premise of the Whitelist can be found on our GitBook.</h3>
+      </div>
+      <div className={classNames(styles.whitelist, "md:mt-10 mt-5")}>
+        <h3>Check your eligability for whitelist by copy and pasting your BEP-20 wallet address below:</h3>
+        <div className={classNames(styles.inputBox,"md:mt-1 mt-5")}>
+          <input type="text" name="walletAddress" value={checkAddress}  onInput={handleInputAddress}/>
+          <button onClick={handleCheckWhitelist}>Check</button>
+        </div>
+        <h3 className="mt-5">Eligiblity Status: <span style={{color:'white'}}>{IsEligible?'Eligible':'Not Eligible'}</span></h3>
+      </div>
+      <div className={classNames(styles.whitelist, "md:mt-10 mt-5")}>
+        <h1>Whitelist Statistics</h1>
+        <h3>Whitelist Slots Outstanding: <span style={{color: 'white'}}>{info.presaleMaxPlan?.toNumber() - info.presaleTotalPlan?.toNumber()}</span></h3>
+        <h3>Whitelist Spots Left To Claim:  <span style={{color: 'white'}}>{info.presaleMaxSupply?.toNumber() - info.presaleTotalSupply?.toNumber()}</span></h3>
+        <h3 style={{textAlign:'center'}}>Whitelist is <span style={{color: 'white'}}>{info.presaleTotalPlan?.toNumber()*100/info.presaleMaxPlan?.toNumber()}%</span> filled</h3>
+        <div className={styles.progressBar}>
+          <div style={{width: `${info.presaleTotalPlan?.toNumber()*100/info.presaleMaxPlan?.toNumber()}%`}}></div>
+        </div>
         {info.presaleStarted && info.presaleEndTime > Math.floor(new Date().getTime() / 1000) && <p>Ends in <strong>{timeLimit}</strong></p>}
         <div className="flex flex-wrap gap-4 mt-4 justify-end">
           {info.isPresaleAllowed && info.isPresaleSupplied && info.presaleStarted &&
@@ -124,14 +161,14 @@ export default function Monitor() {
             <button onClick={handleStart} className="w-full md:w-auto">Start right now</button>}
         </div>
       </div>
-      <div className={classNames(styles.whitelist, "md:mt-10 mt-5")}>
+      {/* <div className={classNames(styles.whitelist, "md:mt-10 mt-5")}>
         <h1>Whitelist for presale</h1>
         <p>Our company would like to presale to our honest customers.</p>
         <p>You can download whitelist accounts by clicking WHITELIST button and find yourself.</p>
         <div className="flex flex-wrap gap-4 mt-4 justify-end">
           <button onClick={handleDownloadWhitelist} className="w-full md:w-auto">Download Whitelist</button>
         </div>
-      </div>
+      </div> */}
     </div >
   )
 }

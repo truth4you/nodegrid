@@ -18,6 +18,12 @@
     padding-bottom: 1em;
     line-height: 33px;
   }
+  h3 {
+    color: var(--color-primary);
+    font-size: large;
+    padding-bottom: 1em;
+    line-height: 30px;
+  }
   p {
     line-height: 2em;
   }
@@ -38,5 +44,52 @@
     &.approved {
       background-color: rgb(199, 113, 0);
     }
+  }
+}
+
+.inputBox {
+    position: relative;
+  input{
+    width: 100%;
+    padding-right: 100px !important; 
+    box-sizing: border-box;
+    border-radius: 2em;
+    padding: 0.7em 1.2em;
+    border: 1px solid var(--color-primary);
+    background-color: transparent;
+    color: white;
+    -moz-appearance:textfield;
+    &::placeholder {
+      color: var(--color-primary);
+      opacity: 0.5;
+      font-size: 0.8em;
+    }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+  button{
+    position: absolute;
+    right: 3px; 
+    top: 3px;
+    bottom: 3px;
+    line-height: 1 !important;
+    z-index: 4;
+  }
+}
+.progressBar{
+  position: relative;
+  background-color: #fff1;
+  overflow: hidden;
+  height: 1em;
+  width: 100%;
+  border: 1px solid #44F1A6;
+  border-radius: 4px;
+  div{
+    position: absolute;
+    height: 100%;
+    background-color: #44F1A6;
   }
 }

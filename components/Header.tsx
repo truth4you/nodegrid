@@ -46,7 +46,7 @@ export default function Header() {
             { title: "Admin", route: "/monitor", owner: true },
           ].filter(route => {
             if (route.owner) return info.isOwner
-            if (route.presale) return info.isPresaleAllowed || info.isOwner
+            // if (route.presale) return info.isPresaleAllowed || info.isOwner
             return true
           }).map(({ route, title, target }) => (
             <li className="mt-3 md:mt-0 md:mr-6" key={title}>
